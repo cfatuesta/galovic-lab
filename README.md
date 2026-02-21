@@ -18,8 +18,3 @@ The intranet is password-protected. Share the password with lab members directly
 ## Built with
 
 Pure HTML/CSS/JS — no framework dependencies. Fonts loaded from Google Fonts.
-
-## Contact
-
-Dr. Marian Galovic · marian.galovic@usz.ch  
-Department of Neurology, University Hospital Zurich
