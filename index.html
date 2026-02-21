@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galovic Lab — Epilepsy Research · University Hospital Zurich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #f8f5ef;
+  --warm-white: #fdfbf7;
+  --stone: #e8e2d9;
+  --stone-mid: #cfc8bc;
+  --stone-dark: #a89f92;
+  --ink: #1c1a17;
+  --ink-mid: #3d3a35;
+  --ink-light: #6b6560;
+  --sage: #4a6741;
+  --sage-light: #5a7e50;
+  --sage-pale: #edf2eb;
+  --rust: #8b4a35;
+  --rust-pale: #f5ede9;
+  --gold: #9a7d4a;
+  --gold-pale: #f5f0e6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--warm-white); color: var(--ink);
+  font-family: 'Jost', sans-serif; font-size: 15px;
+  font-weight: 400; line-height: 1.7; overflow-x: hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0; opacity:0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px; pointer-events:none; z-index:9999;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(253,251,247,0.94); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--stone);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px; height:60px;
+}
+.nav-brand { display:flex; align-items:center; gap:14px; cursor:pointer; text-decoration:none; }
+.nav-monogram {
+  width:32px; height:32px; border:1.5px solid var(--ink); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant SC',serif; font-size:13px; font-weight:600; color:var(--ink);
+}
+.nav-title { font-family:'Cormorant SC',serif; font-size:15px; font-weight:500; color:var(--ink); letter-spacing:0.08em; }
+.nav-subtitle { font-size:10px; color:var(--ink-light); letter-spacing:0.12em; text-transform:uppercase; }
+.nav-links { display:flex; gap:0; list-style:none; align-items:center; }
+.nav-links a {
+  color:var(--ink-light); font-family:'Jost',sans-serif; font-size:12px; font-weight:500;
+  letter-spacing:0.08em; text-transform:uppercase; padding:6px 12px; border-radius:3px;
+  cursor:pointer; transition:all 0.2s; text-decoration:none; display:block;
+}
+.nav-links a:hover { color:var(--ink); }
+.nav-intranet {
+  margin-left:8px; background:var(--ink); color:var(--warm-white)!important;
+  padding:6px 16px!important; border-radius:3px; font-size:11px!important;
+  letter-spacing:0.1em!important;
+}
+.nav-intranet:hover { background:var(--ink-mid)!important; color:var(--warm-white)!important; }
+
+/* HERO */
+.hero {
+  min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:60px;
+}
+.hero-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:80px 64px 80px 80px; border-right:1px solid var(--stone);
+}
+.hero-eyebrow {
+  font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-light); margin-bottom:28px;
+  display:flex; align-items:center; gap:10px;
+}
+.hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--stone-dark); display:block; }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif; font-size:clamp(44px,5vw,72px);
+  font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:24px;
+}
+.hero h1 em { font-style:italic; color:var(--sage); }
+.hero-desc { font-size:15px; color:var(--ink-light); max-width:420px; margin-bottom:36px; line-height:1.75; }
+.hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+.btn {
+  font-family:'Jost',sans-serif; font-size:11px; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase;
+  padding:10px 22px; border-radius:2px; cursor:pointer; border:1px solid; transition:all 0.2s; text-decoration:none; display:inline-block;
+}
+.btn-dark { background:var(--ink); border-color:var(--ink); color:var(--warm-white); }
+.btn-dark:hover { background:var(--ink-mid); }
+.btn-outline { background:none; border-color:var(--stone); color:var(--ink-light); }
+.btn-outline:hover { border-color:var(--ink-light); color:var(--ink); }
+.hero-affil { font-size:11px; color:var(--stone-dark); letter-spacing:0.1em; text-transform:uppercase; border-top:1px solid var(--stone); padding-top:20px; }
+.hero-right {
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:80px 64px; background:var(--ivory); position:relative; overflow:hidden;
+}
+.hero-deco {
+  position:absolute; top:40px; right:48px;
+  font-family:'Cormorant Garamond',serif; font-size:180px; font-weight:300;
+  color:var(--stone); line-height:1; pointer-events:none; opacity:0.5;
+}
+.hero-right-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--stone-dark); margin-bottom:32px; }
+.hero-stats { display:flex; flex-direction:column; }
+.hero-stat { display:flex; justify-content:space-between; align-items:baseline; padding:20px 0; border-top:1px solid var(--stone); }
+.hero-stat:last-child { border-bottom:1px solid var(--stone); }
+.hero-stat-num { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:var(--ink); line-height:1; }
+.hero-stat-label { font-size:11px; color:var(--ink-light); letter-spacing:0.1em; text-transform:uppercase; text-align:right; }
+
+/* SECTIONS */
+.section { max-width:1240px; margin:0 auto; padding:80px 48px; }
+.rule { height:1px; background:var(--stone); margin:0 48px; }
+.section-eyebrow { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-light); margin-bottom:10px; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:300; color:var(--ink); margin-bottom:40px; }
+.section-title em { font-style:italic; color:var(--sage); }
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; flex-wrap:wrap; gap:16px; }
+
+/* RESEARCH AREAS */
+.areas-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.area-card {
+  background:var(--warm-white); border:1px solid var(--stone); border-radius:16px;
+  padding:28px 28px;
+  box-shadow:0 2px 12px rgba(28,26,23,0.06);
+  transition:transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+}
+.area-card:hover { transform:translateY(-4px); box-shadow:0 10px 36px rgba(28,26,23,0.12); border-color:var(--stone-mid); }
+.area-icon { font-size:28px; margin-bottom:14px; }
+.area-name { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:8px; }
+.area-desc { font-size:13px; color:var(--ink-light); line-height:1.7; }
+.area-tag {
+  display:inline-block; margin-top:14px;
+  font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase;
+  background:var(--sage-pale); color:var(--sage); border:1px solid rgba(74,103,65,0.2);
+  padding:3px 10px; border-radius:20px;
+}
+
+/* TEAM */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.team-card {
+  background:var(--warm-white); border:1px solid var(--stone); border-radius:14px;
+  padding:24px 22px; box-shadow:0 2px 10px rgba(28,26,23,0.05);
+  transition:transform 0.22s, box-shadow 0.22s;
+}
+.team-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(28,26,23,0.10); }
+.team-monogram {
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant SC',serif; font-size:17px; font-weight:500;
+  color:var(--warm-white); margin-bottom:14px;
+}
+.team-name { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:500; color:var(--ink); margin-bottom:3px; }
+.team-role { font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage); margin-bottom:4px; }
+.team-affil { font-size:11.5px; color:var(--ink-light); font-style:italic; margin-bottom:6px; }
+.team-focus { font-size:11.5px; color:var(--ink-light); line-height:1.6; }
+.visiting-tag {
+  display:inline-block; margin-top:8px; font-size:9px; letter-spacing:0.12em; text-transform:uppercase;
+  border:1px solid var(--stone-mid); color:var(--stone-dark); padding:2px 7px; border-radius:20px;
+}
+.team-section-label { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--stone-dark); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--stone); }
+
+/* PUBLICATIONS */
+.pub-list { display:flex; flex-direction:column; gap:1px; border:1px solid var(--stone); border-radius:12px; overflow:hidden; }
+.pub-item { background:var(--warm-white); padding:24px 28px; display:flex; gap:24px; align-items:flex-start; transition:background 0.2s; }
+.pub-item:hover { background:var(--ivory); }
+.pub-year-col { min-width:56px; flex-shrink:0; text-align:right; }
+.pub-year { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--sage); line-height:1; }
+.pub-status-tag { display:block; margin-top:5px; font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; padding:2px 6px; border-radius:20px; border:1px solid; text-align:center; }
+.s-prep { background:rgba(107,143,212,0.08); color:#6b8fd4; border-color:rgba(107,143,212,0.2); }
+.s-preprint { background:var(--gold-pale); color:var(--gold); border-color:rgba(154,125,74,0.2); }
+.s-published { background:var(--sage-pale); color:var(--sage); border-color:rgba(74,103,65,0.2); }
+.pub-content { flex:1; }
+.pub-title { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:500; color:var(--ink); margin-bottom:5px; line-height:1.35; }
+.pub-authors { font-size:12.5px; color:var(--ink-light); margin-bottom:3px; }
+.pub-journal { font-size:12.5px; color:var(--stone-dark); font-style:italic; }
+.pub-finding { background:var(--sage-pale); border-left:2px solid var(--sage); padding:8px 12px; margin-top:10px; font-size:12px; color:var(--sage); line-height:1.6; }
+.pub-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; }
+.pub-tag { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; background:var(--ivory); border:1px solid var(--stone); padding:2px 8px; color:var(--ink-light); border-radius:20px; }
+
+/* PROFILE LINKS */
+.profile-strip { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+.profile-link {
+  display:flex; align-items:center; gap:12px;
+  background:var(--warm-white); border:1px solid var(--stone); border-radius:12px;
+  padding:14px 20px; text-decoration:none; color:var(--ink);
+  transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  box-shadow:0 2px 8px rgba(28,26,23,0.05);
+  flex:1; min-width:220px;
+}
+.profile-link:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(28,26,23,0.10); border-color:var(--stone-mid); }
+.profile-link-icon { font-size:20px; flex-shrink:0; }
+.profile-link-body { flex:1; min-width:0; }
+.profile-link-name { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; color:var(--ink); line-height:1.2; }
+.profile-link-platform { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-light); margin-top:2px; }
+.profile-link-arrow { font-size:14px; color:var(--stone-dark); flex-shrink:0; }
+
+/* CONFERENCES */
+.conf-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+.conf-card { background:var(--warm-white); border:1px solid var(--stone); border-radius:14px; padding:26px 28px; box-shadow:0 2px 10px rgba(28,26,23,0.05); transition:transform 0.22s, box-shadow 0.22s; }
+.conf-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(28,26,23,0.10); }
+.conf-type { font-size:9.5px; letter-spacing:0.15em; text-transform:uppercase; color:var(--stone-dark); margin-bottom:10px; }
+.conf-name { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:500; color:var(--ink); margin-bottom:8px; line-height:1.3; }
+.conf-detail { font-size:12.5px; color:var(--ink-light); margin-bottom:4px; }
+.conf-deadline { font-size:12px; color:var(--ink-light); margin-top:8px; }
+.conf-deadline strong { color:var(--ink); }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+.contact-block { }
+.contact-title { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--ink); margin-bottom:16px; }
+.contact-title em { font-style:italic; color:var(--sage); }
+.contact-text { font-size:14px; color:var(--ink-light); line-height:1.75; margin-bottom:20px; }
+.contact-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; }
+.contact-key { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--stone-dark); min-width:72px; padding-top:2px; }
+.contact-val { font-size:14px; color:var(--ink-mid); }
+.contact-form { background:var(--ivory); border:1px solid var(--stone); border-radius:14px; padding:32px; }
+.form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.form-label { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-light); font-weight:500; }
+.form-control { background:var(--warm-white); border:1px solid var(--stone); padding:10px 14px; color:var(--ink); font-family:'Jost',sans-serif; font-size:13.5px; outline:none; transition:border-color 0.2s; border-radius:8px; appearance:none; width:100%; }
+.form-control:focus { border-color:var(--sage); }
+textarea.form-control { resize:vertical; min-height:100px; }
+.btn-sage { background:var(--sage); border-color:var(--sage); color:var(--warm-white); }
+.btn-sage:hover { background:var(--sage-light); }
+
+/* FOOTER */
+footer {
+  background:var(--ink); color:rgba(253,251,247,0.7);
+  padding:48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+}
+.footer-brand { font-family:'Cormorant SC',serif; font-size:18px; color:var(--warm-white); letter-spacing:0.08em; }
+.footer-sub { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; margin-top:4px; color:rgba(253,251,247,0.5); }
+.footer-links { display:flex; gap:20px; }
+.footer-links a { font-size:11px; color:rgba(253,251,247,0.55); letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--warm-white); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:none;} }
+.fade-up { animation:fadeUp 0.7s ease both; }
+.fade-up-1 { animation-delay:0.1s; }
+.fade-up-2 { animation-delay:0.2s; }
+.fade-up-3 { animation-delay:0.3s; }
+
+@media(max-width:900px){
+  .hero { grid-template-columns:1fr; }
+  .hero-left { padding:60px 32px; border-right:none; border-bottom:1px solid var(--stone); }
+  .hero-right { padding:48px 32px; }
+  .hero-deco { display:none; }
+  .section { padding:56px 24px; }
+  .rule { margin:0 24px; }
+  nav { padding:0 20px; }
+  .nav-links a { padding:6px 8px; font-size:11px; }
+  .contact-grid { grid-template-columns:1fr; }
+  .areas-grid,.team-grid,.conf-grid { grid-template-columns:1fr; }
+  footer { padding:32px 24px; flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-monogram">GL</div>
+    <div>
+      <div class="nav-title">Galovic Lab</div>
+      <div class="nav-subtitle">University Hospital Zurich</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#conferences">Conferences</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="galovic-lab-intranet.html" class="nav-intranet">Lab Intranet →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up">Department of Neurology · Clinical Neuroscience Center</div>
+    <h1 class="fade-up fade-up-1">Epilepsy<br>Research<br><em>Reimagined</em></h1>
+    <p class="hero-desc fade-up fade-up-2">The Galovic Lab advances the understanding, prediction, and treatment of epilepsy through large-scale real-world data, neuroimaging biomarkers, and clinical AI — at University Hospital Zurich and global partner sites.</p>
+    <div class="hero-cta fade-up fade-up-3">
+      <a href="#research" class="btn btn-dark">Our Research →</a>
+      <a href="#contact" class="btn btn-outline">Join the Lab</a>
+    </div>
+    <div class="hero-affil fade-up">Department of Neurology · University Hospital and University of Zurich</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-deco">GL</div>
+    <div class="hero-right-label">Lab at a glance</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">Researchers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">13</div>
+        <div class="hero-stat-label">Active Projects</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Databases</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">Papers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- RESEARCH AREAS -->
+<section class="section" id="research">
+  <div class="section-eyebrow">What We Study</div>
+  <div class="section-title">Research <em>Areas</em></div>
+  <div class="areas-grid">
+    <div class="area-card">
+      <div class="area-icon">🧠</div>
+      <div class="area-name">Post-Stroke Epilepsy</div>
+      <div class="area-desc">Predicting and preventing epilepsy after stroke using EEG biomarkers, multicenter cohort data, and the SeLECT scoring system.</div>
+      <div class="area-tag">SELECT Consortium · EEG</div>
+    </div>
+    <div class="area-card">
+      <div class="area-icon">⏱️</div>
+      <div class="area-name">Late-Onset Epilepsy</div>
+      <div class="area-desc">Understanding new-onset epilepsy in adults over 55 — its links to neurodegeneration, dementia, and the neuroprotective potential of antiseizure medications.</div>
+      <div class="area-tag">TriNetX · UK Biobank</div>
+    </div>
+    <div class="area-card">
+      <div class="area-icon">💊</div>
+      <div class="area-name">Drug Outcomes & Pharmacotherapy</div>
+      <div class="area-desc">Real-world effectiveness and safety of antiseizure medications, immunomodulators, and novel agents across large federated healthcare databases.</div>
+      <div class="area-tag">TriNetX · Pharmacoepidemiology</div>
+    </div>
+    <div class="area-card">
+      <div class="area-icon">🧬</div>
+      <div class="area-name">Biomarkers & EEG</div>
+      <div class="area-desc">Identifying blood-based and electrophysiological biomarkers of epileptogenesis — including NfL, GFAP, extracellular vesicles, and quantitative EEG features.</div>
+      <div class="area-tag">IMPOSE · FINESSE</div>
+    </div>
+    <div class="area-card">
+      <div class="area-icon">⏳</div>
+      <div class="area-name">Brain Aging & Neurodegeneration</div>
+      <div class="area-desc">Studying accelerated biological aging in epilepsy using PhenoAge, structural MRI brain age, and longitudinal population cohorts.</div>
+      <div class="area-tag">UK Biobank · ENIGMA</div>
+    </div>
+    <div class="area-card">
+      <div class="area-icon">🤖</div>
+      <div class="area-name">Clinical AI & NLP</div>
+      <div class="area-desc">Applying large language models and automated pipelines to extract structured data from EEG reports and clinical records at scale.</div>
+      <div class="area-tag">MedGemma · Local LLMs</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- TEAM -->
+<section class="section" id="team">
+  <div class="section-eyebrow">People</div>
+  <div class="section-title">Our <em>Team</em></div>
+  <div class="team-section-label" style="margin-bottom:20px">Core Team</div>
+  <div class="team-grid" id="public-team-core" style="margin-bottom:40px"></div>
+  <div class="team-section-label" style="margin-bottom:20px">Visiting Researchers & Collaborators</div>
+  <div class="team-grid" id="public-team-visiting"></div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Scientific Output</div>
+      <div class="section-title" style="margin-bottom:0">Recent <em>Publications</em></div>
+    </div>
+  </div>
+
+  <!-- RESEARCHER PROFILES -->
+  <div class="profile-strip">
+    <a class="profile-link" href="https://scholar.google.com/citations?user=RBIHxa8AAAAJ&hl=en" target="_blank" rel="noopener">
+      <div class="profile-link-icon">🎓</div>
+      <div class="profile-link-body">
+        <div class="profile-link-name">Dr. Marian Galovic</div>
+        <div class="profile-link-platform">Google Scholar · Full Publication List</div>
+      </div>
+      <div class="profile-link-arrow">↗</div>
+    </a>
+    <a class="profile-link" href="https://scholar.google.com/citations?user=KWjDcx0AAAAJ&hl=en" target="_blank" rel="noopener">
+      <div class="profile-link-icon">🎓</div>
+      <div class="profile-link-body">
+        <div class="profile-link-name">Dr. Kai Michael Schubert</div>
+        <div class="profile-link-platform">Google Scholar · Full Publication List</div>
+      </div>
+      <div class="profile-link-arrow">↗</div>
+    </a>
+    <a class="profile-link" href="https://www.researchgate.net/profile/Kai-Schubert" target="_blank" rel="noopener">
+      <div class="profile-link-icon">🔬</div>
+      <div class="profile-link-body">
+        <div class="profile-link-name">Dr. Kai Michael Schubert</div>
+        <div class="profile-link-platform">ResearchGate · Profile & Papers</div>
+      </div>
+      <div class="profile-link-arrow">↗</div>
+    </a>
+  </div>
+
+  <div class="pub-list" id="public-pub-list"></div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CONFERENCES -->
+<section class="section" id="conferences">
+  <div class="section-eyebrow">Events</div>
+  <div class="section-title"><em>Conferences</em> & Presentations</div>
+  <div class="conf-grid" id="public-conf-grid"></div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-eyebrow">Get in Touch</div>
+  <div class="section-title">Contact <em>& Join</em></div>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <div class="contact-title">We're <em>Hiring</em></div>
+      <p class="contact-text">The Galovic Lab welcomes applications from motivated PhD students, postdoctoral researchers, and clinical fellows interested in epilepsy research, pharmacoepidemiology, neuroimaging, and clinical AI.</p>
+      <p class="contact-text">We particularly encourage applicants with backgrounds in neurology, clinical epidemiology, data science, or biostatistics.</p>
+      <div class="contact-item"><span class="contact-key">PI</span><span class="contact-val">Dr. Marian Galovic, MD PhD</span></div>
+      <div class="contact-item"><span class="contact-key">Email</span><span class="contact-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb6baa9b2bab5f5bcbab7b4adb2b89baea8a1f5b8b3">[email&#160;protected]</a></span></div>
+      <div class="contact-item"><span class="contact-key">Address</span><span class="contact-val">Department of Neurology, University Hospital Zurich, Frauenklinikstrasse 26, 8091 Zurich, Switzerland</span></div>
+    </div>
+    <div class="contact-form">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:6px">Send a Message</div>
+      <div style="font-size:13px;color:var(--ink-light);margin-bottom:22px">Interested in joining or collaborating? We'd love to hear from you.</div>
+      <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-control" placeholder="Dr. Jane Smith"></div>
+      <div class="form-group"><label class="form-label">Institution</label><input type="text" class="form-control" placeholder="University of…"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="jane@university.edu"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" placeholder="I'm interested in…"></textarea></div>
+      <button class="btn btn-sage" style="width:100%;padding:12px" onclick="alert('Thank you — Dr. Galovic will be in touch.')">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Galovic Lab</div>
+    <div class="footer-sub">University Hospital Zurich · Department of Neurology</div>
+  </div>
+  <div class="footer-links">
+    <a href="#research">Research</a>
+    <a href="#team">Team</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+    <a href="galovic-lab-intranet.html">Intranet →</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const TC = ['#4a6741','#6b5c8a','#5c7a8a','#8a5c4a','#4a7a6e','#7a6e4a','#5c4a7a','#4a5c7a','#7a4a5c'];
+
+const teamCore = [
+  {name:'Dr. Marian Galovic',initials:'MG',role:'Principal Investigator',affil:'University Hospital Zurich',focus:'PSE, epileptogenesis, biomarkers, multicenter trials',bg:TC[0]},
+  {name:'Carolina Ferreira-Atuesta',initials:'CF',role:'PhD Student',affil:'UZH / University of Liverpool',focus:'Late-onset epilepsy, TriNetX, pharmacoepidemiology',bg:TC[1]},
+  {name:'Dr. Kai Michael Schubert',initials:'KS',role:'Senior Researcher',affil:'University Hospital Zurich',focus:'EEG, PSE, SELECT consortium, epidemiology',bg:TC[2]},
+  {name:'Dr. Katharina Schuler',initials:'KSc',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Immunology & epilepsy, TriNetX, clinical AI',bg:TC[4]},
+  {name:'Dr. Miranda Stattmann',initials:'MS',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Biomarkers, IMPOSE cohort, EVs, NfL, GFAP',bg:TC[5]},
+  {name:'Dr. Marco Di Donato',initials:'MD',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Sleep & epilepsy, UK Biobank, mortality',bg:'#5c7a8a'},
+  {name:'Dr. Anton Schmick',initials:'AS',role:'Clinical Researcher',affil:'UZH / Lübeck',focus:'Oncology & epilepsy, TriNetX, pharmacotherapy',bg:TC[7]},
+];
+const teamVisiting = [
+  {name:'Xin You Tai',initials:'XT',role:'Research Collaborator',affil:'University of Oxford',focus:'Neuroimaging, UK Biobank, late-onset epilepsy',bg:TC[6],visiting:true},
+  {name:'Lubin Gou',initials:'LG',role:'Visiting Researcher',affil:'University Hospital Zurich',focus:'Brain age estimation, MRI, ENIGMA pipeline',bg:TC[8],visiting:true},
+  {name:'Peter Westarp',initials:'PW',role:'Research Student',affil:'University Hospital Zurich',focus:'Biological aging, PhenoAge, UK Biobank',bg:'#8a6a4a',visiting:true},
+];
+
+const publications = [
+  {year:2026,status:'preparation',title:'Sodium Channel Blockers Are Associated with Reduced Dementia Risk in Late-Onset Unexplained Epilepsy',authors:'Ferreira-Atuesta C, Schubert KM, Tai XY, … Lip GYH*, Mbizvo GK*, Galovic M*',journal:'Manuscript in preparation',finding:'HR 0.73 (0.61–0.88) all-cause dementia; HR 0.66 (0.49–0.88) Alzheimer\'s vs LEV/BRV. Replicated in Down syndrome cohort and NACC. >75M adults ≥55 years.',tags:['loe','dementia','pharmacotherapy']},
+  {year:2026,status:'preparation',title:'Incidence and Attributable Disease Burden of Adult-Onset Acquired Epilepsy',authors:'Schubert KM, Stattmann M, Ferreira-Atuesta C, Schuler K, … Koepp MJ, Galovic M',journal:'Manuscript in preparation',finding:'3.8% incidence overall (1.8% MS → 10.5% malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, and cognitive decline.',tags:['epidemiology','trinetx','disease-burden']},
+  {year:2026,status:'preparation',title:'Epilepsy is Associated with Accelerated Biological Aging (UK Biobank)',authors:'Westarp P, Ferreira-Atuesta C, Schubert KM, Galovic M',journal:'Manuscript in preparation',finding:'Incident epilepsy: +1.70y PhenoAgeAccel (p<0.001). Carbamazepine: −0.99y; phenytoin: +1.05y.',tags:['biological-aging','uk-biobank']},
+  {year:2026,status:'preparation',title:'Continuous vs. Short EEG after Ischemic Stroke for Post-Stroke Epilepsy Prediction',authors:'Schubert KM, … Galovic M*, Gaspard N*, Punia V* — SeLECT Consortium',journal:'Manuscript in preparation',finding:'cEEG tripled IED detection (OR 3.75). LPDs sHR 4.50; electrographic seizures sHR 3.63.',tags:['eeg','post-stroke-epilepsy']},
+  {year:2026,status:'preparation',title:'Hearing Aid Use and Risk of Dementia in Adults with Late-Onset Epilepsy',authors:'Ferreira-Atuesta C, Schubert KM, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*',journal:'Manuscript in preparation',finding:'HA use reduced Alzheimer\'s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69.',tags:['dementia','late-onset-epilepsy']},
+  {year:2025,status:'preprint',title:'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis',authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',journal:'Preprint',finding:'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011. All JAK inhibitors: HR 0.64 (0.42–0.98).',tags:['pharmacotherapy','immunology']},
+];
+
+const conferences = [
+  {name:'American Epilepsy Society Annual Meeting',date:'Dec 2025',location:'Houston, TX',deadline:'Jul 15, 2025',type:'International'},
+  {name:'ILAE World Congress of Epileptology',date:'Sep 2025',location:'Istanbul, Turkey',deadline:'Mar 1, 2025',type:'International'},
+  {name:'European Congress of Epileptology',date:'Jun 2025',location:'Vienna, Austria',deadline:'Jan 31, 2025',type:'European'},
+  {name:'Swiss Neurological Society',date:'Apr 2025',location:'Bern, Switzerland',deadline:'Feb 2025',type:'National'},
+];
+
+function pubBadge(s){return{preparation:'<span class="pub-status-tag s-prep">In Prep</span>',preprint:'<span class="pub-status-tag s-preprint">Preprint</span>'}[s]||'<span class="pub-status-tag s-published">Published</span>';}
+
+function teamCard(m){
+  return `<div class="team-card">
+    <div class="team-monogram" style="background:${m.bg}">${m.initials}</div>
+    <div class="team-name">${m.name}</div>
+    <div class="team-role">${m.role}</div>
+    <div class="team-affil">${m.affil}</div>
+    <div class="team-focus">${m.focus}</div>
+    ${m.visiting?'<div class="visiting-tag">Visiting / External</div>':''}
+  </div>`;
+}
+
+document.getElementById('public-team-core').innerHTML = teamCore.map(teamCard).join('');
+document.getElementById('public-team-visiting').innerHTML = teamVisiting.map(teamCard).join('');
+
+document.getElementById('public-pub-list').innerHTML = publications.map(p=>`<div class="pub-item">
+  <div class="pub-year-col"><div class="pub-year">${p.year}</div>${pubBadge(p.status)}</div>
+  <div class="pub-content">
+    <div class="pub-title">${p.title}</div>
+    <div class="pub-authors">${p.authors}</div>
+    <div class="pub-journal">${p.journal}</div>
+    ${p.finding?`<div class="pub-finding">📊 ${p.finding}</div>`:''}
+    <div class="pub-tags">${p.tags.map(t=>`<span class="pub-tag">${t}</span>`).join('')}</div>
+  </div>
+</div>`).join('');
+
+document.getElementById('public-conf-grid').innerHTML = conferences.map(c=>`<div class="conf-card">
+  <div class="conf-type">${c.type} · ${c.date}</div>
+  <div class="conf-name">${c.name}</div>
+  <div class="conf-detail">📍 ${c.location}</div>
+  <div class="conf-deadline">Abstract deadline: <strong>${c.deadline}</strong></div>
+</div>`).join('');
+
+// Smooth scroll
+document.querySelectorAll('a[href^="
