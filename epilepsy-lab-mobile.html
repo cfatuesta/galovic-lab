@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>NeuroEpi Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #f8f5ef;
+  --warm-white: #fdfbf7;
+  --stone: #e8e2d9;
+  --stone-mid: #cfc8bc;
+  --stone-dark: #a89f92;
+  --ink: #1c1a17;
+  --ink-mid: #3d3a35;
+  --ink-light: #6b6560;
+  --sage: #4a6741;
+  --sage-light: #5a7e50;
+  --sage-pale: #edf2eb;
+  --rust: #8b4a35;
+  --rust-pale: #f5ede9;
+  --gold: #9a7d4a;
+  --gold-pale: #f5f0e6;
+  --blue-pill: #6b8fd4;
+  --tab-h: 82px;
+  --safe-top: env(safe-area-inset-top, 44px);
+  --safe-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%; width: 100%;
+  overflow: hidden;
+  background: var(--ivory);
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── APP SHELL ─── */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  flex-shrink: 0;
+  background: rgba(253,251,247,0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding-top: var(--safe-top);
+  border-bottom: 1px solid var(--stone);
+  z-index: 50;
+}
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 12px;
+}
+.top-monogram {
+  width: 30px; height: 30px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant SC', serif;
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  flex-shrink: 0;
+}
+.top-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: 15px; font-weight: 500; color: var(--ink);
+  letter-spacing: 0.06em;
+}
+.top-sub {
+  font-size: 10px; color: var(--ink-light);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.top-bar-page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 300; color: var(--ink);
+  padding: 4px 18px 14px;
+  letter-spacing: -0.01em;
+}
+.top-bar-page-title em { font-style: italic; color: var(--sage); }
+
+/* ─── SCROLL AREA ─── */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ─── SCREENS ─── */
+.screen { display: none; padding: 0 0 calc(var(--tab-h) + 8px); }
+.screen.active { display: block; }
+
+/* ─── HOME HERO ─── */
+.home-hero {
+  background: var(--warm-white);
+  padding: 24px 18px 20px;
+  border-bottom: 1px solid var(--stone);
+}
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before { content:''; width:20px; height:1px; background:var(--stone-dark); display:block; }
+.home-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 300; line-height: 1.1;
+  color: var(--ink); margin-bottom: 12px;
+}
+.home-hero h1 em { font-style: italic; color: var(--sage); }
+.home-hero p {
+  font-size: 13px; color: var(--ink-light); line-height: 1.7;
+  margin-bottom: 16px;
+}
+.hero-affil {
+  font-size: 10px; color: var(--stone-dark); letter-spacing: 0.1em;
+  text-transform: uppercase; border-top: 1px solid var(--stone); padding-top: 14px;
+}
+
+/* ─── STAT STRIP ─── */
+.stat-strip {
+  display: flex; background: var(--ivory);
+  border-bottom: 1px solid var(--stone);
+}
+.stat-item {
+  flex: 1; padding: 16px 0; text-align: center;
+  border-right: 1px solid var(--stone);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300; color: var(--ink); line-height: 1;
+}
+.stat-label {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-light); margin-top: 3px;
+}
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light); padding: 20px 18px 10px;
+}
+
+/* ─── CARDS ─── */
+.card-list { padding: 0 18px; display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px; }
+
+.card {
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 16px;
+  padding: 18px 18px;
+  box-shadow: 0 2px 12px rgba(28,26,23,0.06), 0 1px 3px rgba(28,26,23,0.04);
+  transition: transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  active-transform: scale(0.98);
+}
+.card:active { transform: scale(0.975); box-shadow: 0 1px 4px rgba(28,26,23,0.05); }
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
+.card-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+.card-area-tag {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-light); border: 1px solid var(--stone);
+  padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+}
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 500; line-height: 1.3;
+  color: var(--ink); margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 12px; color: var(--ink-light); line-height: 1.65;
+  margin-bottom: 10px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card-finding {
+  background: var(--sage-pale); border-left: 2px solid var(--sage);
+  padding: 9px 12px; font-size: 11.5px; color: var(--sage);
+  border-radius: 0 8px 8px 0; margin-bottom: 10px; line-height: 1.6;
+}
+.card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 10px; border-top: 1px solid var(--stone);
+}
+.card-db {
+  font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-light); background: var(--ivory); border: 1px solid var(--stone);
+  padding: 2px 8px; border-radius: 20px;
+}
+.status-pill { display: flex; align-items: center; gap: 5px; font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-light); }
+.status-pip { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status-pip.preparation { background: var(--blue-pill); }
+.status-pip.preprint { background: var(--gold); }
+.status-pip.active { background: var(--sage); }
+.status-pip.submitted { background: var(--rust); }
+
+/* ─── TEAM CARDS ─── */
+.team-section-head {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--stone-dark); padding: 18px 18px 8px;
+  border-bottom: 1px solid var(--stone); margin-bottom: 12px;
+}
+.team-card {
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 10px rgba(28,26,23,0.05);
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.team-mono {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant SC', serif; font-size: 15px; font-weight: 500;
+  color: white;
+}
+.team-info { flex: 1; min-width: 0; }
+.team-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.team-role { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 3px; }
+.team-affil { font-size: 11px; color: var(--ink-light); font-style: italic; margin-bottom: 4px; }
+.team-focus { font-size: 11px; color: var(--ink-light); line-height: 1.55; }
+.visiting-badge {
+  display: inline-block; margin-top: 5px;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--stone-mid); color: var(--stone-dark);
+  padding: 2px 7px; border-radius: 20px;
+}
+
+/* ─── PUBLICATIONS ─── */
+.pub-card {
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 10px rgba(28,26,23,0.05);
+}
+.pub-top { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.pub-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; color: var(--sage); line-height: 1;
+  flex-shrink: 0; min-width: 40px;
+}
+.pub-status-tag {
+  font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 20px; border: 1px solid;
+  white-space: nowrap; align-self: flex-start; margin-top: 2px;
+}
+.s-prep { background: rgba(107,143,212,0.08); color: #6b8fd4; border-color: rgba(107,143,212,0.3); }
+.s-preprint { background: var(--gold-pale); color: var(--gold); border-color: rgba(154,125,74,0.3); }
+.s-published { background: var(--sage-pale); color: var(--sage); border-color: rgba(74,103,65,0.3); }
+.pub-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 5px; line-height: 1.35; }
+.pub-authors { font-size: 11.5px; color: var(--ink-light); margin-bottom: 3px; line-height: 1.5; }
+.pub-journal { font-size: 11px; color: var(--stone-dark); font-style: italic; }
+.pub-finding {
+  background: var(--sage-pale); border-left: 2px solid var(--sage);
+  padding: 8px 10px; margin-top: 8px;
+  font-size: 11.5px; color: var(--sage); line-height: 1.6;
+  border-radius: 0 6px 6px 0;
+}
+.pub-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.pub-tag {
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--ivory); border: 1px solid var(--stone);
+  padding: 2px 8px; border-radius: 20px; color: var(--ink-light);
+}
+
+/* ─── FILTER CHIPS ─── */
+.chip-bar {
+  display: flex; gap: 7px; overflow-x: auto; padding: 8px 18px 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chip-bar::-webkit-scrollbar { display: none; }
+.chip {
+  flex-shrink: 0;
+  font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; border: 1px solid var(--stone);
+  background: var(--warm-white); color: var(--ink-light);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.chip.active { background: var(--ink); border-color: var(--ink); color: white; }
+
+/* ─── IDEAS ─── */
+.idea-form {
+  margin: 0 18px 16px;
+  background: var(--ivory); border: 1px solid var(--stone); border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 14px rgba(28,26,23,0.07);
+}
+.idea-form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; color: var(--ink); margin-bottom: 4px;
+}
+.idea-form-sub { font-size: 12px; color: var(--ink-light); margin-bottom: 16px; line-height: 1.6; }
+.form-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); display: block; margin-bottom: 5px; }
+.form-control {
+  width: 100%; background: var(--warm-white); border: 1px solid var(--stone);
+  padding: 10px 12px; color: var(--ink);
+  font-family: 'Jost', sans-serif; font-size: 14px;
+  outline: none; border-radius: 10px; margin-bottom: 12px;
+  transition: border-color 0.2s; -webkit-appearance: none;
+}
+.form-control:focus { border-color: var(--sage); }
+textarea.form-control { resize: none; min-height: 80px; }
+.btn-submit {
+  width: 100%; background: var(--sage); color: white; border: none;
+  padding: 12px; border-radius: 12px; font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+}
+.btn-submit:active { opacity: 0.85; }
+
+.idea-card {
+  background: var(--warm-white);
+  border: 1px solid var(--stone); border-radius: 16px;
+  padding: 18px; box-shadow: 0 2px 12px rgba(28,26,23,0.06);
+}
+.idea-card:active { transform: scale(0.98); }
+.idea-card-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+.idea-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+.badge {
+  font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px; border: 1px solid;
+}
+.badge-feasible { background: var(--sage-pale); color: var(--sage); border-color: rgba(74,103,65,0.2); }
+.badge-moderate { background: var(--gold-pale); color: var(--gold); border-color: rgba(154,125,74,0.2); }
+.badge-challenging { background: var(--rust-pale); color: var(--rust); border-color: rgba(139,74,53,0.2); }
+.badge-area { background: var(--ivory); color: var(--ink-light); border-color: var(--stone); }
+.idea-desc { font-size: 12px; color: var(--ink-light); line-height: 1.65; margin-bottom: 10px; }
+.idea-note { background: var(--sage-pale); border-left: 2px solid var(--sage); padding: 8px 10px; font-size: 11.5px; color: var(--sage); margin-bottom: 10px; line-height: 1.6; border-radius: 0 6px 6px 0; }
+.idea-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding-top: 10px; border-top: 1px solid var(--stone); }
+.idea-meta { font-size: 11px; color: var(--stone-dark); }
+.idea-actions { display: flex; gap: 6px; }
+.btn-sm {
+  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 8px; cursor: pointer; border: 1px solid;
+}
+.btn-dark { background: var(--ink); border-color: var(--ink); color: white; }
+.btn-outline { background: none; border-color: var(--stone); color: var(--ink-light); }
+
+/* ─── BOTTOM TAB BAR ─── */
+.tab-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(253,251,247,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--stone);
+  display: flex;
+  padding-bottom: var(--safe-bottom);
+  height: var(--tab-h);
+}
+.tab-btn {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 8px 0 0;
+  gap: 3px; border: none; background: none; cursor: pointer;
+  color: var(--stone-dark); transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-btn.active { color: var(--sage); }
+.tab-icon { font-size: 22px; line-height: 1; }
+.tab-label { font-size: 10px; letter-spacing: 0.05em; font-weight: 500; font-family: 'Jost', sans-serif; }
+
+/* ─── DETAIL SHEET ─── */
+.sheet-overlay {
+  position: fixed; inset: 0; background: rgba(28,26,23,0.5);
+  backdrop-filter: blur(4px); z-index: 200; display: none;
+  align-items: flex-end; justify-content: center;
+}
+.sheet-overlay.open { display: flex; }
+.sheet {
+  background: var(--warm-white); border-radius: 24px 24px 0 0;
+  width: 100%; max-height: 88dvh;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 0 0 calc(var(--safe-bottom) + 16px);
+  animation: slideUp 0.28s cubic-bezier(0.32,0.72,0,1);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+.sheet-handle {
+  width: 36px; height: 4px; background: var(--stone-mid);
+  border-radius: 2px; margin: 12px auto 0;
+}
+.sheet-content { padding: 20px 20px 10px; }
+.sheet-icon { font-size: 32px; margin-bottom: 8px; }
+.sheet-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 10px; }
+.sheet-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.sheet-tag {
+  font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; border: 1px solid;
+}
+.sheet-tag.active { background: var(--sage-pale); color: var(--sage); border-color: rgba(74,103,65,0.2); }
+.sheet-tag.preparation { background: rgba(107,143,212,0.08); color: #6b8fd4; border-color: rgba(107,143,212,0.25); }
+.sheet-tag.preprint { background: var(--gold-pale); color: var(--gold); border-color: rgba(154,125,74,0.2); }
+.sheet-tag.db { background: var(--ivory); color: var(--ink-light); border-color: var(--stone); }
+.sheet-finding {
+  background: var(--sage-pale); border-left: 2px solid var(--sage);
+  padding: 11px 14px; font-size: 13px; color: var(--sage);
+  border-radius: 0 10px 10px 0; margin-bottom: 16px; line-height: 1.65;
+}
+.detail-row { margin-bottom: 12px; }
+.detail-key { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-dark); margin-bottom: 3px; }
+.detail-val { font-size: 13.5px; color: var(--ink-mid); line-height: 1.6; }
+.team-pips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.pip {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--ink-light);
+  background: var(--ivory); border: 1px solid var(--stone);
+  padding: 4px 10px; border-radius: 20px;
+}
+.pip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sheet-btn {
+  width: calc(100% - 40px); margin: 16px 20px 0;
+  background: var(--ink); color: white; border: none;
+  padding: 14px; border-radius: 14px; font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+}
+.sheet-btn:active { opacity: 0.85; }
+.sheet-close-btn {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--stone); border: none; width: 28px; height: 28px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--ink-light); cursor: pointer;
+}
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: calc(var(--tab-h) + 10px); left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: white; font-size: 13px;
+  padding: 11px 20px; border-radius: 20px;
+  display: none; z-index: 500; white-space: nowrap;
+  animation: fadeIn 0.2s ease;
+  box-shadow: 0 4px 20px rgba(28,26,23,0.25);
+}
+.toast.show { display: block; }
+@keyframes fadeIn { from { opacity:0; transform: translateX(-50%) translateY(6px); } to { opacity:1; transform: translateX(-50%); } }
+
+/* ─── GRANTS ─── */
+.grant-card {
+  background: var(--warm-white); border: 1px solid var(--stone); border-radius: 14px;
+  padding: 18px; box-shadow: 0 2px 10px rgba(28,26,23,0.05);
+}
+.grant-funder { font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 500; }
+.grant-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 12px; line-height: 1.35; }
+.grant-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.grant-key { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone-dark); min-width: 58px; padding-top: 1px; }
+.grant-val { font-size: 13px; color: var(--ink-mid); }
+.grant-amount { color: var(--sage); font-weight: 600; }
+.grant-desc { font-size: 12px; color: var(--ink-light); line-height: 1.65; margin-top: 10px; border-top: 1px solid var(--stone); padding-top: 10px; }
+.grant-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.grant-status {
+  font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; border: 1px solid;
+}
+.grant-status.active { background: var(--sage-pale); color: var(--sage); border-color: rgba(74,103,65,0.2); }
+.grant-status.pending { background: var(--gold-pale); color: var(--gold); border-color: rgba(154,125,74,0.2); }
+.grant-status.planning { background: var(--ivory); color: var(--ink-light); border-color: var(--stone); }
+.grant-linked { font-size: 10.5px; color: var(--stone-dark); }
+
+/* ─── EMPTY STATE ─── */
+.empty-state { text-align: center; padding: 52px 32px; color: var(--ink-light); font-size: 13px; border: 1px solid var(--stone); border-radius: 14px; margin: 0 18px; }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-monogram">NE</div>
+      <div>
+        <div class="top-title">NeuroEpi Lab</div>
+        <div class="top-sub">University Hospital Zurich</div>
+      </div>
+    </div>
+    <div class="top-bar-page-title" id="page-title">Home</div>
+  </div>
+
+  <!-- SCROLL AREA -->
+  <div class="scroll-area" id="scroll-area">
+
+    <!-- HOME -->
+    <div class="screen active" id="screen-home">
+      <div class="home-hero">
+        <div class="hero-eyebrow">Clinical Neuroscience Center</div>
+        <h1>Advancing<br><em>Epilepsy</em><br>Research</h1>
+        <p>Collaborative research spanning epilepsy epidemiology, EEG biomarkers, pharmacotherapy outcomes, brain aging, and clinical AI — at University Hospital Zurich and international partner sites.</p>
+        <div class="hero-affil">Department of Neurology · University Hospital and University of Zurich</div>
+      </div>
+      <div class="stat-strip">
+        <div class="stat-item"><div class="stat-num" id="stat-researchers">10</div><div class="stat-label">Researchers</div></div>
+        <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">Projects</div></div>
+        <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Databases</div></div>
+        <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Papers</div></div>
+      </div>
+      <div class="section-label">Recent Projects</div>
+      <div class="card-list" id="home-cards"></div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="screen" id="screen-projects">
+      <div class="chip-bar" id="project-chips"></div>
+      <div class="card-list" id="all-cards"></div>
+    </div>
+
+    <!-- IDEAS -->
+    <div class="screen" id="screen-ideas">
+      <div class="idea-form">
+        <div class="idea-form-title">Submit an Idea</div>
+        <div class="idea-form-sub">Feasibility is assessed automatically and relevant literature is suggested.</div>
+        <label class="form-label">Your Name</label>
+        <select class="form-control" id="idea-submitter">
+          <option>Dr. Marian Galovic</option>
+          <option>Carolina Ferreira-Atuesta</option>
+          <option>Dr. Kai Michael Schubert</option>
+          <option>Dr. Marco Di Donato</option>
+          <option>Dr. Katharina Schuler</option>
+          <option>Dr. Miranda Stattmann</option>
+          <option>Dr. Anton Schmick</option>
+          <option>Xin You Tai</option>
+          <option>Lubin Gou</option>
+        </select>
+        <label class="form-label">Research Area</label>
+        <select class="form-control" id="idea-area">
+          <option>Post-Stroke Epilepsy</option>
+          <option>Late-Onset Epilepsy</option>
+          <option>Drug Outcomes / Pharmacotherapy</option>
+          <option>Sleep & Epilepsy</option>
+          <option>EEG & Biomarkers</option>
+          <option>Brain Aging & Neurodegeneration</option>
+          <option>Clinical AI / LLMs</option>
+          <option>Comorbidities</option>
+          <option>Other</option>
+        </select>
+        <label class="form-label">Idea Title</label>
+        <input type="text" class="form-control" id="idea-title" placeholder="e.g. GLP-1 agonists and seizure risk…">
+        <label class="form-label">Description & Hypothesis</label>
+        <textarea class="form-control" id="idea-desc" placeholder="Describe the research question, proposed methods, and expected outcomes…"></textarea>
+        <label class="form-label">Database</label>
+        <select class="form-control" id="idea-db">
+          <option>TriNetX</option><option>UK Biobank</option>
+          <option>ENIGMA (Longitudinal)</option><option>SELECT Multicenter</option>
+          <option>IMPOSE Study</option><option>Multiple / TBD</option>
+        </select>
+        <button class="btn-submit" onclick="submitIdea()">Submit & Assess Feasibility</button>
+      </div>
+      <div class="card-list" id="ideas-list">
+        <div class="empty-state">No ideas yet — be the first to propose a new direction.</div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="screen" id="screen-team">
+      <div class="team-section-head">Core Team</div>
+      <div class="card-list" id="team-core-list"></div>
+      <div class="team-section-head" style="margin-top:12px">Visiting & Collaborators</div>
+      <div class="card-list" id="team-visiting-list"></div>
+    </div>
+
+    <!-- PUBLICATIONS -->
+    <div class="screen" id="screen-pubs">
+      <div class="chip-bar" id="pub-chips"></div>
+      <div class="card-list" id="pub-list"></div>
+    </div>
+
+    <!-- GRANTS -->
+    <div class="screen" id="screen-grants">
+      <div class="section-label">Active & Pending Grants</div>
+      <div class="card-list" id="grants-list"></div>
+      <div class="section-label" style="margin-top:8px">Funding Opportunities</div>
+      <div class="card-list" id="opps-list"></div>
+    </div>
+
+  </div><!-- /scroll-area -->
+</div><!-- /app -->
+
+<!-- BOTTOM TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" id="tb-home" onclick="showScreen('home','Home')">
+    <div class="tab-icon">🏠</div><div class="tab-label">Home</div>
+  </button>
+  <button class="tab-btn" id="tb-projects" onclick="showScreen('projects','Projects')">
+    <div class="tab-icon">📋</div><div class="tab-label">Projects</div>
+  </button>
+  <button class="tab-btn" id="tb-ideas" onclick="showScreen('ideas','Ideas')">
+    <div class="tab-icon">💡</div><div class="tab-label">Ideas</div>
+  </button>
+  <button class="tab-btn" id="tb-team" onclick="showScreen('team','Team')">
+    <div class="tab-icon">👥</div><div class="tab-label">Team</div>
+  </button>
+  <button class="tab-btn" id="tb-pubs" onclick="showScreen('pubs','Publications')">
+    <div class="tab-icon">📄</div><div class="tab-label">Papers</div>
+  </button>
+  <button class="tab-btn" id="tb-grants" onclick="showScreen('grants','Grants')">
+    <div class="tab-icon">🏆</div><div class="tab-label">Grants</div>
+  </button>
+</div>
+
+<!-- DETAIL SHEET -->
+<div class="sheet-overlay" id="sheet" onclick="closeSheet(event)">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content" id="sheet-content"></div>
+    <button class="sheet-btn" id="sheet-join-btn" onclick="showToast('Join request noted!')">+ Join This Project</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TC = ['#4a6741','#6b5c8a','#5c7a8a','#8a5c4a','#4a7a6e','#7a6e4a','#5c4a7a','#4a5c7a','#7a4a5c'];
+
+const BASE_TEAM = {
+  names: ['Dr. Marian Galovic','Carolina Ferreira-Atuesta','Dr. Kai Michael Schubert'],
+  initials: ['MG','CF','KS'], colors: [TC[0],TC[1],TC[2]],
+};
+function mergeTeam(extra){
+  const names=[...BASE_TEAM.names],initials=[...BASE_TEAM.initials],colors=[...BASE_TEAM.colors];
+  if(extra) extra.names.forEach((n,i)=>{ if(!names.includes(n)){names.push(n);initials.push(extra.initials[i]);colors.push(extra.colors[i]);} });
+  return {names,initials,colors};
+}
+
+const projects = [
+  { id:1, name:'Sleep Duration & All-Cause Mortality in Adults with Epilepsy', icon:'😴', tag:'UK Biobank', status:'preparation', area:'sleep', areaLabel:'Sleep', desc:'Cohort study of 2,874 adults with epilepsy followed for 15 years in UK Biobank, examining the association between sleep duration and all-cause mortality.', finding:'Sleeping ≥9h associated with significantly higher all-cause mortality vs ≤7h (HR 1.52; 95% CI 1.15–2.00; p=.003).', extra:{names:['Dr. Marco Di Donato','Xin You Tai'],initials:['MD','XT'],colors:[TC[3],TC[6]]}, database:'UK Biobank (n=2,874; 15-year follow-up)', methods:'Cox proportional hazards regression; sleep duration categories; adjusted survival analysis.', notes:'Collaborators: Xin You Tai (Oxford), Prof. Christian R. Baumann (UZH).' },
+  { id:2, name:'Continuous vs. Short EEG after Ischemic Stroke for Predicting Post-Stroke Epilepsy', icon:'🧠', tag:'SELECT', status:'preparation', area:'pse', areaLabel:'Post-Stroke Epilepsy', desc:'Retrospective SeLECT Consortium study (n=283) comparing cEEG (≥12h) vs 60-min sEEG for detecting epileptiform abnormalities and predicting PSE over 41 months.', finding:'cEEG tripled IED detection (OR 3.75). LPDs sHR 4.50; electrographic seizures sHR 3.63. ΔC-index +0.055.', extra:null, database:'SELECT Multicenter (n=283; 41-month follow-up)', methods:'Fine–Gray competing-risks regression; within-patient OR; C-index; NRI.', notes:'Co-senior: Galovic (UZH), Gaspard (Brussels/Yale), Punia (Cleveland Clinic).' },
+  { id:3, name:'Hearing Aid Use & Risk of Dementia in LOE, Stroke & Diabetes with Hearing Loss', icon:'👂', tag:'TriNetX', status:'preparation', area:'loe', areaLabel:'Late-Onset Epilepsy', desc:'Target trial emulation using TriNetX (>250M patients) examining whether hearing aid use reduces dementia incidence across three high-risk neurological populations.', finding:'HA use reduced Alzheimer\'s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69.', extra:null, database:'TriNetX (epilepsy: 1,093 pairs; stroke: 2,363; diabetes: 14,934)', methods:'Propensity score matching; target trial emulation; Cox regression; competing risks.', notes:'Lead: Ferreira-Atuesta. Co-senior: Lip, Mbizvo, Galovic. Liverpool collaboration.' },
+  { id:4, name:'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis', icon:'💊', tag:'TriNetX', status:'preprint', area:'pharm', areaLabel:'Pharmacotherapy', desc:'Pharmacoepidemiological TriNetX study comparing incident epilepsy risk in RA patients on tofacitinib or JAK inhibitors vs TNFα inhibitors.', finding:'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011. All JAK inhibitors: HR 0.64 (0.42–0.98).', extra:{names:['Dr. Katharina Schuler'],initials:['KSc'],colors:[TC[4]]}, database:'TriNetX (n=5,485 vs 5,482; all JAK: 9,836 vs 9,844)', methods:'Propensity-score matched cohort; Cox regression; competing risks; forest plot.', notes:'Lead: Schuler. Linked to Koetser Foundation grant (Feb 2026).' },
+  { id:5, name:'Incidence & Attributable Disease Burden of Adult-Onset Acquired Epilepsy', icon:'📊', tag:'TriNetX', status:'preparation', area:'epidemiology', areaLabel:'Epidemiology', desc:'Real-world analysis of 2.4M adults across 20 brain insult etiologies, quantifying acquired epilepsy incidence and its independent contribution to long-term morbidity and mortality.', finding:'3.8% incidence overall (1.8% MS → 10.5% malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, and cognitive decline.', extra:{names:['Dr. Miranda Stattmann','Dr. Katharina Schuler','Dr. Anton Schmick'],initials:['MS','KSc','AS'],colors:[TC[5],TC[4],TC[7]]}, database:'TriNetX (n=2,489,454; 20 etiologies)', methods:'Cox regression; 32 prespecified outcomes across 5 clinical domains.', notes:'Collaboration: UCL Queen Square (Koepp), Karolinska (Curman), Lübeck (Ludwig, Schmick).' },
+  { id:6, name:'Epilepsy is Associated with Accelerated Biological Aging (PhenoAge, UK Biobank)', icon:'⏳', tag:'UK Biobank', status:'preparation', area:'aging', areaLabel:'Brain Aging', desc:'Cross-sectional and prospective analysis of 415,915 UK Biobank participants comparing PhenoAgeAccel in prevalent epilepsy, incident epilepsy, and controls.', finding:'Incident epilepsy: +1.70y age acceleration (p<0.001). Carbamazepine: −0.99y; phenytoin: +1.05y.', extra:null, database:'UK Biobank (n=415,915)', methods:'Multivariable regression; PhenoAge (9-biomarker composite); cross-sectional + prospective analysis.', notes:'Lead: Peter Westarp (research student).' },
+  { id:7, name:'Brain Age Estimation from Structural MRI — ENIGMA Dataset (BrainAgeR Pipeline)', icon:'🧩', tag:'ENIGMA', status:'active', area:'aging', areaLabel:'Brain Aging', desc:'Automated brain age estimation using the BrainAgeR Pipeline (v2.1) on T1-weighted MRI from the ENIGMA epilepsy dataset.', finding:null, extra:{names:['Lubin Gou'],initials:['LG'],colors:[TC[8]]}, database:'ENIGMA (T1 MRI dataset)', methods:'SPM12 segmentation; BrainAgeR v2.1 Docker; per-subject QC report.', notes:'Lead: Lubin Gou (visiting researcher). gou.lubin@usz.ch' },
+  { id:8, name:'Vortioxetine vs Citalopram & Outcomes in Patients with Brain Neoplasms', icon:'🔬', tag:'TriNetX', status:'preparation', area:'pharm', areaLabel:'Pharmacotherapy', desc:'Pharmacoepidemiological study comparing vortioxetine vs citalopram in patients with brain neoplasms.', finding:null, extra:{names:['Dr. Anton Schmick'],initials:['AS'],colors:[TC[7]]}, database:'TriNetX', methods:'Propensity-score matched cohort; survival analysis; multidomain outcome comparison.', notes:'Lead: Anton Schmick. Collaboration: Lübeck Institute (Ludwig).' },
+  { id:9, name:'Biomarkers in Epilepsy — IMPOSE Pilot (EVs, NfL, GFAP, NULISA)', icon:'🧪', tag:'IMPOSE', status:'active', area:'biomarker', areaLabel:'Biomarkers', desc:'Pilot biomarker study using IMPOSE cohort samples with longitudinal blood collection. Explores EVs, pTau217, NfL, GFAP, and NULISA CNS panels.', finding:'8 IMPOSE patients with suitable longitudinal samples identified. NULISA: ~150 CHF/sample.', extra:{names:['Dr. Miranda Stattmann','Dr. Tobias Weiss','Dr. Nils Briel'],initials:['MS','TW','NB'],colors:[TC[5],TC[7],TC[8]]}, database:'IMPOSE Study Biobank', methods:'EV isolation; NULISA CNS panel; pTau217, NfL, GFAP (Lumipulse); within-subject paired analysis.', notes:'Lead: Miranda Stattmann. Pending SNSF funding (min CHF 200–300k).' },
+  { id:10, name:'LLM-Assisted EEG Report Analysis (MedGemma / Local Models)', icon:'🤖', tag:'Clinical AI', status:'active', area:'ai', areaLabel:'Clinical AI', desc:'Benchmarking local large language models (incl. MedGemma) for automated extraction and classification of structured information from clinical EEG reports.', finding:null, extra:{names:['Dr. Katharina Schuler'],initials:['KSc'],colors:[TC[4]]}, database:'Local EHR / EEG Reports (UZH)', methods:'Local LLM deployment; structured variable extraction; accuracy benchmarking.', notes:'Lead: Katharina Schuler. Harry (external collaborator). Kickoff: Tue 24.02.' },
+  { id:11, name:'LLM-Assisted Clinical Data Extraction from Medical Records', icon:'📑', tag:'Clinical AI', status:'active', area:'ai', areaLabel:'Clinical AI', desc:'Using large language models to extract structured clinical variables from unstructured medical records.', finding:null, extra:{names:['Giannis Katsaros'],initials:['GK'],colors:[TC[8]]}, database:'Local EHR (UZH)', methods:'LLM prompt engineering; structured output validation; clinical NLP pipeline.', notes:'Giannis Katsaros: departmental collaborator.' },
+  { id:12, name:'Sodium Channel Blockers & Reduced Dementia Risk in Late-Onset Unexplained Epilepsy', icon:'🧬', tag:'TriNetX', status:'preparation', area:'loe', areaLabel:'Late-Onset Epilepsy', desc:'Target trial emulation using global federated real-world data (>75M adults aged ≥55) comparing dementia risk across antiseizure monotherapies in late-onset unexplained epilepsy.', finding:'Sodium channel blockers: HR 0.73 (0.61–0.88) all-cause dementia, HR 0.66 (0.49–0.88) Alzheimer\'s vs levetiracetam/brivaracetam. Replicated in Down syndrome cohort and NACC.', extra:{names:['Xin You Tai','Dr. Simon Schreiner','Dr. Hans H. Jung'],initials:['XT','SS','HJ'],colors:[TC[6],'#5c6a7a','#7a5c6a']}, database:'TriNetX (>75M adults ≥55); NACC; Down syndrome cohort', methods:'Target trial emulation; PSM cohorts; Cox regression; competing risks; external replication.', notes:'International collaboration: Oxford, Liverpool, Gothenburg, Mount Sinai, UZH. Co-senior: Lip, Mbizvo, Galovic.' },
+  { id:13, name:'Suicide Attempt Risk: Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy', icon:'⚕️', tag:'TriNetX', status:'preparation', area:'pharm', areaLabel:'Pharmacotherapy', desc:'Pharmacoepidemiological TriNetX study comparing suicide attempt rates in patients with epilepsy initiating levetiracetam versus lacosamide or lamotrigine.', finding:null, extra:{names:['Dr. Miranda Stattmann'],initials:['MS'],colors:[TC[5]]}, database:'TriNetX', methods:'Propensity-score matched cohort; Cox regression; competing risks; psychiatric adverse event analysis.', notes:'Lead: Miranda Stattmann. Addresses FDA/EMA neuropsychiatric safety signals for levetiracetam.' },
+];
+
+const teamCore = [
+  {name:'Dr. Marian Galovic',initials:'MG',role:'Principal Investigator',affil:'University Hospital Zurich',focus:'PSE, epileptogenesis, biomarkers, multicenter trials',bg:TC[0]},
+  {name:'Carolina Ferreira-Atuesta',initials:'CF',role:'PhD Student',affil:'UZH / University of Liverpool',focus:'Late-onset epilepsy, TriNetX, pharmacoepidemiology',bg:TC[1]},
+  {name:'Dr. Kai Michael Schubert',initials:'KS',role:'Senior Researcher',affil:'University Hospital Zurich',focus:'EEG, PSE, SELECT consortium, epidemiology',bg:TC[2]},
+  {name:'Dr. Katharina Schuler',initials:'KSc',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Immunology & epilepsy, TriNetX, clinical AI',bg:TC[4]},
+  {name:'Dr. Miranda Stattmann',initials:'MS',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Biomarkers, IMPOSE cohort, EVs, NfL, GFAP',bg:TC[5]},
+  {name:'Dr. Marco Di Donato',initials:'MD',role:'Clinical Researcher',affil:'University Hospital Zurich',focus:'Sleep & epilepsy, UK Biobank, mortality',bg:'#5c7a8a'},
+  {name:'Dr. Anton Schmick',initials:'AS',role:'Clinical Researcher',affil:'UZH / Lübeck',focus:'Oncology & epilepsy, TriNetX, pharmacotherapy',bg:TC[7]},
+];
+const teamVisiting = [
+  {name:'Xin You Tai',initials:'XT',role:'Research Collaborator',affil:'University of Oxford',focus:'Neuroimaging, UK Biobank, late-onset epilepsy',bg:TC[6],visiting:true},
+  {name:'Lubin Gou',initials:'LG',role:'Visiting Researcher',affil:'University Hospital Zurich',focus:'Brain age estimation, MRI, ENIGMA pipeline',bg:TC[8],visiting:true},
+  {name:'Peter Westarp',initials:'PW',role:'Research Student',affil:'University Hospital Zurich',focus:'Biological aging, PhenoAge, UK Biobank',bg:'#8a6a4a',visiting:true},
+];
+
+const publications = [
+  {year:2026,status:'preparation',title:'Association between Sleep Duration and All-Cause Mortality in Adults With Epilepsy',authors:'Di Donato M, Ferreira-Atuesta C, Tai XY, … Baumann CR, Galovic M',finding:'HR 1.52 (95% CI 1.15–2.00; p=.003) for ≥9h vs ≤7h sleep.',tags:['sleep','mortality','uk-biobank'],categories:['sleep','loe']},
+  {year:2026,status:'preparation',title:'Continuous vs. Short EEG after Ischemic Stroke: What cEEG Adds for PSE Prediction',authors:'Schubert KM, … Galovic M*, Gaspard N*, Punia V* — SeLECT Consortium',finding:'cEEG tripled IED detection (OR 3.75). LPDs sHR 4.50; electrographic seizures sHR 3.63.',tags:['eeg','pse','ceeg'],categories:['pse','eeg']},
+  {year:2026,status:'preparation',title:'Hearing Aid Use and Risk of Dementia in Adults with Late-Onset Epilepsy, Stroke, or Diabetes',authors:'Ferreira-Atuesta C, Schubert KM, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*',finding:'HA use reduced Alzheimer\'s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69.',tags:['hearing-aid','dementia','loe'],categories:['loe','comorbid','pharm']},
+  {year:2025,status:'preprint',title:'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis',authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',finding:'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011.',tags:['trinetx','jak-inhibitors'],categories:['pharm','comorbid']},
+  {year:2026,status:'preparation',title:'Incidence and Attributable Disease Burden of Adult-Onset Acquired Epilepsy',authors:'Schubert KM, Stattmann M, Ferreira-Atuesta C, … Galovic M',finding:'3.8% incidence overall (1.8% MS → 10.5% malignant CNS tumors).',tags:['trinetx','epidemiology','acquired-epilepsy'],categories:['loe','pse','comorbid']},
+  {year:2026,status:'preparation',title:'Epilepsy is Associated with Accelerated Biological Aging (UK Biobank)',authors:'Westarp P, Ferreira-Atuesta C, Schubert KM, Galovic M',finding:'Incident epilepsy: +1.70y PhenoAgeAccel (p<0.001). Carbamazepine: −0.99y; phenytoin: +1.05y.',tags:['phenoage','biological-aging','uk-biobank'],categories:['aging','loe']},
+  {year:2026,status:'preparation',title:'Vortioxetine vs Citalopram and Clinical Outcomes in Patients with Brain Neoplasms',authors:'Schmick A, Ludwig RJ, Schubert KM, Ferreira-Atuesta C, Galovic M, et al.',finding:null,tags:['trinetx','brain-neoplasms'],categories:['pharm','comorbid']},
+  {year:2026,status:'preparation',title:'LLM-Assisted Data Extraction from Clinical EEG Reports: Benchmarking Local Models',authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',finding:'MedGemma demonstrated strong performance for structured medical report extraction.',tags:['llm','eeg','clinical-ai'],categories:['ai','eeg']},
+  {year:2026,status:'preparation',title:'Sodium Channel Blockers Are Associated with Reduced Dementia Risk in Late-Onset Unexplained Epilepsy',authors:'Ferreira-Atuesta C, Schubert KM, Tai XY, Noain D, … Lip GYH*, Mbizvo GK*, Galovic M*',finding:'HR 0.73 (0.61–0.88) all-cause dementia; HR 0.66 (0.49–0.88) Alzheimer\'s vs LEV/BRV. >75M adults ≥55 years.',tags:['trinetx','loe','dementia','sodium-channel-blockers'],categories:['loe','pharm','comorbid']},
+  {year:2026,status:'preparation',title:'Suicide Attempt Risk with Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy',authors:'Stattmann M, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',finding:null,tags:['trinetx','levetiracetam','pharmacovigilance'],categories:['pharm','comorbid']},
+];
+
+const grants = [
+  {funder:'Koetser Foundation for Brain Research',title:'JAK Inhibitors as Novel Modulators of Epileptogenesis',pi:'Dr. Katharina Schuler',amount:'CHF ~80,000',period:'2026–2027',status:'pending',description:'Supported by TriNetX real-world data: 58% reduction in new epilepsy with tofacitinib vs TNFα inhibitors in RA.',deadline:'Feb 15, 2026',linked:'JAK vs TNFα'},
+  {funder:'Swiss National Science Foundation (SNSF)',title:'Post-Stroke Epilepsy Prediction — Multimodal EEG Biomarker Validation',pi:'Dr. Marian Galovic',amount:'CHF 450,000',period:'2024–2027',status:'active',description:'Funds SELECT-EEG multicenter validation study and the lab\'s PSE/EEG research program.',deadline:'N/A (active)',linked:'cEEG / SELECT'},
+  {funder:'SNSF / Alternative Funder (TBD)',title:'Biomarkers of Seizure Activity — FINESSE 2.0',pi:'Dr. Marian Galovic',amount:'CHF 200–300k+',period:'2026–2028',status:'planning',description:'Full IMPOSE/FINESSE biomarker pipeline. Galovic ineligible for SNSF before Oct 2026 — exploring co-applicants.',deadline:'Oct 2026 (SNSF)',linked:'Biomarkers / IMPOSE'},
+];
+
+const fundingOpps = [
+  {name:'SNSF Project Grant',deadline:'Oct 2026',amount:'Up to CHF 1M',note:'Next available for Galovic lab. Explore co-applicant (e.g. Weiss).'},
+  {name:'ERC Starting Grant',deadline:'Sep 2025',amount:'€1.5M',note:'2–7 yrs post-PhD. Potential PI: Weiss.'},
+  {name:'Hartmann Müller Foundation',deadline:'Rolling',amount:'CHF 20–80k',note:'Zurich-based. Suitable for FINESSE pilot bridge funding.'},
+  {name:'Vontobel Foundation',deadline:'Rolling',amount:'CHF 50k',note:'Zurich-based private medical research funder.'},
+];
+
+let ideas = [];
+
+// ─── STATUS HELPERS ───
+function siInfo(s){return{active:{pip:'active',label:'Active'},preparation:{pip:'preparation',label:'In Prep'},preprint:{pip:'preprint',label:'Preprint'},submitted:{pip:'submitted',label:'Under Review'}}[s]||{pip:'preparation',label:'Planning'};}
+function pubBadge(s){return{preparation:'<span class="pub-status-tag s-prep">In Prep</span>',preprint:'<span class="pub-status-tag s-preprint">Preprint</span>'}[s]||'<span class="pub-status-tag s-published">Published</span>';}
+function fbadge(f){return{feasible:'<span class="badge badge-feasible">Feasible</span>',moderate:'<span class="badge badge-moderate">Moderate</span>',challenging:'<span class="badge badge-challenging">Challenging</span>'}[f]||'';}
+
+// ─── NAVIGATION ───
+function showScreen(id, title){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  document.getElementById('tb-'+id).classList.add('active');
+  document.getElementById('page-title').textContent = title;
+  document.getElementById('scroll-area').scrollTop = 0;
+  renderScreen(id);
+}
+
+function renderScreen(id){
+  if(id==='home') renderHome();
+  else if(id==='projects') renderProjects();
+  else if(id==='ideas') renderIdeas();
+  else if(id==='team') renderTeam();
+  else if(id==='pubs') renderPubs();
+  else if(id==='grants') renderGrants();
+}
+
+// ─── PROJECT CARD ───
+const AREA_LABELS = {all:'All',pse:'Post-Stroke',loe:'Late-Onset',pharm:'Pharmacotherapy',eeg:'EEG',sleep:'Sleep',aging:'Brain Aging',ai:'Clinical AI',epidemiology:'Epidemiology',biomarker:'Biomarkers'};
+let activeArea = 'all';
+
+function projectCardHTML(p){
+  const t=mergeTeam(p.extra); const si=siInfo(p.status);
+  return `<div class="card" onclick="openProject(${p.id})">
+    <div class="card-top"><div class="card-icon">${p.icon}</div><span class="card-area-tag">${p.areaLabel}</span></div>
+    <div class="card-title">${p.name}</div>
+    <div class="card-desc">${p.desc}</div>
+    ${p.finding?`<div class="card-finding">📊 ${p.finding}</div>`:''}
+    <div class="card-footer">
+      <span class="card-db">${p.tag}</span>
+      <div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>
+    </div>
+  </div>`;
+}
+
+function renderHome(){
+  const el=document.getElementById('home-cards');
+  if(el) el.innerHTML=projects.slice(0,4).map(projectCardHTML).join('');
+}
+
+function renderProjects(){
+  // chips
+  const cb=document.getElementById('project-chips');
+  if(cb&&!cb.dataset.built){
+    cb.dataset.built='1';
+    const areas=['all',...new Set(projects.map(p=>p.area))];
+    cb.innerHTML=areas.map(a=>`<button class="chip${a==='all'?' active':''}" onclick="filterArea('${a}',this)">${AREA_LABELS[a]||a}</button>`).join('');
+  }
+  const el=document.getElementById('all-cards');
+  if(el){
+    const filtered=activeArea==='all'?projects:projects.filter(p=>p.area===activeArea);
+    el.innerHTML=filtered.map(projectCardHTML).join('');
+  }
+}
+
+function filterArea(area,btn){
+  activeArea=area;
+  document.querySelectorAll('#project-chips .chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const el=document.getElementById('all-cards');
+  if(el){
+    const filtered=area==='all'?projects:projects.filter(p=>p.area===area);
+    el.innerHTML=filtered.map(projectCardHTML).join('');
+  }
+}
+
+// ─── PROJECT DETAIL SHEET ───
+function openProject(id){
+  const p=projects.find(x=>x.id===id); if(!p) return;
+  const t=mergeTeam(p.extra); const si=siInfo(p.status);
+  document.getElementById('sheet-content').innerHTML=`
+    <div class="sheet-icon">${p.icon}</div>
+    <div class="sheet-title">${p.name}</div>
+    <div class="sheet-tags">
+      <span class="sheet-tag ${p.status}">${si.label}</span>
+      <span class="sheet-tag db">${p.tag}</span>
+    </div>
+    <p style="font-size:13px;color:var(--ink-light);line-height:1.7;margin-bottom:14px">${p.desc}</p>
+    ${p.finding?`<div class="sheet-finding">📊 ${p.finding}</div>`:''}
+    <div class="detail-row"><div class="detail-key">Team</div><div class="team-pips">${t.names.map((n,i)=>`<div class="pip"><span class="pip-dot" style="background:${t.colors[i]}"></span>${t.initials[i]}</div>`).join('')}</div></div>
+    <div class="detail-row"><div class="detail-key">Database</div><div class="detail-val">${p.database}</div></div>
+    <div class="detail-row"><div class="detail-key">Methods</div><div class="detail-val">${p.methods}</div></div>
+    <div class="detail-row"><div class="detail-key">Notes</div><div class="detail-val" style="color:var(--ink-light)">${p.notes}</div></div>
+  `;
+  document.getElementById('sheet').classList.add('open');
+}
+function closeSheet(e){if(e.target.id==='sheet')document.getElementById('sheet').classList.remove('open');}
+
+// ─── TEAM ───
+function renderTeam(){
+  const core=document.getElementById('team-core-list');
+  if(core) core.innerHTML=teamCore.map(m=>`<div class="team-card">
+    <div class="team-mono" style="background:${m.bg}">${m.initials}</div>
+    <div class="team-info">
+      <div class="team-name">${m.name}</div>
+      <div class="team-role">${m.role}</div>
+      <div class="team-affil">${m.affil}</div>
+      <div class="team-focus">${m.focus}</div>
+    </div>
+  </div>`).join('');
+  const vis=document.getElementById('team-visiting-list');
+  if(vis) vis.innerHTML=teamVisiting.map(m=>`<div class="team-card">
+    <div class="team-mono" style="background:${m.bg}">${m.initials}</div>
+    <div class="team-info">
+      <div class="team-name">${m.name}</div>
+      <div class="team-role">${m.role}</div>
+      <div class="team-affil">${m.affil}</div>
+      <div class="team-focus">${m.focus}</div>
+      <div class="visiting-badge">Visiting / External</div>
+    </div>
+  </div>`).join('');
+  const sr=document.getElementById('stat-researchers');
+  if(sr) sr.textContent=teamCore.length+teamVisiting.length;
+}
+
+// ─── PUBLICATIONS ───
+const PUB_CATS = {all:'All',pse:'Post-Stroke',loe:'Late-Onset',pharm:'Pharmacotherapy',eeg:'EEG',sleep:'Sleep',aging:'Brain Aging',ai:'Clinical AI',comorbid:'Comorbidities'};
+let activePubCat = 'all';
+
+function renderPubs(){
+  const cb=document.getElementById('pub-chips');
+  if(cb&&!cb.dataset.built){
+    cb.dataset.built='1';
+    cb.innerHTML=Object.entries(PUB_CATS).map(([k,v])=>`<button class="chip${k==='all'?' active':''}" onclick="filterPubs('${k}',this)">${v}</button>`).join('');
+  }
+  const el=document.getElementById('pub-list');
+  if(!el) return;
+  const filtered=activePubCat==='all'?publications:publications.filter(p=>p.categories.includes(activePubCat));
+  el.innerHTML=filtered.sort((a,b)=>b.year-a.year).map(p=>`<div class="pub-card">
+    <div class="pub-top">
+      <div class="pub-year">${p.year}</div>
+      ${pubBadge(p.status)}
+    </div>
+    <div class="pub-title">${p.title}</div>
+    <div class="pub-authors">${p.authors}</div>
+    ${p.finding?`<div class="pub-finding">📊 ${p.finding}</div>`:''}
+    <div class="pub-tags">${p.tags.map(t=>`<span class="pub-tag">${t}</span>`).join('')}</div>
+  </div>`).join('');
+}
+function filterPubs(cat,btn){
+  activePubCat=cat;
+  document.querySelectorAll('#pub-chips .chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPubs();
+}
+
+// ─── GRANTS ───
+function renderGrants(){
+  const gl=document.getElementById('grants-list');
+  if(gl) gl.innerHTML=grants.map(g=>`<div class="grant-card">
+    <div class="grant-funder">${g.funder}</div>
+    <div class="grant-title">${g.title}</div>
+    <div class="grant-row"><span class="grant-key">PI</span><span class="grant-val">${g.pi}</span></div>
+    <div class="grant-row"><span class="grant-key">Amount</span><span class="grant-val grant-amount">${g.amount}</span></div>
+    <div class="grant-row"><span class="grant-key">Period</span><span class="grant-val">${g.period}</span></div>
+    <div class="grant-row"><span class="grant-key">Deadline</span><span class="grant-val">${g.deadline}</span></div>
+    <div class="grant-desc">${g.description}</div>
+    <div class="grant-footer"><span class="grant-status ${g.status}">${g.status.charAt(0).toUpperCase()+g.status.slice(1)}</span>${g.linked?`<span class="grant-linked">↗ ${g.linked}</span>`:''}</div>
+  </div>`).join('');
+  const ol=document.getElementById('opps-list');
+  if(ol) ol.innerHTML=fundingOpps.map(o=>`<div class="grant-card">
+    <div class="grant-funder">Opportunity</div>
+    <div class="grant-title">${o.name}</div>
+    <div class="grant-row"><span class="grant-key">Amount</span><span class="grant-val grant-amount">${o.amount}</span></div>
+    <div class="grant-row"><span class="grant-key">Deadline</span><span class="grant-val">${o.deadline}</span></div>
+    <div class="grant-desc">${o.note}</div>
+  </div>`).join('');
+}
+
+// ─── IDEAS ───
+const FDB={
+  'TriNetX':{score:'feasible',note:'TriNetX >250M patient records with robust ICD-10 coding. Typical n >5,000.'},
+  'UK Biobank':{score:'feasible',note:'Established cohort. Analysis pipelines well-documented; application required.'},
+  'ENIGMA (Longitudinal)':{score:'moderate',note:'Rich imaging data but smaller n. Power calculations are critical.'},
+  'SELECT Multicenter':{score:'moderate',note:'Requires SELECT steering committee coordination.'},
+  'IMPOSE Study':{score:'challenging',note:'Prospective, ongoing enrollment. Best for embedded secondary analyses.'},
+  'Multiple / TBD':{score:'moderate',note:'Multi-database replication is powerful but requires careful variable harmonisation.'},
+};
+const PSG={'Post-Stroke Epilepsy':['Holtkamp et al. (2017) — Neurology.','Brigo F et al. (2021) — J Neurol.'],'Late-Onset Epilepsy':['Sen A et al. (2020) — Lancet.','Feyissa AM et al. (2022) — JAMA Neurol.'],'Drug Outcomes / Pharmacotherapy':['Brodie MJ et al. (2018) — Epilepsia.'],'Sleep & Epilepsy':['Nobili L et al. (2016) — Nat Rev Neurol.'],'EEG & Biomarkers':['Gaspard N et al. (2019) — Neurology.'],'Brain Aging & Neurodegeneration':['Levine ME et al. (2018) — Aging Cell.'],'Clinical AI / LLMs':['Google MedGemma (2024) — research.google.'],'Comorbidities':['Stafstrom CE et al. (2013) — Neuron.'],'Other':['Fisher RS et al. (2017) — Epilepsia.']};
+
+function submitIdea(){
+  const title=document.getElementById('idea-title').value.trim();
+  const desc=document.getElementById('idea-desc').value.trim();
+  if(!title||!desc){showToast('Please fill in title and description.');return;}
+  const area=document.getElementById('idea-area').value;
+  const db=document.getElementById('idea-db').value;
+  const fi=FDB[db]||{score:'moderate',note:''};
+  ideas.unshift({id:Date.now(),title,desc,area,submitter:document.getElementById('idea-submitter').value,db,feasibility:fi.score,note:fi.note,papers:PSG[area]||PSG['Other']});
+  document.getElementById('idea-title').value='';
+  document.getElementById('idea-desc').value='';
+  showToast('Idea submitted — feasibility assessed!');
+  renderIdeas();
+}
+
+function renderIdeas(){
+  const el=document.getElementById('ideas-list'); if(!el) return;
+  if(!ideas.length){el.innerHTML='<div class="empty-state">No ideas yet — be the first to propose a new direction.</div>';return;}
+  el.innerHTML=ideas.map(idea=>`<div class="idea-card">
+    <div class="idea-badges"><span class="badge badge-area">${idea.area}</span>${fbadge(idea.feasibility)}</div>
+    <div class="idea-card-title">${idea.title}</div>
+    <div class="idea-desc">${idea.desc}</div>
+    ${idea.note?`<div class="idea-note">${idea.note}</div>`:''}
+    ${idea.papers?`<div style="margin-bottom:8px">${idea.papers.map(p=>`<div style="font-size:11.5px;color:var(--ink-light);padding:4px 0;border-bottom:1px solid var(--stone)">${p}</div>`).join('')}</div>`:''}
+    <div class="idea-footer">
+      <div class="idea-meta">By <strong>${idea.submitter}</strong> · ${idea.db}</div>
+      <div class="idea-actions"><button class="btn-sm btn-dark" onclick="showToast('Idea promoted to project!')">→ Project</button></div>
+    </div>
+  </div>`).join('');
+}
+
+// ─── TOAST ───
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ─── INIT ───
+renderHome();
+renderTeam();
+</script>
+</body>
+</html>
