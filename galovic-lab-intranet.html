@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galovic Lab — Intranet</title>
+<title>Galovic Lab &mdash; Intranet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --ivory: #f8f5ef;
@@ -90,7 +90,7 @@ body::before {
   z-index: 9999;
 }
 
-/* ——— NAV ——— */
+/* --- NAV --- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(253,251,247,0.94);
@@ -125,12 +125,12 @@ nav {
 .nav-links button:hover { color: var(--ink); }
 .nav-links button.active { color: var(--sage); }
 
-/* ——— TABS ——— */
+/* --- TABS --- */
 #app { position: relative; }
 .tab { display: none; }
 .tab.active { display: block; }
 
-/* ——— HERO ——— */
+/* --- HERO --- */
 .hero {
   min-height: 100vh;
   display: grid;
@@ -199,17 +199,17 @@ nav {
   opacity: 0.5;
 }
 
-/* ——— SECTIONS ——— */
+/* --- SECTIONS --- */
 .section { max-width: 1240px; margin: 0 auto; padding: 80px 48px; }
 .section-sm { max-width: 1240px; margin: 0 auto; padding: 56px 48px; }
 .rule { height: 1px; background: var(--stone); margin: 0 48px; }
 
-.section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; gap: 20px; flex-wrap: wrap; }
-.section-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
+.section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; gap: 20px; }
+.section-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
 .section-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--ink); letter-spacing: -0.01em; }
 .section-title em { font-style: italic; color: var(--sage); }
 
-/* ——— PROJECT CARDS ——— */
+/* --- PROJECT CARDS --- */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
 .project-card {
   background: var(--warm-white);
@@ -221,7 +221,7 @@ nav {
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(28,26,23,0.06), 0 1px 3px rgba(28,26,23,0.04);
 }
-.project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(28,26,23,0.12), 0 2px 8px rgba(28,26,23,0.06); border-color: var(--stone-mid); }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(28,26,23,0.12), 0 2px 8px rgba(28,26,23,0.06); }
 .project-card.hidden { display: none; }
 .project-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
 .project-icon-wrap { font-size: 22px; line-height: 1; flex-shrink: 0; }
@@ -275,7 +275,7 @@ nav {
 .status-pip.active { background: var(--sage); }
 .status-pip.submitted { background: var(--rust); }
 
-/* ——— FILTER BAR ——— */
+/* --- FILTER BAR --- */
 .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
 .filter-btn {
   background: none; border: 1px solid var(--stone); color: var(--ink-light);
@@ -286,23 +286,23 @@ nav {
 .filter-btn:hover { border-color: var(--ink-light); color: var(--ink); }
 .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--warm-white); }
 
-/* ——— TEAM ——— */
+/* --- TEAM --- */
 .team-section-label {
   font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--stone-dark); margin-bottom: 20px; padding-bottom: 12px;
   border-bottom: 1px solid var(--stone);
 }
 .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 40px; }
-.team-card { background: var(--warm-white); padding: 24px 22px; border: 1px solid var(--stone); border-radius: 14px; transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s; box-shadow: 0 2px 10px rgba(28,26,23,0.05), 0 1px 3px rgba(28,26,23,0.04); }
-.team-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(28,26,23,0.10), 0 2px 6px rgba(28,26,23,0.05); border-color: var(--stone-mid); }
+.team-card { background: var(--warm-white); padding: 24px 22px; border: 1px solid var(--stone); border-radius: 14px; transition: transform 0.22s, box-shadow 0.22s; }
+.team-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(28,26,23,0.10), 0 2px 6px rgba(28,26,23,0.05); }
 .team-card-monogram {
   width: 52px; height: 52px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Cormorant SC', serif; font-size: 17px; font-weight: 500;
   color: var(--warm-white); margin-bottom: 14px; flex-shrink: 0;
 }
-.team-card-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 3px; line-height: 1.2; }
-.team-card-role { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 4px; }
+.team-card-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.team-card-role { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 6px; }
 .team-card-affil { font-size: 11.5px; color: var(--ink-light); margin-bottom: 6px; font-style: italic; }
 .team-card-focus { font-size: 11.5px; color: var(--ink-light); line-height: 1.6; }
 .visiting-tag {
@@ -312,9 +312,9 @@ nav {
   padding: 2px 7px; border-radius: 2px;
 }
 
-/* ——— IDEAS ——— */
-.idea-form-wrap { background: var(--ivory); border: 1px solid var(--stone); border-radius: 16px; padding: 36px; margin-bottom: 32px; box-shadow: 0 4px 24px rgba(28,26,23,0.07), 0 1px 4px rgba(28,26,23,0.04); }
-.idea-form-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); margin-bottom: 5px; }
+/* --- IDEAS --- */
+.idea-form-wrap { background: var(--ivory); border: 1px solid var(--stone); border-radius: 16px; padding: 36px; margin-bottom: 32px; }
+.idea-form-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
 .idea-form-sub { font-size: 13px; color: var(--ink-light); margin-bottom: 26px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
@@ -330,8 +330,8 @@ nav {
 .form-control option { background: var(--warm-white); }
 textarea.form-control { resize: vertical; min-height: 80px; }
 .ideas-list { display: flex; flex-direction: column; gap: 14px; }
-.idea-item { background: var(--warm-white); border: 1px solid var(--stone); border-radius: 14px; padding: 26px 30px; transition: box-shadow 0.22s, transform 0.22s, border-color 0.22s; box-shadow: 0 2px 12px rgba(28,26,23,0.06), 0 1px 3px rgba(28,26,23,0.04); }
-.idea-item:hover { background: var(--warm-white); border-color: var(--stone-mid); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(28,26,23,0.11), 0 2px 8px rgba(28,26,23,0.06); }
+.idea-item { background: var(--warm-white); border: 1px solid var(--stone); border-radius: 14px; padding: 26px 30px; transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s; }
+.idea-item:hover { background: var(--warm-white); border-color: var(--stone-mid); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(28,26,23,0.10); }
 .idea-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 8px; }
 .idea-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink); }
 .idea-badges { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
@@ -350,13 +350,13 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   padding: 10px 14px; font-size: 12px; color: var(--sage); margin-bottom: 12px; line-height: 1.6;
 }
 .idea-papers-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
-.paper-ref { font-size: 12px; color: var(--ink-light); padding: 5px 0; border-bottom: 1px solid var(--stone); line-height: 1.55; }
+.paper-ref { font-size: 12px; color: var(--ink-light); padding: 5px 0; border-bottom: 1px solid var(--stone); line-height: 1.6; }
 .paper-ref:last-child { border-bottom: none; }
 .idea-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--stone); }
 .idea-meta { font-size: 11.5px; color: var(--stone-dark); }
 .idea-actions { display: flex; gap: 8px; }
 
-/* ——— PUBLICATIONS ——— */
+/* --- PUBLICATIONS --- */
 .sub-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--stone); margin-bottom: 32px; overflow-x: auto; }
 .sub-tab-btn {
   background: none; border: none; border-bottom: 2px solid transparent;
@@ -399,28 +399,28 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   padding: 2px 8px; color: var(--ink-light);
 }
 
-/* ——— CONFERENCES ——— */
+/* --- CONFERENCES --- */
 .conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; border: 1px solid var(--stone); }
 .conf-card { background: var(--warm-white); padding: 26px 28px; transition: background 0.2s; }
 .conf-card:hover { background: var(--ivory); }
-.conf-type-tag { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone-dark); margin-bottom: 10px; }
-.conf-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+.conf-type-tag { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone-dark); margin-bottom: 8px; }
+.conf-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
 .conf-detail { font-size: 12.5px; color: var(--ink-light); margin-bottom: 4px; }
 .conf-deadline { font-size: 12px; color: var(--ink-light); margin-top: 8px; }
 .conf-deadline strong { color: var(--ink); }
 .conf-attendees { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--stone); }
 
-/* ——— GRANTS ——— */
-.grants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px; border: 1px solid var(--stone); margin-bottom: 48px; }
+/* --- GRANTS --- */
+.grants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px; border: 1px solid var(--stone); }
 .grant-card { background: var(--warm-white); padding: 28px 30px; transition: background 0.2s; position: relative; }
 .grant-card:hover { background: var(--ivory); }
-.grant-funder { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
-.grant-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 16px; }
+.grant-funder { font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.grant-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 14px; }
 .grant-row { display: flex; gap: 12px; margin-bottom: 8px; font-size: 13px; }
-.grant-key { color: var(--stone-dark); min-width: 72px; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 1px; }
+.grant-key { color: var(--stone-dark); min-width: 72px; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; }
 .grant-val { color: var(--ink-mid); flex: 1; }
 .grant-amount { color: var(--sage); font-weight: 600; }
-.grant-desc { font-size: 12.5px; color: var(--ink-light); line-height: 1.65; margin-top: 10px; border-top: 1px solid var(--stone); padding-top: 12px; }
+.grant-desc { font-size: 12.5px; color: var(--ink-light); line-height: 1.65; margin-top: 10px; border-top: 1px solid var(--stone); padding-top: 10px; }
 .grant-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
 .status-tag {
   font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -431,7 +431,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 .status-tag.planning { background: var(--ivory); color: var(--ink-light); border-color: var(--stone); }
 .linked-tag { font-size: 10.5px; color: var(--stone-dark); }
 
-/* ——— FUNDING OPPS ——— */
+/* --- FUNDING OPPS --- */
 .opps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; border: 1px solid var(--stone); }
 .opp-card { background: var(--warm-white); padding: 22px 24px; transition: background 0.2s; }
 .opp-card:hover { background: var(--ivory); }
@@ -440,15 +440,15 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 .opp-deadline { font-size: 11.5px; color: var(--stone-dark); margin-top: 4px; }
 .opp-note { font-size: 12px; color: var(--ink-light); margin-top: 6px; line-height: 1.6; }
 
-/* ——— RESOURCES ——— */
+/* --- RESOURCES --- */
 .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; border: 1px solid var(--stone); }
 .resource-card { background: var(--warm-white); padding: 24px; transition: background 0.2s; cursor: pointer; }
 .resource-card:hover { background: var(--ivory); }
 .resource-icon-wrap { font-size: 24px; margin-bottom: 12px; }
-.resource-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
+.resource-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
 .resource-desc { font-size: 12.5px; color: var(--ink-light); line-height: 1.65; }
 
-/* ——— QUICK ACTIONS ——— */
+/* --- QUICK ACTIONS --- */
 .actions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; border: 1px solid var(--stone); }
 .action-card {
   background: var(--warm-white); padding: 28px 24px;
@@ -456,10 +456,10 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 }
 .action-card:hover { background: var(--ivory); }
 .action-icon { font-size: 24px; margin-bottom: 12px; }
-.action-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.action-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
 .action-desc { font-size: 12px; color: var(--ink-light); line-height: 1.6; }
 
-/* ——— BUTTONS ——— */
+/* --- BUTTONS --- */
 .btn {
   font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -472,24 +472,24 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 .btn-sage { background: var(--sage); border-color: var(--sage); color: var(--warm-white); }
 .btn-sage:hover { background: var(--sage-light); border-color: var(--sage-light); }
 
-/* ——— MODAL ——— */
+/* --- MODAL --- */
 .modal-overlay { position: fixed; inset: 0; background: rgba(28,26,23,0.6); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; }
 .modal-overlay.open { display: flex; }
-.modal { background: var(--warm-white); border: 1px solid var(--stone); padding: 36px; max-width: 580px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; animation: mIn 0.2s ease; }
+.modal { background: var(--warm-white); border: 1px solid var(--stone); padding: 36px; max-width: 580px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; border-radius: 16px; animation: mIn 0.25s ease; }
 @keyframes mIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-.modal-close { position: absolute; top: 18px; right: 18px; background: none; border: 1px solid var(--stone); color: var(--ink-light); width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s; border-radius: 2px; }
+.modal-close { position: absolute; top: 18px; right: 18px; background: none; border: 1px solid var(--stone); color: var(--ink-light); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .modal-close:hover { border-color: var(--ink); color: var(--ink); }
-.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 20px; line-height: 1.3; }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 20px; }
 .detail-row { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
-.detail-key { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-dark); min-width: 84px; padding-top: 2px; }
+.detail-key { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-dark); min-width: 80px; padding-top: 2px; }
 .detail-val { font-size: 13.5px; color: var(--ink-mid); flex: 1; line-height: 1.6; }
 
-/* ——— TOAST ——— */
-.toast { position: fixed; bottom: 28px; right: 28px; background: var(--ink); color: var(--warm-white); font-size: 13px; padding: 12px 20px; border-radius: 3px; display: none; z-index: 500; animation: tIn 0.2s ease; max-width: 320px; }
+/* --- TOAST --- */
+.toast { position: fixed; bottom: 28px; right: 28px; background: var(--ink); color: var(--warm-white); font-size: 13px; padding: 12px 20px; border-radius: 6px; display: none; animation: tIn 0.2s ease; z-index: 9999; }
 .toast.show { display: block; }
 @keyframes tIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 
-/* ——— ANIMATIONS ——— */
+/* --- ANIMATIONS --- */
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
 .fade-up { animation: fadeUp 0.7s ease both; }
 .fade-up-1 { animation-delay: 0.1s; }
@@ -509,6 +509,24 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   .projects-grid, .grants-grid, .conf-grid, .team-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ADMIN CONTROLS */
+.admin-controls { display:none; gap:4px; }
+body.admin-mode .admin-controls { display:flex; }
+.admin-btn {
+  background:none; border:1px solid var(--stone); color:var(--ink-light);
+  font-size:11px; padding:3px 8px; border-radius:2px; cursor:pointer;
+  font-family:'Jost',sans-serif; transition:all 0.15s;
+}
+.admin-btn:hover { border-color:var(--ink-light); color:var(--ink); }
+.admin-btn.danger:hover { border-color:var(--rust); color:var(--rust); }
+.btn-danger { background:var(--rust); border-color:var(--rust); color:var(--warm-white); }
+.btn-danger:hover { background:#7a3020; border-color:#7a3020; }
+.gate-loading { font-size:12px; color:var(--ink-light); margin-top:12px; display:none; }
+.user-pill { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--ink-light); }
+.user-pill strong { color:var(--ink); font-weight:500; }
+.nav-right { display:flex; align-items:center; gap:16px; }
+.form-control-color { width:48px; height:36px; padding:2px; border:1px solid var(--stone); border-radius:2px; cursor:pointer; background:var(--warm-white); }
 </style>
 </head>
 <body>
@@ -517,12 +535,20 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 <div id="gate">
   <div class="gate-box">
     <div class="gate-monogram">GL</div>
-    <div class="gate-title">Galovic Lab Intranet</div>
-    <div class="gate-sub">University Hospital Zurich · Research Team</div>
-    <input class="gate-input" type="password" id="gate-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPassword()">
-    <button class="gate-btn" onclick="checkPassword()">Enter →</button>
-    <div class="gate-error" id="gate-error">Incorrect password. Please try again.</div>
-    <div class="gate-public">← <a href="galovic-lab-public.html">Back to public site</a></div>
+    <div class="gate-title" id="gate-title">Galovic Lab Intranet</div>
+    <div class="gate-sub">University Hospital Zurich &middot; Research Team</div>
+    <div id="gate-name-wrap" style="display:none">
+      <input class="gate-input" type="text" id="gate-name" placeholder="Your full name" style="letter-spacing:0">
+    </div>
+    <input class="gate-input" type="email" id="gate-email" placeholder="Email address" style="letter-spacing:0" onkeydown="if(event.key==='Enter')document.getElementById('gate-password').focus()">
+    <input class="gate-input" type="password" id="gate-password" placeholder="Password" onkeydown="if(event.key==='Enter')gateSubmit()">
+    <button class="gate-btn" id="gate-btn" onclick="gateSubmit()">Enter &rarr;</button>
+    <div class="gate-error" id="gate-error"></div>
+    <div class="gate-loading" id="gate-loading">Please wait&hellip;</div>
+    <div class="gate-public" style="margin-top:14px">
+      <span id="gate-toggle-text" style="font-size:11px;color:var(--stone-dark)">New to the lab? <a href="#" onclick="toggleGateMode();return false" style="color:var(--ink-light)">Sign up</a></span>
+    </div>
+    <div class="gate-public">&larr; <a href="galovic-lab-public.html">Back to public site</a></div>
   </div>
 </div>
 
@@ -531,7 +557,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <div class="nav-monogram">GL</div>
     <div>
       <div class="nav-title">Galovic Lab</div>
-      <div class="nav-subtitle">Intranet · University Hospital Zurich</div>
+      <div class="nav-subtitle">Intranet &middot; University Hospital Zurich</div>
     </div>
   </div>
   <ul class="nav-links">
@@ -543,8 +569,15 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <li><button onclick="showTab('conferences')" id="nav-conferences">Conferences</button></li>
     <li><button onclick="showTab('grants')" id="nav-grants">Grants</button></li>
     <li><button onclick="showTab('resources')" id="nav-resources">Resources</button></li>
-    <li><a href="galovic-lab-public.html" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone-dark);padding:6px 12px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--stone-dark)'">← Public Site</a></li>
+    <li id="nav-li-users" style="display:none"><button onclick="showTab('users')" id="nav-users">Users</button></li>
+    <li><a href="galovic-lab-public.html" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone-dark);padding:6px 12px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--stone-dark)'">&larr; Public</a></li>
   </ul>
+  <div class="nav-right">
+    <div class="user-pill" id="user-pill" style="display:none">
+      <span>Logged in as <strong id="user-name-display"></strong></span>
+      <button class="admin-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
 </nav>
 
 <div id="app">
@@ -553,11 +586,11 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 <div id="tab-home" class="tab active">
   <div class="hero">
     <div class="hero-left">
-      <div class="hero-eyebrow fade-up">Research Team · Internal Portal</div>
+      <div class="hero-eyebrow fade-up">Research Team &middot; Internal Portal</div>
       <h1 class="fade-up fade-up-1">Galovic<br><em>Lab</em><br>Intranet</h1>
-      <p class="hero-desc fade-up fade-up-2">Your internal hub for active projects, research ideas, grants, publications, and lab resources. Welcome back to the Galovic Lab.</p>
-      <button class="btn btn-dark fade-up fade-up-3" style="align-self:flex-start" onclick="showTab('projects')">View Projects →</button>
-      <div class="hero-affil fade-up fade-up-4">Department of Neurology · University Hospital and University of Zurich</div>
+      <p class="hero-desc fade-up fade-up-2">Your internal hub for active projects, research ideas, grants, publications and team coordination.</p>
+      <button class="btn btn-dark fade-up fade-up-3" style="align-self:flex-start" onclick="showTab('projects')">View Projects &rarr;</button>
+      <div class="hero-affil fade-up fade-up-4">Department of Neurology &middot; University Hospital and University of Zurich</div>
     </div>
     <div class="hero-right">
       <div class="hero-deco">GL</div>
@@ -591,7 +624,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
         <div class="section-eyebrow">Featured</div>
         <div class="section-title">Recent <em>Projects</em></div>
       </div>
-      <button class="btn btn-outline" onclick="showTab('projects')">View all →</button>
+      <button class="btn btn-outline" onclick="showTab('projects')">View all &rarr;</button>
     </div>
     <div class="projects-grid" id="home-projects"></div>
   </div>
@@ -601,11 +634,11 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   <div class="section-sm">
     <div class="section-eyebrow" style="margin-bottom:20px">Quick actions</div>
     <div class="actions-grid">
-      <div class="action-card" onclick="showTab('ideas')"><div class="action-icon">💡</div><div class="action-title">Submit an Idea</div><div class="action-desc">Propose a new research direction with auto feasibility assessment</div></div>
-      <div class="action-card" onclick="showTab('projects')"><div class="action-icon">📋</div><div class="action-title">Join a Project</div><div class="action-desc">Assign yourself to an active research project</div></div>
-      <div class="action-card" onclick="showTab('publications')"><div class="action-icon">📄</div><div class="action-title">Publications</div><div class="action-desc">Browse papers, preprints, and manuscripts in preparation</div></div>
-      <div class="action-card" onclick="showTab('grants')"><div class="action-icon">🏆</div><div class="action-title">Grants & Funding</div><div class="action-desc">Track active grants, proposals, and opportunities</div></div>
-      <div class="action-card" onclick="showTab('conferences')"><div class="action-icon">🎤</div><div class="action-title">Conferences</div><div class="action-desc">Abstract deadlines and attendance tracker</div></div>
+      <div class="action-card" onclick="showTab('ideas')"><div class="action-icon">&#128161;</div><div class="action-title">Submit an Idea</div><div class="action-desc">Propose a new research direction. Feasibility is assessed automatically.</div></div>
+      <div class="action-card" onclick="showTab('projects')"><div class="action-icon">&#128203;</div><div class="action-title">Join a Project</div><div class="action-desc">Browse active studies and add yourself as a collaborator.</div></div>
+      <div class="action-card" onclick="showTab('publications')"><div class="action-icon">&#128196;</div><div class="action-title">Publications</div><div class="action-desc">Track manuscripts in preparation, preprints, and published papers.</div></div>
+      <div class="action-card" onclick="showTab('grants')"><div class="action-icon">&#127942;</div><div class="action-title">Grants &amp; Funding</div><div class="action-desc">Active grants, pending applications, and upcoming funding opportunities.</div></div>
+      <div class="action-card" onclick="showTab('conferences')"><div class="action-icon">&#127908;</div><div class="action-title">Conferences</div><div class="action-desc">Upcoming scientific meetings and abstract deadlines.</div></div>
     </div>
   </div>
 </div>
@@ -618,7 +651,11 @@ textarea.form-control { resize: vertical; min-height: 80px; }
         <div class="section-eyebrow">All Studies</div>
         <div class="section-title">Research <em>Projects</em></div>
       </div>
-      <button class="btn btn-dark" onclick="showToast('Use the Ideas board to propose and promote new projects.')">+ New Project</button>
+      <div style="display:flex;gap:8px">
+        <div class="admin-controls">
+          <button class="btn btn-dark" onclick="openProjectModal(null)">+ New Project</button>
+        </div>
+      </div>
     </div>
     <div class="filter-bar" id="project-filters"></div>
     <div class="projects-grid" id="all-projects"></div>
@@ -636,28 +673,23 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     </div>
     <div class="idea-form-wrap">
       <div class="idea-form-title">Submit a Research Idea</div>
-      <div class="idea-form-sub">Describe your idea — feasibility is assessed automatically based on the chosen database, and relevant literature is suggested.</div>
+      <div class="idea-form-sub">Describe your idea &mdash; feasibility is assessed automatically based on the chosen database and area.</div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Your Name</label>
-          <select class="form-control" id="idea-submitter">
-            <option>Dr. Marian Galovic</option><option>Carolina Ferreira-Atuesta</option>
-            <option>Dr. Kai Michael Schubert</option><option>Dr. Marco Di Donato</option>
-            <option>Dr. Katharina Schuler</option><option>Dr. Miranda Stattmann</option>
-            <option>Dr. Anton Schmick</option><option>Xin You Tai</option><option>Lubin Gou</option>
-          </select>
+          <input type="text" class="form-control" id="idea-submitter" placeholder="Your name">
         </div>
         <div class="form-group"><label class="form-label">Research Area</label>
           <select class="form-control" id="idea-area">
             <option>Post-Stroke Epilepsy</option><option>Late-Onset Epilepsy</option>
             <option>Epileptogenesis</option><option>Drug Outcomes / Pharmacotherapy</option>
-            <option>Sleep & Epilepsy</option><option>EEG & Biomarkers</option>
-            <option>Brain Aging & Neurodegeneration</option><option>Clinical AI / LLMs</option>
+            <option>Sleep &amp; Epilepsy</option><option>EEG &amp; Biomarkers</option>
+            <option>Brain Aging &amp; Neurodegeneration</option><option>Clinical AI / LLMs</option>
             <option>Comorbidities</option><option>Other</option>
           </select>
         </div>
       </div>
-      <div class="form-group"><label class="form-label">Idea Title</label><input type="text" class="form-control" id="idea-title" placeholder="e.g. GLP-1 receptor agonists and seizure risk in T2DM patients"></div>
-      <div class="form-group"><label class="form-label">Description & Hypothesis</label><textarea class="form-control" id="idea-desc" placeholder="Describe the research question, proposed methods, and expected outcomes..."></textarea></div>
+      <div class="form-group"><label class="form-label">Idea Title</label><input type="text" class="form-control" id="idea-title" placeholder="Working title for the study"></div>
+      <div class="form-group"><label class="form-label">Description &amp; Hypothesis</label><textarea class="form-control" id="idea-desc" rows="3" placeholder="Describe the research question, population, exposure, and outcome"></textarea></div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Preferred Database</label>
           <select class="form-control" id="idea-db">
@@ -668,12 +700,12 @@ textarea.form-control { resize: vertical; min-height: 80px; }
         </div>
         <div class="form-group"><label class="form-label">Estimated Timeline</label>
           <select class="form-control" id="idea-timeline">
-            <option>&lt; 3 months</option><option>3–6 months</option>
-            <option>6–12 months</option><option>&gt; 12 months</option>
+            <option>&lt; 3 months</option><option>3&ndash;6 months</option>
+            <option>6&ndash;12 months</option><option>&gt; 12 months</option>
           </select>
         </div>
       </div>
-      <button class="btn btn-sage" onclick="submitIdea()">Submit & Assess Feasibility</button>
+      <button class="btn btn-sage" onclick="submitIdea()">Submit &amp; Assess Feasibility</button>
     </div>
     <div class="ideas-list" id="ideas-list"></div>
   </div>
@@ -687,11 +719,13 @@ textarea.form-control { resize: vertical; min-height: 80px; }
         <div class="section-eyebrow">People</div>
         <div class="section-title">Our <em>Team</em></div>
       </div>
-      <button class="btn btn-dark" onclick="showToast('Contact Dr. Galovic to add new team members.')">+ Add Member</button>
+      <div class="admin-controls">
+        <button class="btn btn-dark" onclick="openTeamModal(null)">+ Add Member</button>
+      </div>
     </div>
     <div class="team-section-label">Core Team</div>
     <div class="team-grid" id="team-grid-core"></div>
-    <div class="team-section-label">Visiting Researchers & Collaborators</div>
+    <div class="team-section-label">Visiting Researchers &amp; Collaborators</div>
     <div class="team-grid" id="team-grid-visiting"></div>
   </div>
 </div>
@@ -711,47 +745,45 @@ textarea.form-control { resize: vertical; min-height: 80px; }
       <button class="sub-tab-btn" onclick="showSubTab('pubs','pse',this)">Post-Stroke Epilepsy</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','loe',this)">Late-Onset Epilepsy</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','pharm',this)">Pharmacotherapy</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','eeg',this)">EEG & Biomarkers</button>
+      <button class="sub-tab-btn" onclick="showSubTab('pubs','eeg',this)">EEG &amp; Biomarkers</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','sleep',this)">Sleep</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','aging',this)">Brain Aging</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','ai',this)">Clinical AI</button>
       <button class="sub-tab-btn" onclick="showSubTab('pubs','comorbid',this)">Comorbidities</button>
     </div>
-
-    <!-- RESEARCHER PROFILES -->
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
-      <a href="https://scholar.google.com/citations?user=RBIHxa8AAAAJ&hl=en" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:12px;padding:14px 20px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(28,26,23,0.05);flex:1;min-width:220px;transition:transform 0.2s,box-shadow 0.2s"
+      <a href="https://scholar.google.com/citations?user=RBIHxa8AAAAJ&amp;hl=en" target="_blank" rel="noopener"
+        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">🎓</span>
+        <span style="font-size:20px">&#127891;</span>
         <div style="flex:1">
           <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Marian Galovic</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar · Full Publication List</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar</div>
         </div>
-        <span style="font-size:14px;color:var(--stone-dark)">↗</span>
+        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
       </a>
-      <a href="https://scholar.google.com/citations?user=KWjDcx0AAAAJ&hl=en" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:12px;padding:14px 20px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(28,26,23,0.05);flex:1;min-width:220px;transition:transform 0.2s,box-shadow 0.2s"
+      <a href="https://scholar.google.com/citations?user=KWjDcx0AAAAJ&amp;hl=en" target="_blank" rel="noopener"
+        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">🎓</span>
+        <span style="font-size:20px">&#127891;</span>
         <div style="flex:1">
           <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Kai Michael Schubert</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar · Full Publication List</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar</div>
         </div>
-        <span style="font-size:14px;color:var(--stone-dark)">↗</span>
+        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
       </a>
       <a href="https://www.researchgate.net/profile/Kai-Schubert" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:12px;padding:14px 20px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(28,26,23,0.05);flex:1;min-width:220px;transition:transform 0.2s,box-shadow 0.2s"
+        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">🔬</span>
+        <span style="font-size:20px">&#128300;</span>
         <div style="flex:1">
           <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Kai Michael Schubert</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">ResearchGate · Profile & Papers</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">ResearchGate</div>
         </div>
-        <span style="font-size:14px;color:var(--stone-dark)">↗</span>
+        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
       </a>
     </div>
     <div id="pubs-all" class="sub-tab-content active"><div class="pub-list" id="pub-list-all"></div></div>
@@ -772,7 +804,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <div class="section-header">
       <div>
         <div class="section-eyebrow">Events</div>
-        <div class="section-title"><em>Conferences</em> & Presentations</div>
+        <div class="section-title"><em>Conferences</em> &amp; Presentations</div>
       </div>
       <button class="btn btn-dark" onclick="showToast('Conference tracking form coming soon.')">+ Add Conference</button>
     </div>
@@ -786,7 +818,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <div class="section-header">
       <div>
         <div class="section-eyebrow">Funding</div>
-        <div class="section-title">Grants & <em>Funding</em></div>
+        <div class="section-title">Grants &amp; <em>Funding</em></div>
       </div>
       <button class="btn btn-dark" onclick="showToast('Grant entry form coming soon.')">+ Add Grant</button>
     </div>
@@ -805,10 +837,38 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <div class="section-header">
       <div>
         <div class="section-eyebrow">Lab Infrastructure</div>
-        <div class="section-title">Tools & <em>Resources</em></div>
+        <div class="section-title">Tools &amp; <em>Resources</em></div>
       </div>
     </div>
     <div class="resources-grid" id="resources-grid"></div>
+  </div>
+</div>
+
+<!-- USERS (admin only) -->
+<div id="tab-users" class="tab">
+  <div class="section" style="padding-top:96px">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Admin</div>
+        <div class="section-title">Lab <em>Users</em></div>
+      </div>
+    </div>
+    <div style="background:var(--ivory);border:1px solid var(--stone);border-radius:16px;padding:36px;margin-bottom:32px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:6px">Invite a New User</div>
+      <div style="font-size:13px;color:var(--ink-light);margin-bottom:24px">Sends a magic link &mdash; the user clicks it to set their password and access the intranet.</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="invite-email" placeholder="name@usz.ch">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Display Name</label>
+          <input type="text" class="form-control" id="invite-name" placeholder="Dr. Jane Smith">
+        </div>
+      </div>
+      <button class="btn btn-sage" onclick="inviteUser()">Send Invite Link</button>
+    </div>
+    <div id="users-list"></div>
   </div>
 </div>
 
@@ -816,20 +876,18 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 
 <!-- MODALS -->
 <div class="modal-overlay" id="project-modal" onclick="closeModal(event,'project-modal')">
-  <div class="modal"><button class="modal-close" onclick="document.getElementById('project-modal').classList.remove('open')">✕</button><div id="modal-content"></div></div>
+  <div class="modal"><button class="modal-close" onclick="document.getElementById('project-modal').classList.remove('open')">&#10005;</button>
+  <div id="modal-content"></div>
+  </div>
 </div>
+
 <div class="modal-overlay" id="join-modal" onclick="closeModal(event,'join-modal')">
   <div class="modal">
-    <button class="modal-close" onclick="document.getElementById('join-modal').classList.remove('open')">✕</button>
+    <button class="modal-close" onclick="document.getElementById('join-modal').classList.remove('open')">&#10005;</button>
     <div class="modal-title">Join Project</div>
     <p id="join-project-name" style="font-size:12.5px;color:var(--ink-light);margin-bottom:20px;font-style:italic"></p>
     <div class="form-group"><label class="form-label">Your name</label>
-      <select class="form-control" id="join-name">
-        <option>Dr. Marian Galovic</option><option>Carolina Ferreira-Atuesta</option>
-        <option>Dr. Kai Michael Schubert</option><option>Dr. Marco Di Donato</option>
-        <option>Dr. Katharina Schuler</option><option>Dr. Miranda Stattmann</option>
-        <option>Dr. Anton Schmick</option><option>Xin You Tai</option><option>Lubin Gou</option>
-      </select>
+      <select class="form-control" id="join-name"></select>
     </div>
     <div class="form-group"><label class="form-label">Your role</label>
       <select class="form-control" id="join-role">
@@ -837,472 +895,683 @@ textarea.form-control { resize: vertical; min-height: 80px; }
         <option>Data Analyst</option><option>Manuscript Writer</option><option>Statistical Advisor</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">Note (optional)</label><input type="text" class="form-control" id="join-note" placeholder="What aspect will you focus on?"></div>
+    <div class="form-group"><label class="form-label">Note (optional)</label><input type="text" class="form-control" id="join-note" placeholder="e.g. handling TriNetX analysis"></div>
     <button class="btn btn-dark" onclick="confirmJoin()" style="width:100%">Confirm</button>
   </div>
 </div>
+
+<!-- Project Edit Modal -->
+<div class="modal-overlay" id="project-edit-modal" onclick="closeModal(event,'project-edit-modal')">
+  <div class="modal" style="max-width:680px">
+    <button class="modal-close" onclick="document.getElementById('project-edit-modal').classList.remove('open')">&#10005;</button>
+    <div class="modal-title" id="project-edit-title">New Project</div>
+    <input type="hidden" id="project-edit-id">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Icon (emoji)</label>
+        <input type="text" class="form-control" id="pf-icon" placeholder="&#128300;" maxlength="4">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-control" id="pf-status">
+          <option value="preparation">In Preparation</option>
+          <option value="active">Active</option>
+          <option value="preprint">Preprint</option>
+          <option value="submitted">Submitted</option>
+          <option value="published">Published</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Project Name</label>
+      <input type="text" class="form-control" id="pf-name" placeholder="Study title">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Area Tag (display label)</label>
+        <input type="text" class="form-control" id="pf-area-tag" placeholder="Post-Stroke Epilepsy">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Area Code (for filter)</label>
+        <select class="form-control" id="pf-area">
+          <option value="pse">pse</option>
+          <option value="loe">loe</option>
+          <option value="pharm">pharm</option>
+          <option value="eeg">eeg</option>
+          <option value="sleep">sleep</option>
+          <option value="aging">aging</option>
+          <option value="ai">ai</option>
+          <option value="epidemiology">epidemiology</option>
+          <option value="biomarker">biomarker</option>
+          <option value="other">other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" id="pf-desc" rows="3" placeholder="Study design and objectives"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Key Finding (leave blank if none)</label>
+      <textarea class="form-control" id="pf-finding" rows="2" placeholder="Main result or finding"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Database Tags (comma-separated)</label>
+        <input type="text" class="form-control" id="pf-dbtags" placeholder="TriNetX, UK Biobank">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Methods</label>
+        <input type="text" class="form-control" id="pf-methods" placeholder="Cox regression; PSM">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes / Collaborators</label>
+      <textarea class="form-control" id="pf-notes" rows="2" placeholder="Collaborators, funding, etc."></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn btn-dark" onclick="saveProject()" style="flex:1">Save Project</button>
+      <button class="btn btn-outline" onclick="document.getElementById('project-edit-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Team Member Edit Modal -->
+<div class="modal-overlay" id="team-edit-modal" onclick="closeModal(event,'team-edit-modal')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('team-edit-modal').classList.remove('open')">&#10005;</button>
+    <div class="modal-title" id="team-edit-title">Add Team Member</div>
+    <input type="hidden" id="tf-id">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="tf-name" placeholder="Dr. Jane Smith">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Initials</label>
+        <input type="text" class="form-control" id="tf-initials" placeholder="JS" maxlength="4">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Role</label>
+        <input type="text" class="form-control" id="tf-role" placeholder="PhD Student">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Affiliation</label>
+        <input type="text" class="form-control" id="tf-affil" placeholder="University Hospital Zurich">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Research Focus</label>
+      <input type="text" class="form-control" id="tf-focus" placeholder="Epilepsy, TriNetX, pharmacoepidemiology">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Avatar Colour</label>
+        <input type="color" class="form-control-color" id="tf-color" value="#4a6741">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Type</label>
+        <select class="form-control" id="tf-visiting">
+          <option value="false">Core Team</option>
+          <option value="true">Visiting / External</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn btn-dark" onclick="saveTeamMember()" style="flex:1">Save Member</button>
+      <button class="btn btn-outline" onclick="document.getElementById('team-edit-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ——— TEAM COLORS ———
-const TC = ['#4a6741','#6b5c8a','#5c7a8a','#8a5c4a','#4a7a6e','#7a6e4a','#5c4a7a','#4a5c7a','#7a4a5c'];
+// --- SUPABASE ---
+const SUPABASE_URL = 'https://jxrvxyjwjwiztviiqnzi.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_5r0pKGImCK4Wy3zFrKwkrg_DF3wGeu1';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ——— CORE DATA ———
-// Marian Galovic (MG), Carolina Ferreira-Atuesta (CF), Kai Michael Schubert (KS)
-// are on ALL projects. Additional leads/members are listed per project.
+// --- STATE ---
+let currentUser = null, currentProfile = null, isAdmin = false;
+let projects = [], teamMembers = [], projectMembers = {}, ideas = [];
+let currentJoinId = null;
 
-const BASE_TEAM = {
-  names: ['Dr. Marian Galovic','Carolina Ferreira-Atuesta','Dr. Kai Michael Schubert'],
-  initials: ['MG','CF','KS'],
-  colors: [TC[0], TC[1], TC[2]],
-};
+// --- INIT ---
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) await afterLogin(session.user);
+})();
 
-function mergeTeam(extra) {
-  // extra: {names:[], initials:[], colors:[]}
-  const names = [...BASE_TEAM.names];
-  const initials = [...BASE_TEAM.initials];
-  const colors = [...BASE_TEAM.colors];
-  if (extra) {
-    extra.names.forEach((n,i) => {
-      if (!names.includes(n)) { names.push(n); initials.push(extra.initials[i]); colors.push(extra.colors[i]); }
-    });
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN' && session) await afterLogin(session.user);
+  if (event === 'SIGNED_OUT') { showGate(); }
+});
+
+// --- AUTH ---
+let gateMode = 'login';
+function toggleGateMode() {
+  gateMode = gateMode === 'login' ? 'signup' : 'login';
+  const isSignup = gateMode === 'signup';
+  document.getElementById('gate-title').textContent = isSignup ? 'Create Account' : 'Galovic Lab Intranet';
+  document.getElementById('gate-name-wrap').style.display = isSignup ? 'block' : 'none';
+  document.getElementById('gate-btn').textContent = isSignup ? 'Sign Up \u2192' : 'Enter \u2192';
+  document.getElementById('gate-toggle-text').innerHTML = isSignup
+    ? 'Already have an account? <a href="#" onclick="toggleGateMode();return false" style="color:var(--ink-light)">Sign in</a>'
+    : 'New to the lab? <a href="#" onclick="toggleGateMode();return false" style="color:var(--ink-light)">Sign up</a>';
+  document.getElementById('gate-error').style.display = 'none';
+}
+async function gateSubmit() { if (gateMode === 'signup') await doSignup(); else await doLogin(); }
+async function doSignup() {
+  const email = document.getElementById('gate-email').value.trim();
+  const password = document.getElementById('gate-password').value;
+  const name = document.getElementById('gate-name').value.trim();
+  if (!email || !password || !name) { showGateError('Please fill in all fields.'); return; }
+  if (password.length < 6) { showGateError('Password must be at least 6 characters.'); return; }
+  const btn = document.getElementById('gate-btn');
+  btn.disabled = true; btn.textContent = 'Creating\u2026';
+  const { error } = await sb.auth.signUp({ email, password, options: { data: { name } } });
+  if (error) { showGateError(error.message); btn.disabled = false; btn.textContent = 'Sign Up \u2192'; return; }
+  const e = document.getElementById('gate-error');
+  e.textContent = 'Account created! Sign in below.'; e.style.color = 'var(--sage)'; e.style.display = 'block';
+  toggleGateMode(); btn.disabled = false;
+}
+async function doLogin() {
+  const email = document.getElementById('gate-email').value.trim();
+  const password = document.getElementById('gate-password').value;
+  if (!email || !password) { showGateError('Please enter email and password.'); return; }
+  const btn = document.getElementById('gate-btn');
+  btn.disabled = true; btn.textContent = 'Signing in\u2026';
+  document.getElementById('gate-error').style.display = 'none';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) {
+    showGateError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message);
+    btn.disabled = false; btn.textContent = 'Enter \u2192';
   }
-  return { names, initials, colors };
 }
 
-let projects = [
-  { id:1, name:'Sleep Duration & All-Cause Mortality in Adults with Epilepsy',
-    icon:'😴', tag:'UK Biobank', status:'preparation', area:'sleep',
-    areaLabel:'Sleep',
-    desc:'Cohort study of 2,874 adults with epilepsy followed for 15 years in UK Biobank, examining the association between sleep duration and all-cause mortality.',
-    finding:'Sleeping ≥9h associated with significantly higher all-cause mortality vs ≤7h (HR 1.52; 95% CI 1.15–2.00; p=.003). Routine sleep assessment may identify high-risk PWE.',
-    extra: { names:['Dr. Marco Di Donato','Xin You Tai'], initials:['MD','XT'], colors:[TC[3],TC[6]] },
-    database:'UK Biobank (n=2,874; 15-year follow-up)',
-    methods:'Cox proportional hazards regression; sleep duration categories; adjusted survival analysis.',
-    notes:'Collaborators: Xin You Tai (Oxford), Prof. Christian R. Baumann (UZH).'
-  },
-  { id:2, name:'Continuous vs. Short EEG after Ischemic Stroke for Predicting Post-Stroke Epilepsy',
-    icon:'🧠', tag:'SELECT', status:'preparation', area:'pse',
-    areaLabel:'Post-Stroke Epilepsy',
-    desc:'Retrospective SeLECT Consortium study (n=283) comparing cEEG (≥12h) vs 60-min sEEG for detecting epileptiform abnormalities and predicting PSE over 41 months.',
-    finding:'cEEG tripled IED detection (OR 3.75). LPDs (sHR 4.50) and electrographic seizures (sHR 3.63) were the strongest PSE predictors. ΔC-index +0.055; NRI 0.25.',
-    extra: null,
-    database:'SELECT Multicenter (n=283; median 41-month follow-up)',
-    methods:'Fine–Gray competing-risks regression; within-patient OR; C-index; NRI.',
-    notes:'Co-senior: Galovic (UZH), Gaspard (Brussels/Yale), Punia (Cleveland Clinic).'
-  },
-  { id:3, name:'Hearing Aid Use & Risk of Dementia in LOE, Stroke & Diabetes with Hearing Loss',
-    icon:'👂', tag:'TriNetX', status:'preparation', area:'loe',
-    areaLabel:'Late-Onset Epilepsy',
-    desc:'Target trial emulation using TriNetX (>250M patients) examining whether hearing aid use reduces dementia incidence across three high-risk neurological populations.',
-    finding:'HA use reduced Alzheimer\'s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69. All-cause dementia (epilepsy) HR 0.50.',
-    extra: null,
-    database:'TriNetX (epilepsy: 1,093 pairs; stroke: 2,363; diabetes: 14,934)',
-    methods:'Propensity score matching; target trial emulation; Cox regression; competing risks.',
-    notes:'Lead: Ferreira-Atuesta. Co-senior: Lip, Mbizvo, Galovic. Liverpool collaboration.'
-  },
-  { id:4, name:'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis',
-    icon:'💊', tag:'TriNetX', status:'preprint', area:'pharm',
-    areaLabel:'Pharmacotherapy',
-    desc:'Pharmacoepidemiological TriNetX study comparing incident epilepsy risk in RA patients on tofacitinib or JAK inhibitors vs TNFα inhibitors.',
-    finding:'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011. All JAK inhibitors vs TNFα: HR 0.64 (0.42–0.98), p=0.037.',
-    extra: { names:['Dr. Katharina Schuler'], initials:['KSc'], colors:[TC[4]] },
-    database:'TriNetX (tofacitinib: n=5,485 vs 5,482; all JAK: n=9,836 vs 9,844)',
-    methods:'Propensity-score matched cohort; Cox regression; competing risks; forest plot.',
-    notes:'Lead: Schuler. Linked to Koetser Foundation grant proposal (Feb 2026).'
-  },
-  { id:5, name:'Incidence & Attributable Disease Burden of Adult-Onset Acquired Epilepsy',
-    icon:'📊', tag:'TriNetX', status:'preparation', area:'epidemiology',
-    areaLabel:'Epidemiology',
-    desc:'Real-world analysis of 2.4M adults across 20 brain insult etiologies, quantifying acquired epilepsy incidence and its independent contribution to long-term morbidity and mortality.',
-    finding:'3.8% incidence overall (1.8% MS → 10.5% malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, frailty, injury risk, and cognitive decline.',
-    extra: { names:['Dr. Miranda Stattmann','Dr. Katharina Schuler','Dr. Anton Schmick'], initials:['MS','KSc','AS'], colors:[TC[5],TC[4],TC[7]] },
-    database:'TriNetX (n=2,489,454; 20 etiologies)',
-    methods:'Incident cohort; propensity-matched controls within etiology; Cox regression; 32 prespecified outcomes across 5 clinical domains.',
-    notes:'Collaboration: UCL Queen Square (Koepp), Karolinska (Curman), Lübeck (Ludwig, Schmick).'
-  },
-  { id:6, name:'Epilepsy is Associated with Accelerated Biological Aging (PhenoAge, UK Biobank)',
-    icon:'⏳', tag:'UK Biobank', status:'preparation', area:'aging',
-    areaLabel:'Brain Aging',
-    desc:'Cross-sectional and prospective analysis of 415,915 UK Biobank participants comparing PhenoAgeAccel (biological − chronological age) in prevalent epilepsy, incident epilepsy, and controls.',
-    finding:'Incident epilepsy: +1.70y age acceleration (p<0.001), persisting after full adjustment (+0.85y). Higher baseline PhenoAgeAccel predicts earlier epilepsy onset. Carbamazepine: −0.99y; phenytoin: +1.05y.',
-    extra: null,
-    database:'UK Biobank (n=415,915)',
-    methods:'Multivariable regression; PhenoAge (9-biomarker composite); cross-sectional + prospective analysis; ASM subgroup analysis.',
-    notes:'Lead: Peter Westarp (research student). Keywords: Epilepsy, Biological Aging, PhenoAge.'
-  },
-  { id:7, name:'Brain Age Estimation from Structural MRI — ENIGMA Dataset (BrainAgeR Pipeline)',
-    icon:'🧩', tag:'ENIGMA', status:'active', area:'aging',
-    areaLabel:'Brain Aging',
-    desc:'Automated brain age estimation using the BrainAgeR Pipeline (v2.1) on T1-weighted MRI from the ENIGMA epilepsy dataset. Dockerised workflow: SPM12 segmentation, R-based modeling, QC reports.',
-    finding:null,
-    extra: { names:['Lubin Gou'], initials:['LG'], colors:[TC[8]] },
-    database:'ENIGMA (T1 MRI dataset)',
-    methods:'SPM12 segmentation; BrainAgeR v2.1 Docker; tissue volume extraction; per-subject QC report.',
-    notes:'Lead: Lubin Gou (visiting researcher). Contact: gou.lubin@usz.ch'
-  },
-  { id:8, name:'Vortioxetine vs Citalopram & Outcomes in Patients with Brain Neoplasms',
-    icon:'🔬', tag:'TriNetX', status:'preparation', area:'pharm',
-    areaLabel:'Pharmacotherapy',
-    desc:'TriNetX pharmacoepidemiological study comparing outcomes of vortioxetine versus citalopram in patients with brain neoplasms, examining psychiatric, cognitive, and oncological endpoints.',
-    finding:null,
-    extra: { names:['Dr. Anton Schmick'], initials:['AS'], colors:[TC[7]] },
-    database:'TriNetX',
-    methods:'Propensity-score matched cohort; survival analysis; multidomain outcome comparison.',
-    notes:'Lead: Anton Schmick. Collaboration: Lübeck Institute (Ludwig).'
-  },
-  { id:9, name:'Biomarkers in Epilepsy — IMPOSE Pilot (EVs, NfL, GFAP, NULISA)',
-    icon:'🧪', tag:'IMPOSE', status:'active', area:'biomarker',
-    areaLabel:'Biomarkers',
-    desc:'Pilot biomarker study using IMPOSE cohort samples with longitudinal blood collection (shortly after seizure and 6-month follow-up). Explores EVs, pTau217, NfL, GFAP, and NULISA CNS panels.',
-    finding:'8 IMPOSE patients with suitable longitudinal samples identified. Within-subject post-event vs 6-month follow-up design. NULISA: ~150 CHF/sample (Gothenburg). NfL, GFAP available on Lumipulse.',
-    extra: { names:['Dr. Miranda Stattmann','Dr. Tobias Weiss','Dr. Nils Briel'], initials:['MS','TW','NB'], colors:[TC[5],TC[7],TC[8]] },
-    database:'IMPOSE Study Biobank',
-    methods:'EV isolation (NCAM+ particles); NULISA CNS panel; pTau217, NfL, GFAP (Lumipulse); within-subject paired analysis.',
-    notes:'Lead: Miranda Stattmann. Pending SNSF / alternative funding (min CHF 200–300k). FINESSE pilot data phase underway.'
-  },
-  { id:10, name:'LLM-Assisted EEG Report Analysis (MedGemma / Local Models)',
-    icon:'🤖', tag:'Clinical AI', status:'active', area:'ai',
-    areaLabel:'Clinical AI',
-    desc:'Benchmarking local large language models (incl. MedGemma) for automated extraction and classification of structured information from clinical EEG reports.',
-    finding:null,
-    extra: { names:['Dr. Katharina Schuler'], initials:['KSc'], colors:[TC[4]] },
-    database:'Local EHR / EEG Reports (UZH)',
-    methods:'Local LLM deployment; structured variable extraction; accuracy benchmarking; MedGemma evaluation.',
-    notes:'Lead: Katharina Schuler. Harry (external collaborator) supporting implementation. Kickoff: Tue 24.02.'
-  },
-  { id:11, name:'LLM-Assisted Clinical Data Extraction from Medical Records',
-    icon:'📑', tag:'Clinical AI', status:'active', area:'ai',
-    areaLabel:'Clinical AI',
-    desc:'Using large language models to extract structured clinical variables from unstructured medical records (discharge letters, clinical notes).',
-    finding:null,
-    extra: { names:['Giannis Katsaros'], initials:['GK'], colors:[TC[8]] },
-    database:'Local EHR (UZH)',
-    methods:'LLM prompt engineering; structured output validation; clinical NLP pipeline.',
-    notes:'Giannis Katsaros: departmental collaborator. Proof-of-concept: Codex pre-screening in ~3 minutes.'
-  },
-  { id:12, name:'Sodium Channel Blockers & Reduced Dementia Risk in Late-Onset Unexplained Epilepsy',
-    icon:'🧬', tag:'TriNetX', status:'preparation', area:'loe',
-    areaLabel:'Late-Onset Epilepsy',
-    desc:'Target trial emulation using global federated real-world data (>75M adults aged ≥55) comparing dementia risk across antiseizure monotherapies in late-onset unexplained epilepsy. Tests whether sodium channel blockers provide disease-modifying neuroprotection via suppression of network hyperexcitability that drives amyloid-β release and tau propagation.',
-    finding:'Sodium channel blockers associated with 27% lower all-cause dementia hazard (HR 0.73, 95% CI 0.61–0.88) and 34% lower Alzheimer\'s disease hazard (HR 0.66, 0.49–0.88) vs levetiracetam/brivaracetam. Replicated in Down syndrome cohort and National Alzheimer\'s Coordinating Center (NACC) dataset. Individual agents (phenytoin, carbamazepine, lamotrigine) showed divergent safety/efficacy profiles.',
-    extra: { names:['Xin You Tai','Dr. Simon Schreiner','Dr. Hans H. Jung'], initials:['XT','SS','HJ'], colors:[TC[6],'#5c6a7a','#7a5c6a'] },
-    database:'TriNetX (>75M adults ≥55 yrs); NACC (external validation); Down syndrome cohort',
-    methods:'Target trial emulation; propensity-score matched cohorts; Cox regression; competing risks; external replication in NACC and Down syndrome cohort.',
-    notes:'International collaboration: Oxford (Tai), Liverpool (Marson, Lip, Mbizvo), Gothenburg (Zelano), Mount Sinai (Hedden), UZH (Noain, Skwarzynska, Wyss, Schreiner, Jung). Co-senior: Lip, Mbizvo, Galovic.'
-  },
-  { id:13, name:'Suicide Attempt Risk: Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy',
-    icon:'⚕️', tag:'TriNetX', status:'preparation', area:'pharm',
-    areaLabel:'Pharmacotherapy',
-    desc:'Pharmacoepidemiological TriNetX study comparing suicide attempt rates in patients with epilepsy initiating levetiracetam versus lacosamide or lamotrigine, addressing the known psychiatric adverse effect signal of levetiracetam.',
-    finding:null,
-    extra: { names:['Dr. Miranda Stattmann'], initials:['MS'], colors:[TC[5]] },
-    database:'TriNetX',
-    methods:'Propensity-score matched cohort; Cox regression; competing risks; psychiatric adverse event analysis.',
-    notes:'Lead: Miranda Stattmann. Addresses FDA/EMA neuropsychiatric safety signals for levetiracetam.'
-  },
-];
+async function afterLogin(user) {
+  currentUser = user;
+  let { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  if (!profile) {
+    await sb.from('profiles').insert({ id: user.id, name: user.user_metadata?.name || user.email, role: 'member' });
+    const res = await sb.from('profiles').select('*').eq('id', user.id).single();
+    profile = res.data;
+  }
+  currentProfile = profile;
+  isAdmin = profile?.role === 'admin';
+  await loadAll();
+  hideGate();
+  updateUIForRole();
+  renderAll();
+}
 
-let teamCore = [
-  {name:'Dr. Marian Galovic', initials:'MG', role:'Principal Investigator', affil:'University Hospital Zurich', focus:'PSE, epileptogenesis, biomarkers, multicenter trials', bg:TC[0]},
-  {name:'Carolina Ferreira-Atuesta', initials:'CF', role:'PhD Student', affil:'UZH / University of Liverpool', focus:'Late-onset epilepsy, TriNetX, pharmacoepidemiology', bg:TC[1]},
-  {name:'Dr. Kai Michael Schubert', initials:'KS', role:'Senior Researcher', affil:'University Hospital Zurich', focus:'EEG, PSE, SELECT consortium, epidemiology', bg:TC[2]},
-  {name:'Dr. Katharina Schuler', initials:'KSc', role:'Clinical Researcher', affil:'University Hospital Zurich', focus:'Immunology & epilepsy, TriNetX, clinical AI', bg:TC[4]},
-  {name:'Dr. Miranda Stattmann', initials:'MS', role:'Clinical Researcher', affil:'University Hospital Zurich', focus:'Biomarkers, IMPOSE cohort, EVs, NfL, GFAP', bg:TC[5]},
-  {name:'Dr. Marco Di Donato', initials:'MD', role:'Clinical Researcher', affil:'University Hospital Zurich', focus:'Sleep & epilepsy, UK Biobank, mortality', bg:'#5c7a8a'},
-  {name:'Dr. Anton Schmick', initials:'AS', role:'Clinical Researcher', affil:'UZH / Lübeck', focus:'Oncology & epilepsy, TriNetX, pharmacotherapy', bg:TC[7]},
-];
-let teamVisiting = [
-  {name:'Xin You Tai', initials:'XT', role:'Research Collaborator', affil:'University of Oxford', focus:'Neuroimaging, UK Biobank, late-onset epilepsy', bg:TC[6], visiting:true},
-  {name:'Lubin Gou', initials:'LG', role:'Visiting Researcher', affil:'University Hospital Zurich', focus:'Brain age estimation, MRI, ENIGMA pipeline', bg:TC[8], visiting:true},
-  {name:'Peter Westarp', initials:'PW', role:'Research Student', affil:'University Hospital Zurich', focus:'Biological aging, PhenoAge, UK Biobank', bg:'#8a6a4a', visiting:true},
-];
+async function doLogout() {
+  await sb.auth.signOut();
+  currentUser = null; currentProfile = null; isAdmin = false;
+  projects = []; teamMembers = []; projectMembers = {}; ideas = [];
+  document.body.classList.remove('admin-mode');
+}
 
-let publications = [
-  { year:2026, status:'preparation',
-    title:'Association between Sleep Duration and All-Cause Mortality in Adults With Epilepsy',
-    authors:'Di Donato M, Ferreira-Atuesta C, Tai XY, … Baumann CR, Galovic M',
-    journal:'Manuscript in preparation',
-    finding:'HR 1.52 (95% CI 1.15–2.00; p=.003) for ≥9h vs ≤7h sleep. UK Biobank; 2,874 PWE; 15-year follow-up.',
-    tags:['sleep','mortality','uk-biobank'], categories:['sleep','loe']},
-  { year:2026, status:'preparation',
-    title:'Continuous vs. Short EEG after Ischemic Stroke: What cEEG Adds for PSE Prediction',
-    authors:'Schubert KM, Dasari V, Tatillo C, Naeije G, Beniczky S, Bentes C, Galovic M*, Gaspard N*, Punia V* — SeLECT Consortium',
-    journal:'Manuscript in preparation',
-    finding:'cEEG tripled IED detection (OR 3.75). LPDs sHR 4.50; electrographic seizures sHR 3.63. ΔC-index +0.055; NRI 0.25.',
-    tags:['eeg','pse','ceeg','select-consortium'], categories:['pse','eeg']},
-  { year:2026, status:'preparation',
-    title:'Hearing Aid Use and Risk of Dementia in Adults with Late-Onset Epilepsy, Stroke, or Diabetes and Comorbid Hearing Loss',
-    authors:'Ferreira-Atuesta C, Schubert KM, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*',
-    journal:'Manuscript in preparation',
-    finding:'HA use reduced Alzheimer\'s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69. All-cause dementia (epilepsy) HR 0.50.',
-    tags:['hearing-aid','dementia','loe','trinetx'], categories:['loe','comorbid','pharm']},
-  { year:2025, status:'preprint',
-    title:'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis',
-    authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',
-    journal:'Preprint',
-    finding:'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011. All JAK inhibitors: HR 0.64 (0.42–0.98), p=0.037.',
-    tags:['trinetx','jak-inhibitors','rheumatoid-arthritis'], categories:['pharm','comorbid']},
-  { year:2026, status:'preparation',
-    title:'Incidence and Attributable Disease Burden of Adult-Onset Acquired Epilepsy: A Real-World Analysis of 2.4 Million Adults',
-    authors:'Schubert KM, Stattmann M, Ferreira-Atuesta C, Schuler K, Curman P, Ludwig RJ, Schmick A, Koepp MJ, Galovic M',
-    journal:'Manuscript in preparation',
-    finding:'3.8% incidence overall; range 1.8% (MS) to 10.5% (malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, injury risk, and cognitive decline.',
-    tags:['trinetx','epidemiology','acquired-epilepsy','disease-burden'], categories:['loe','pse','comorbid']},
-  { year:2026, status:'preparation',
-    title:'Epilepsy is Associated with Accelerated Biological Aging: A Population-Based Cohort Study in the UK Biobank',
-    authors:'Westarp P, Ferreira-Atuesta C, Köpp A, Schubert KM, Galovic M',
-    journal:'Manuscript in preparation',
-    finding:'Incident epilepsy: +1.70y PhenoAgeAccel (p<0.001), persisting after full adjustment (+0.85y). Higher baseline aging predicts earlier epilepsy onset. Carbamazepine: −0.99y; phenytoin: +1.05y.',
-    tags:['phenoage','biological-aging','uk-biobank','asm'], categories:['aging','loe']},
-  { year:2026, status:'preparation',
-    title:'Vortioxetine vs Citalopram and Clinical Outcomes in Patients with Brain Neoplasms',
-    authors:'Schmick A, Ludwig RJ, Schubert KM, Ferreira-Atuesta C, Galovic M, et al.',
-    journal:'Manuscript in preparation',
-    finding:null,
-    tags:['trinetx','brain-neoplasms','antidepressants'], categories:['pharm','comorbid']},
-  { year:2026, status:'preparation',
-    title:'LLM-Assisted Data Extraction from Clinical EEG Reports: Benchmarking Local Models',
-    authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',
-    journal:'Manuscript in preparation',
-    finding:'MedGemma demonstrated strong performance for structured medical report extraction in initial benchmarking (Terziev et al.).',
-    tags:['llm','eeg','clinical-ai','medgemma'], categories:['ai','eeg']},
-  { year:2026, status:'preparation',
-    title:'Sodium Channel Blockers Are Associated with Reduced Dementia Risk in Late-Onset Unexplained Epilepsy',
-    authors:'Ferreira-Atuesta C, Schubert KM, Tai XY, Noain D, Skwarzynska D, Wyss MT, Schreiner S, Jung HH, Hedden T, Zelano J, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*',
-    journal:'Manuscript in preparation',
-    finding:'Sodium channel blockers: HR 0.73 (0.61–0.88) for all-cause dementia and HR 0.66 (0.49–0.88) for Alzheimer\'s disease vs levetiracetam/brivaracetam. Replicated in Down syndrome cohort and NACC dataset. >75M adults ≥55 years.',
-    tags:['trinetx','loe','dementia','sodium-channel-blockers','asm','nacc'], categories:['loe','pharm','comorbid']},
-  { year:2026, status:'preparation',
-    title:'Suicide Attempt Risk with Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy',
-    authors:'Stattmann M, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.',
-    journal:'Manuscript in preparation',
-    finding:null,
-    tags:['trinetx','levetiracetam','psychiatric-adverse-effects','pharmacovigilance'], categories:['pharm','comorbid']},
-];
+function showGate() {
+  const g = document.getElementById('gate');
+  g.style.display = 'flex'; g.style.opacity = '1';
+  document.getElementById('user-pill').style.display = 'none';
+  document.getElementById('nav-li-users').style.display = 'none';
+  document.getElementById('gate-btn').disabled = false;
+  document.getElementById('gate-btn').textContent = 'Enter \u2192';
+}
+function hideGate() {
+  const g = document.getElementById('gate');
+  g.style.transition = 'opacity 0.4s'; g.style.opacity = '0';
+  setTimeout(() => g.style.display = 'none', 400);
+}
+function showGateError(msg) {
+  const e = document.getElementById('gate-error');
+  e.textContent = msg; e.style.display = 'block';
+  const inp = document.getElementById('gate-password');
+  inp.classList.add('error');
+  setTimeout(() => inp.classList.remove('error'), 1200);
+}
 
-let conferences = [
+function updateUIForRole() {
+  if (isAdmin) document.body.classList.add('admin-mode');
+  else document.body.classList.remove('admin-mode');
+  const pill = document.getElementById('user-pill');
+  pill.style.display = 'flex';
+  document.getElementById('user-name-display').textContent = currentProfile?.name || currentUser?.email || '';
+  const usersLi = document.getElementById('nav-li-users');
+  usersLi.style.display = isAdmin ? 'list-item' : 'none';
+}
+
+// --- DATA LOADING ---
+async function loadAll() {
+  const [projRes, teamRes, pmRes, ideasRes] = await Promise.all([
+    sb.from('projects').select('*').order('created_at'),
+    sb.from('team_members').select('*').eq('is_active', true).order('sort_order'),
+    sb.from('project_members').select('*'),
+    sb.from('ideas').select('*').order('created_at', { ascending: false }),
+  ]);
+  projects = projRes.data || [];
+  teamMembers = teamRes.data || [];
+  projectMembers = {};
+  (pmRes.data || []).forEach(m => {
+    if (!projectMembers[m.project_id]) projectMembers[m.project_id] = [];
+    projectMembers[m.project_id].push(m);
+  });
+  ideas = ideasRes.data || [];
+}
+
+// --- STATIC DATA ---
+const publications = [
+  { year:2026, status:'preparation', title:'Association between Sleep Duration and All-Cause Mortality in Adults With Epilepsy', authors:'Di Donato M, Ferreira-Atuesta C, Tai XY, \u2026 Baumann CR, Galovic M', journal:'Manuscript in preparation', finding:'HR 1.52 (95% CI 1.15\u20132.00; p=.003) for \u22659h vs \u22647h sleep. UK Biobank; 2,874 PWE; 15-year follow-up.', tags:['sleep','mortality','uk-biobank'], categories:['sleep','loe']},
+  { year:2026, status:'preparation', title:'Continuous vs. Short EEG after Ischemic Stroke: What cEEG Adds for PSE Prediction', authors:'Schubert KM, Dasari V, Tatillo C, Naeije G, Beniczky S, Bentes C, Galovic M*, Gaspard N*, Punia V* \u2014 SeLECT Consortium', journal:'Manuscript in preparation', finding:'cEEG tripled IED detection (OR 3.75). LPDs sHR 4.50; electrographic seizures sHR 3.63. \u0394C-index +0.055; NRI 0.25.', tags:['eeg','pse','ceeg','select-consortium'], categories:['pse','eeg']},
+  { year:2026, status:'preparation', title:'Hearing Aid Use and Risk of Dementia in Adults with Late-Onset Epilepsy, Stroke, or Diabetes and Comorbid Hearing Loss', authors:'Ferreira-Atuesta C, Schubert KM, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*', journal:'Manuscript in preparation', finding:"HA use reduced Alzheimer's risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69. All-cause dementia (epilepsy) HR 0.50.", tags:['hearing-aid','dementia','loe','trinetx'], categories:['loe','comorbid','pharm']},
+  { year:2025, status:'preprint', title:'New Epilepsy: JAK Inhibitors vs TNF\u03b1 Inhibitors in Rheumatoid Arthritis', authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.', journal:'Preprint', finding:'Tofacitinib vs TNF\u03b1: HR 0.42 (0.21\u20130.84), p=0.011. All JAK inhibitors: HR 0.64 (0.42\u20130.98), p=0.037.', tags:['trinetx','jak-inhibitors','rheumatoid-arthritis'], categories:['pharm','comorbid']},
+  { year:2026, status:'preparation', title:'Incidence and Attributable Disease Burden of Adult-Onset Acquired Epilepsy: A Real-World Analysis of 2.4 Million Adults', authors:'Schubert KM, Stattmann M, Ferreira-Atuesta C, Schuler K, Curman P, Ludwig RJ, Schmick A, Koepp MJ, Galovic M', journal:'Manuscript in preparation', finding:'3.8% incidence overall; range 1.8% (MS) to 10.5% (malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, injury risk, and cognitive decline.', tags:['trinetx','epidemiology','acquired-epilepsy','disease-burden'], categories:['loe','pse','comorbid']},
+  { year:2026, status:'preparation', title:'Epilepsy is Associated with Accelerated Biological Aging: A Population-Based Cohort Study in the UK Biobank', authors:'Westarp P, Ferreira-Atuesta C, K\u00f6pp A, Schubert KM, Galovic M', journal:'Manuscript in preparation', finding:'Incident epilepsy: +1.70y PhenoAgeAccel (p<0.001), persisting after full adjustment (+0.85y). Higher baseline aging predicts earlier epilepsy onset. Carbamazepine: \u22120.99y; phenytoin: +1.05y.', tags:['phenoage','biological-aging','uk-biobank','asm'], categories:['aging','loe']},
+  { year:2026, status:'preparation', title:'Vortioxetine vs Citalopram and Clinical Outcomes in Patients with Brain Neoplasms', authors:'Schmick A, Ludwig RJ, Schubert KM, Ferreira-Atuesta C, Galovic M, et al.', journal:'Manuscript in preparation', finding:null, tags:['trinetx','brain-neoplasms','antidepressants'], categories:['pharm','comorbid']},
+  { year:2026, status:'preparation', title:'LLM-Assisted Data Extraction from Clinical EEG Reports: Benchmarking Local Models', authors:'Schuler K, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.', journal:'Manuscript in preparation', finding:'MedGemma demonstrated strong performance for structured medical report extraction in initial benchmarking.', tags:['llm','eeg','clinical-ai','medgemma'], categories:['ai','eeg']},
+  { year:2026, status:'preparation', title:'Sodium Channel Blockers Are Associated with Reduced Dementia Risk in Late-Onset Unexplained Epilepsy', authors:'Ferreira-Atuesta C, Schubert KM, Tai XY, Noain D, Skwarzynska D, Wyss MT, Schreiner S, Jung HH, Hedden T, Zelano J, Marson T, Lip GYH*, Mbizvo GK*, Galovic M*', journal:'Manuscript in preparation', finding:"Sodium channel blockers: HR 0.73 (0.61\u20130.88) for all-cause dementia and HR 0.66 (0.49\u20130.88) for Alzheimer's disease vs levetiracetam/brivaracetam. Replicated in Down syndrome cohort and NACC dataset.", tags:['trinetx','loe','dementia','sodium-channel-blockers','asm','nacc'], categories:['loe','pharm','comorbid']},
+  { year:2026, status:'preparation', title:'Suicide Attempt Risk with Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy', authors:'Stattmann M, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.', journal:'Manuscript in preparation', finding:null, tags:['trinetx','levetiracetam','psychiatric-adverse-effects','pharmacovigilance'], categories:['pharm','comorbid']},
+];
+const conferences = [
   {name:'American Epilepsy Society Annual Meeting', date:'Dec 2025', location:'Houston, TX', deadline:'Jul 15, 2025', type:'National', attendees:['MG','CF','KS']},
   {name:'ILAE World Congress of Epileptology', date:'Sep 2025', location:'Istanbul, Turkey', deadline:'Mar 1, 2025', type:'International', attendees:['MG','CF']},
   {name:'European Congress of Epileptology', date:'Jun 2025', location:'Vienna, Austria', deadline:'Jan 31, 2025', type:'International', attendees:['KS','XT']},
   {name:'Swiss Neurological Society', date:'Apr 2025', location:'Bern, Switzerland', deadline:'Feb 2025', type:'National', attendees:['MD','KSc']},
 ];
-
-let grants = [
-  { funder:'Koetser Foundation for Brain Research',
-    title:'JAK Inhibitors as Novel Modulators of Epileptogenesis',
-    pi:'Dr. Katharina Schuler', amount:'CHF ~80,000', period:'2026–2027', status:'pending',
-    description:'Supported by TriNetX real-world data: 58% reduction in new epilepsy with tofacitinib vs TNFα inhibitors in RA. Forest plot complete.',
-    deadline:'Feb 15, 2026', linked:'JAK vs TNFα'},
-  { funder:'Swiss National Science Foundation (SNSF)',
-    title:'Post-Stroke Epilepsy Prediction — Multimodal EEG Biomarker Validation',
-    pi:'Dr. Marian Galovic', amount:'CHF 450,000', period:'2024–2027', status:'active',
-    description:'Funds SELECT-EEG multicenter validation study and the lab\'s PSE/EEG research program.',
-    deadline:'N/A (active)', linked:'cEEG vs sEEG / SELECT'},
-  { funder:'SNSF / Alternative Funder (TBD)',
-    title:'Biomarkers of Seizure Activity — FINESSE 2.0',
-    pi:'Dr. Marian Galovic', amount:'CHF 200–300k+', period:'2026–2028', status:'planning',
-    description:'Full IMPOSE/FINESSE biomarker pipeline (EVs, NULISA CNS, NfL, GFAP). Galovic ineligible for SNSF before Oct 2026 — exploring co-applicants and bridge options.',
-    deadline:'Oct 2026 (SNSF); alternatives being explored', linked:'Biomarkers / IMPOSE'},
+const grants = [
+  { funder:'Koetser Foundation for Brain Research', title:'JAK Inhibitors as Novel Modulators of Epileptogenesis', pi:'Dr. Katharina Schuler', amount:'CHF ~80,000', period:'2026\u20132027', status:'pending', description:'Supported by TriNetX real-world data: 58% reduction in new epilepsy with tofacitinib vs TNF\u03b1 inhibitors in RA.', deadline:'Feb 15, 2026', linked:'JAK vs TNF\u03b1'},
+  { funder:'Swiss National Science Foundation (SNSF)', title:'Post-Stroke Epilepsy Prediction \u2014 Multimodal EEG Biomarker Validation', pi:'Dr. Marian Galovic', amount:'CHF 450,000', period:'2024\u20132027', status:'active', description:"Funds SELECT-EEG multicenter validation study and the lab's PSE/EEG research program.", deadline:'N/A (active)', linked:'cEEG vs sEEG / SELECT'},
+  { funder:'SNSF / Alternative Funder (TBD)', title:'Biomarkers of Seizure Activity \u2014 FINESSE 2.0', pi:'Dr. Marian Galovic', amount:'CHF 200\u2013300k+', period:'2026\u20132028', status:'planning', description:'Full IMPOSE/FINESSE biomarker pipeline (EVs, NULISA CNS, NfL, GFAP). Galovic ineligible for SNSF before Oct 2026.', deadline:'Oct 2026 (SNSF); alternatives being explored', linked:'Biomarkers / IMPOSE'},
 ];
-
-let fundingOpps = [
-  {name:'SNSF Project Grant', deadline:'Oct 2026', amount:'Up to CHF 1M', note:'Next available for Galovic lab. Explore co-applicant (e.g. Weiss, who returns SNSF Starting Grant).'},
-  {name:'ERC Starting Grant', deadline:'Sep 2025', amount:'€1.5M', note:'2–7 yrs post-PhD. Open science focus. Potential PI: Weiss.'},
-  {name:'Hartmann Müller Foundation', deadline:'Rolling', amount:'CHF 20–80k', note:'Zurich-based. Suitable for FINESSE pilot bridge funding.'},
+const fundingOpps = [
+  {name:'SNSF Project Grant', deadline:'Oct 2026', amount:'Up to CHF 1M', note:'Next available for Galovic lab. Explore co-applicant (e.g. Weiss).'},
+  {name:'ERC Starting Grant', deadline:'Sep 2025', amount:'\u20ac1.5M', note:'2\u20137 yrs post-PhD. Open science focus. Potential PI: Weiss.'},
+  {name:'Hartmann M\u00fcller Foundation', deadline:'Rolling', amount:'CHF 20\u201380k', note:'Zurich-based. Suitable for FINESSE pilot bridge funding.'},
   {name:'Vontobel Foundation', deadline:'Rolling', amount:'CHF 50k', note:'Zurich-based private medical research funder.'},
 ];
-
-let resources = [
-  {icon:'🗄️', name:'TriNetX', desc:'Federated EHR database (>250M patients). Propensity-matching, cohort assembly, survival analysis.'},
-  {icon:'🧬', name:'UK Biobank', desc:'Population cohort: genetics, neuroimaging, wearables, long-term follow-up (n>500,000).'},
-  {icon:'📡', name:'ENIGMA Consortium', desc:'Neuroimaging and longitudinal epilepsy MRI data across international sites.'},
-  {icon:'📋', name:'SELECT Study Portal', desc:'Multicenter PSE consortium — data harmonization and subgroup coordination.'},
-  {icon:'📊', name:'IMPOSE Tracker', desc:'Prospective study management — enrollment, site coordination, biobank samples.'},
-  {icon:'🐳', name:'BrainAgeR Pipeline', desc:'Docker v2.1: SPM12 + R brain age estimation from T1 MRI. Contact: gou.lubin@usz.ch'},
-  {icon:'🤖', name:'MedGemma / Local LLMs', desc:'Local model deployment for EEG report extraction and clinical NLP pipelines.'},
-  {icon:'📚', name:'Statistical SOPs', desc:'Lab protocols: PSM, Cox regression, Fine–Gray competing risks, NRI, C-index.'},
-  {icon:'📝', name:'IRB & Ethics Templates', desc:'Approved protocol templates, consent forms, data use agreements.'},
-  {icon:'📁', name:'Manuscript Drive', desc:'Shared drafts, reviewer responses, submission logs, author agreements.'},
+const resources = [
+  {icon:'&#128452;&#65039;', name:'TriNetX', desc:'Federated EHR database (>250M patients). Propensity-matching, cohort assembly, survival analysis.'},
+  {icon:'&#129516;', name:'UK Biobank', desc:'Population cohort: genetics, neuroimaging, wearables, long-term follow-up (n>500,000).'},
+  {icon:'&#128225;', name:'ENIGMA Consortium', desc:'Neuroimaging and longitudinal epilepsy MRI data across international sites.'},
+  {icon:'&#128203;', name:'SELECT Study Portal', desc:'Multicenter PSE consortium \u2014 data harmonization and subgroup coordination.'},
+  {icon:'&#128202;', name:'IMPOSE Tracker', desc:'Prospective study management \u2014 enrollment, site coordination, biobank samples.'},
+  {icon:'&#128051;', name:'BrainAgeR Pipeline', desc:'Docker v2.1: SPM12 + R brain age estimation from T1 MRI. Contact: gou.lubin@usz.ch'},
+  {icon:'&#129302;', name:'MedGemma / Local LLMs', desc:'Local model deployment for EEG report extraction and clinical NLP pipelines.'},
+  {icon:'&#128218;', name:'Statistical SOPs', desc:'Lab protocols: PSM, Cox regression, Fine\u2013Gray competing risks, NRI, C-index.'},
+  {icon:'&#128221;', name:'IRB & Ethics Templates', desc:'Approved protocol templates, consent forms, data use agreements.'},
+  {icon:'&#128193;', name:'Manuscript Drive', desc:'Shared drafts, reviewer responses, submission logs, author agreements.'},
 ];
 
-let ideas = [];
-let currentJoinId = null;
-
-// ——— NAV ———
-function showTab(name) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  document.getElementById('nav-'+name).classList.add('active');
-  renderAll();
-}
-function showSubTab(g,tab,btn) {
-  document.querySelectorAll(`[id^="${g}-"]`).forEach(t=>t.classList.remove('active'));
-  btn.closest('.sub-tabs').querySelectorAll('.sub-tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(`${g}-${tab}`).classList.add('active');
-  btn.classList.add('active');
-}
-
-// ——— HELPERS ———
-function siInfo(s) {
-  return {active:{pip:'active',label:'Active'},preparation:{pip:'preparation',label:'In Preparation'},preprint:{pip:'preprint',label:'Preprint'},submitted:{pip:'submitted',label:'Under Review'}}[s]||{pip:'preparation',label:'Planning'};
-}
-function pubBadge(s) {
-  return {preparation:'<span class="pub-status-tag s-prep">In Prep</span>',preprint:'<span class="pub-status-tag s-preprint">Preprint</span>',submitted:'<span class="pub-status-tag s-submitted">Under Review</span>'}[s]||'<span class="pub-status-tag s-published">Published</span>';
-}
-
-// ——— PROJECTS ———
-const AREA_LABELS = {all:'All',pse:'Post-Stroke Epilepsy',loe:'Late-Onset Epilepsy',pharm:'Pharmacotherapy',eeg:'EEG & Biomarkers',sleep:'Sleep',aging:'Brain Aging',ai:'Clinical AI',epidemiology:'Epidemiology',biomarker:'Biomarkers'};
-
-function getTeam(p) { return mergeTeam(p.extra); }
-
-function projectCard(p) {
-  const t = getTeam(p);
-  const si = siInfo(p.status);
-  return `<div class="project-card" data-area="${p.area}" onclick="openProject(${p.id})">
-    <div class="project-card-top">
-      <div class="project-icon-wrap">${p.icon}</div>
-      <span class="project-area-tag">${p.areaLabel}</span>
-    </div>
-    <div class="project-name">${p.name}</div>
-    <div class="project-desc">${p.desc}</div>
-    ${p.finding?`<div class="project-finding">📊 ${p.finding}</div>`:''}
-    <span class="project-db-tag">${p.tag}</span>
-    <div class="project-team">
-      ${t.initials.slice(0,6).map((ini,i)=>`<div class="team-pip" style="background:${t.colors[i]}" data-name="${t.names[i]}">${ini}</div>`).join('')}
-      ${t.initials.length>6?`<span style="font-size:11px;color:var(--ink-light)">+${t.initials.length-6}</span>`:''}
-    </div>
-    <div class="project-footer">
-      <div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>
-      <button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="event.stopPropagation();openJoin(${p.id})">+ Join</button>
-    </div>
-  </div>`;
-}
-
-function renderProjects() {
-  const hp=document.getElementById('home-projects');
-  if(hp) hp.innerHTML=projects.slice(0,4).map(projectCard).join('');
-  const ap=document.getElementById('all-projects');
-  if(!ap) return;
-  ap.innerHTML=projects.map(projectCard).join('');
-  const fb=document.getElementById('project-filters');
-  if(fb&&!fb.dataset.built){
-    fb.dataset.built='1';
-    const areas=['all',...new Set(projects.map(p=>p.area))];
-    fb.innerHTML=areas.map(a=>`<button class="filter-btn${a==='all'?' active':''}" onclick="filterProjects('${a}',this)">${AREA_LABELS[a]||a}</button>`).join('');
-  }
-  const sp=document.getElementById('stat-projects'); if(sp) sp.textContent=projects.length;
-}
-function filterProjects(area,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#all-projects .project-card').forEach(c=>{
-    c.classList.toggle('hidden',area!=='all'&&c.dataset.area!==area);
-  });
-}
-
-// ——— TEAM ———
-function teamCard(m) {
-  return `<div class="team-card">
-    <div class="team-card-monogram" style="background:${m.bg}">${m.initials}</div>
-    <div class="team-card-name">${m.name}</div>
-    <div class="team-card-role">${m.role}</div>
-    <div class="team-card-affil">${m.affil}</div>
-    <div class="team-card-focus">${m.focus}</div>
-    ${m.visiting?'<div class="visiting-tag">Visiting / External</div>':''}
-  </div>`;
-}
-function renderTeam(){
-  const c=document.getElementById('team-grid-core'); if(c) c.innerHTML=teamCore.map(teamCard).join('');
-  const v=document.getElementById('team-grid-visiting'); if(v) v.innerHTML=teamVisiting.map(teamCard).join('');
-  const sr=document.getElementById('stat-researchers'); if(sr) sr.textContent=teamCore.length+teamVisiting.length;
-}
-
-// ——— IDEAS ———
-const FDB={
-  'TriNetX':{score:'feasible',note:'TriNetX >250M patient records with robust ICD-10 coding. PSM is well-validated on this platform. Typical n >5,000.'},
-  'UK Biobank':{score:'feasible',note:'Established cohort with genetic, imaging, and wearable data. Analysis pipelines well-documented; application required.'},
+// --- IDEAS FEASIBILITY DATA ---
+const FDB = {
+  'TriNetX':{score:'feasible',note:'TriNetX >250M patient records with robust ICD-10 coding. PSM is well-validated on this platform.'},
+  'UK Biobank':{score:'feasible',note:'Established cohort with genetic, imaging, and wearable data. Analysis pipelines well-documented.'},
   'ENIGMA (Longitudinal)':{score:'moderate',note:'Rich imaging data but smaller n. Power calculations and pre-registration are critical.'},
   'SELECT Multicenter':{score:'moderate',note:'Multicenter design strengthens generalisability. Requires SELECT steering committee coordination.'},
   'IMPOSE Study':{score:'challenging',note:'Prospective, ongoing enrollment. Best for embedded secondary analyses once enrollment is complete.'},
   'Multiple / TBD':{score:'moderate',note:'Multi-database replication is powerful but requires careful variable harmonisation.'},
 };
-const PSG={
-  'Post-Stroke Epilepsy':['Holtkamp et al. (2017) — Incidence and outcome of epilepsy after stroke. Neurology.','Brigo F et al. (2021) — Systematic review: risk factors for PSE. J Neurol.'],
-  'Late-Onset Epilepsy':['Sen A et al. (2020) — Late-onset epilepsy: emerging definitions. Lancet.','Feyissa AM et al. (2022) — Cognitive outcomes in late-onset epilepsy. JAMA Neurol.'],
-  'Epileptogenesis':['Vezzani A et al. (2019) — Neuroinflammation in epileptogenesis. Nat Rev Neurol.'],
-  'Drug Outcomes / Pharmacotherapy':['Brodie MJ et al. (2018) — Patterns of ASM prescribing. Epilepsia.','Kwan P et al. (2022) — Real-world ASM effectiveness. J Neurol Neurosurg Psychiatry.'],
-  'Sleep & Epilepsy':['Nobili L et al. (2016) — Sleep and epilepsy. Nat Rev Neurol.','Larsson D et al. (2022) — Sleep duration and mortality: UK Biobank. BMJ.'],
-  'EEG & Biomarkers':['Gaspard N et al. (2019) — SeLECT score for PSE. Neurology.','Engel J et al. (2021) — Biomarkers of epileptogenesis. Epilepsia.'],
-  'Brain Aging & Neurodegeneration':['Levine ME et al. (2018) — PhenoAge estimation. Aging Cell.','Franke K et al. (2019) — Brain aging in neurological disorders. Neuroimage.'],
-  'Clinical AI / LLMs':['Google MedGemma (2024) — Open health AI models. research.google/blog/medgemma.'],
-  'Comorbidities':['Stafstrom CE et al. (2013) — Comorbidities of epilepsy. Neuron.'],
-  'Other':['Fisher RS et al. (2017) — ILAE operational definition of epilepsy. Epilepsia.'],
+const PSG = {
+  'Post-Stroke Epilepsy':['Holtkamp et al. (2017) \u2014 Incidence and outcome of epilepsy after stroke. Neurology.','Brigo F et al. (2021) \u2014 Systematic review: risk factors for PSE. J Neurol.'],
+  'Late-Onset Epilepsy':['Sen A et al. (2020) \u2014 Late-onset epilepsy: emerging definitions. Lancet.','Feyissa AM et al. (2022) \u2014 Cognitive outcomes in late-onset epilepsy. JAMA Neurol.'],
+  'Epileptogenesis':['Vezzani A et al. (2019) \u2014 Neuroinflammation in epileptogenesis. Nat Rev Neurol.'],
+  'Drug Outcomes / Pharmacotherapy':['Brodie MJ et al. (2018) \u2014 Patterns of ASM prescribing. Epilepsia.','Kwan P et al. (2022) \u2014 Real-world ASM effectiveness. J Neurol Neurosurg Psychiatry.'],
+  'Sleep & Epilepsy':['Nobili L et al. (2016) \u2014 Sleep and epilepsy. Nat Rev Neurol.','Larsson D et al. (2022) \u2014 Sleep duration and mortality: UK Biobank. BMJ.'],
+  'EEG & Biomarkers':['Gaspard N et al. (2019) \u2014 SeLECT score for PSE. Neurology.','Engel J et al. (2021) \u2014 Biomarkers of epileptogenesis. Epilepsia.'],
+  'Brain Aging & Neurodegeneration':['Levine ME et al. (2018) \u2014 PhenoAge estimation. Aging Cell.','Franke K et al. (2019) \u2014 Brain aging in neurological disorders. Neuroimage.'],
+  'Clinical AI / LLMs':['Google MedGemma (2024) \u2014 Open health AI models. research.google/blog/medgemma.'],
+  'Comorbidities':['Stafstrom CE et al. (2013) \u2014 Comorbidities of epilepsy. Neuron.'],
+  'Other':['Fisher RS et al. (2017) \u2014 ILAE operational definition of epilepsy. Epilepsia.'],
 };
+
+// --- NAV ---
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const nb = document.getElementById('nav-' + name);
+  if (nb) nb.classList.add('active');
+  renderAll();
+}
+function showSubTab(g, tab, btn) {
+  document.querySelectorAll(`[id^="${g}-"]`).forEach(t => t.classList.remove('active'));
+  btn.closest('.sub-tabs').querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`${g}-${tab}`).classList.add('active');
+  btn.classList.add('active');
+}
+
+// --- HELPERS ---
+function siInfo(s) {
+  return {active:{pip:'active',label:'Active'},preparation:{pip:'preparation',label:'In Preparation'},preprint:{pip:'preprint',label:'Preprint'},submitted:{pip:'submitted',label:'Under Review'},published:{pip:'active',label:'Published'}}[s]||{pip:'preparation',label:'Planning'};
+}
+function pubBadge(s) {
+  return {preparation:'<span class="pub-status-tag s-prep">In Prep</span>',preprint:'<span class="pub-status-tag s-preprint">Preprint</span>',submitted:'<span class="pub-status-tag s-submitted">Under Review</span>'}[s]||'<span class="pub-status-tag s-published">Published</span>';
+}
 function fbadge(f){return {feasible:'<span class="badge badge-feasible">Feasible</span>',moderate:'<span class="badge badge-moderate">Moderate</span>',challenging:'<span class="badge badge-challenging">Challenging</span>'}[f]||'';}
 
-function renderIdeas(){
-  const el=document.getElementById('ideas-list'); if(!el) return;
-  if(!ideas.length){el.innerHTML='<div style="padding:52px 32px;text-align:center;color:var(--ink-light);border:1px solid var(--stone);font-size:13px">No ideas submitted yet — be the first to propose a new research direction.</div>';return;}
-  el.innerHTML=ideas.map(idea=>`<div class="idea-item">
+// --- PROJECTS ---
+const AREA_LABELS = {all:'All',pse:'Post-Stroke Epilepsy',loe:'Late-Onset Epilepsy',pharm:'Pharmacotherapy',eeg:'EEG & Biomarkers',sleep:'Sleep',aging:'Brain Aging',ai:'Clinical AI',epidemiology:'Epidemiology',biomarker:'Biomarkers',other:'Other'};
+
+function getProjectTeamPips(p) {
+  const members = projectMembers[p.id] || [];
+  return members.map(m => {
+    const tm = teamMembers.find(t => t.name === m.member_name);
+    return {
+      name: m.member_name,
+      initials: tm ? tm.initials : m.member_name.replace(/Dr\.\s*/,'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
+      color: tm ? tm.bg_color : '#888'
+    };
+  });
+}
+
+function projectCard(p) {
+  const pips = getProjectTeamPips(p);
+  const si = siInfo(p.status);
+  const dbTag = Array.isArray(p.database_tags) ? p.database_tags[0] : (p.database_tags || '');
+  return `<div class="project-card" data-area="${p.area||''}" onclick="openProject('${p.id}')">
+    <div class="project-card-top">
+      <div class="project-icon-wrap">${p.icon||'&#128300;'}</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="project-area-tag">${p.area_tag||''}</span>
+        <div class="admin-controls">
+          <button class="admin-btn" onclick="event.stopPropagation();openProjectModal('${p.id}')">&#9998;</button>
+          <button class="admin-btn danger" onclick="event.stopPropagation();deleteProject('${p.id}')">&#10005;</button>
+        </div>
+      </div>
+    </div>
+    <div class="project-name">${p.name}</div>
+    <div class="project-desc">${p.description||''}</div>
+    ${p.finding?`<div class="project-finding">&#128202; ${p.finding}</div>`:''}
+    ${dbTag?`<span class="project-db-tag">${dbTag}</span>`:''}
+    <div class="project-team">
+      ${pips.slice(0,6).map(pip=>`<div class="team-pip" style="background:${pip.color}" data-name="${pip.name}">${pip.initials}</div>`).join('')}
+      ${pips.length>6?`<span style="font-size:11px;color:var(--ink-light)">+${pips.length-6}</span>`:''}
+    </div>
+    <div class="project-footer">
+      <div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>
+      <button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="event.stopPropagation();openJoin('${p.id}')">+ Join</button>
+    </div>
+  </div>`;
+}
+
+function renderProjects() {
+  const hp = document.getElementById('home-projects');
+  if (hp) hp.innerHTML = projects.slice(0,4).map(projectCard).join('');
+  const ap = document.getElementById('all-projects');
+  if (!ap) return;
+  ap.innerHTML = projects.map(projectCard).join('');
+  const fb = document.getElementById('project-filters');
+  if (fb && !fb.dataset.built) {
+    fb.dataset.built = '1';
+    const areas = ['all', ...new Set(projects.map(p=>p.area).filter(Boolean))];
+    fb.innerHTML = areas.map(a=>`<button class="filter-btn${a==='all'?' active':''}" onclick="filterProjects('${a}',this)">${AREA_LABELS[a]||a}</button>`).join('');
+  }
+  const sp = document.getElementById('stat-projects'); if (sp) sp.textContent = projects.length;
+}
+function filterProjects(area, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#all-projects .project-card').forEach(c=>{
+    c.classList.toggle('hidden', area!=='all' && c.dataset.area!==area);
+  });
+}
+
+// --- PROJECT CRUD ---
+function openProjectModal(id) {
+  const modal = document.getElementById('project-edit-modal');
+  if (id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('project-edit-title').textContent = 'Edit Project';
+    document.getElementById('project-edit-id').value = p.id;
+    document.getElementById('pf-icon').value = p.icon || '';
+    document.getElementById('pf-status').value = p.status || 'preparation';
+    document.getElementById('pf-name').value = p.name || '';
+    document.getElementById('pf-area-tag').value = p.area_tag || '';
+    document.getElementById('pf-area').value = p.area || 'other';
+    document.getElementById('pf-desc').value = p.description || '';
+    document.getElementById('pf-finding').value = p.finding || '';
+    document.getElementById('pf-dbtags').value = Array.isArray(p.database_tags) ? p.database_tags.join(', ') : (p.database_tags || '');
+    document.getElementById('pf-methods').value = p.methods || '';
+    document.getElementById('pf-notes').value = p.notes || '';
+  } else {
+    document.getElementById('project-edit-title').textContent = 'New Project';
+    document.getElementById('project-edit-id').value = '';
+    ['pf-icon','pf-name','pf-area-tag','pf-desc','pf-finding','pf-dbtags','pf-methods','pf-notes'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('pf-status').value = 'preparation';
+    document.getElementById('pf-area').value = 'other';
+  }
+  modal.classList.add('open');
+}
+async function saveProject() {
+  const id = document.getElementById('project-edit-id').value;
+  const rawTags = document.getElementById('pf-dbtags').value;
+  const data = {
+    name: document.getElementById('pf-name').value.trim(),
+    icon: document.getElementById('pf-icon').value.trim() || '&#128300;',
+    status: document.getElementById('pf-status').value,
+    area_tag: document.getElementById('pf-area-tag').value.trim(),
+    area: document.getElementById('pf-area').value,
+    description: document.getElementById('pf-desc').value.trim(),
+    finding: document.getElementById('pf-finding').value.trim() || null,
+    database_tags: rawTags ? rawTags.split(',').map(t=>t.trim()).filter(Boolean) : [],
+    methods: document.getElementById('pf-methods').value.trim(),
+    notes: document.getElementById('pf-notes').value.trim(),
+  };
+  if (!data.name) { showToast('Project name is required.'); return; }
+  let error;
+  if (id) {
+    ({ error } = await sb.from('projects').update(data).eq('id', id));
+  } else {
+    ({ error } = await sb.from('projects').insert(data));
+  }
+  if (error) { showToast('Error: ' + error.message); return; }
+  document.getElementById('project-edit-modal').classList.remove('open');
+  document.getElementById('project-filters').dataset.built = '';
+  await loadAll(); renderAll();
+  showToast(id ? 'Project updated.' : 'Project created.');
+}
+async function deleteProject(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p || !confirm(`Delete "${p.name}"? This cannot be undone.`)) return;
+  const { error } = await sb.from('projects').delete().eq('id', id);
+  if (error) { showToast('Error: ' + error.message); return; }
+  document.getElementById('project-filters').dataset.built = '';
+  await loadAll(); renderAll();
+  showToast('Project deleted.');
+}
+
+// --- TEAM ---
+function teamCard(m) {
+  return `<div class="team-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div class="team-card-monogram" style="background:${m.bg_color}">${m.initials}</div>
+      <div class="admin-controls">
+        <button class="admin-btn" onclick="openTeamModal('${m.id}')">&#9998;</button>
+        <button class="admin-btn danger" onclick="deleteTeamMember('${m.id}')">&#10005;</button>
+      </div>
+    </div>
+    <div class="team-card-name">${m.name}</div>
+    <div class="team-card-role">${m.role||''}</div>
+    <div class="team-card-affil">${m.affiliation||''}</div>
+    <div class="team-card-focus">${m.focus||''}</div>
+    ${m.is_visiting?'<div class="visiting-tag">Visiting / External</div>':''}
+  </div>`;
+}
+function renderTeam() {
+  const core = teamMembers.filter(m => !m.is_visiting);
+  const visiting = teamMembers.filter(m => m.is_visiting);
+  const c = document.getElementById('team-grid-core'); if (c) c.innerHTML = core.map(teamCard).join('');
+  const v = document.getElementById('team-grid-visiting'); if (v) v.innerHTML = visiting.map(teamCard).join('');
+  const sr = document.getElementById('stat-researchers'); if (sr) sr.textContent = teamMembers.length;
+}
+
+// --- TEAM CRUD ---
+function openTeamModal(id) {
+  const modal = document.getElementById('team-edit-modal');
+  if (id) {
+    const m = teamMembers.find(x => x.id === id);
+    if (!m) return;
+    document.getElementById('team-edit-title').textContent = 'Edit Team Member';
+    document.getElementById('tf-id').value = m.id;
+    document.getElementById('tf-name').value = m.name;
+    document.getElementById('tf-initials').value = m.initials || '';
+    document.getElementById('tf-role').value = m.role || '';
+    document.getElementById('tf-affil').value = m.affiliation || '';
+    document.getElementById('tf-focus').value = m.focus || '';
+    document.getElementById('tf-color').value = m.bg_color || '#4a6741';
+    document.getElementById('tf-visiting').value = m.is_visiting ? 'true' : 'false';
+  } else {
+    document.getElementById('team-edit-title').textContent = 'Add Team Member';
+    document.getElementById('tf-id').value = '';
+    ['tf-name','tf-initials','tf-role','tf-affil','tf-focus'].forEach(i => document.getElementById(i).value = '');
+    document.getElementById('tf-color').value = '#4a6741';
+    document.getElementById('tf-visiting').value = 'false';
+  }
+  modal.classList.add('open');
+}
+async function saveTeamMember() {
+  const id = document.getElementById('tf-id').value;
+  const data = {
+    name: document.getElementById('tf-name').value.trim(),
+    initials: document.getElementById('tf-initials').value.trim(),
+    role: document.getElementById('tf-role').value.trim(),
+    affiliation: document.getElementById('tf-affil').value.trim(),
+    focus: document.getElementById('tf-focus').value.trim(),
+    bg_color: document.getElementById('tf-color').value,
+    is_visiting: document.getElementById('tf-visiting').value === 'true',
+  };
+  if (!data.name) { showToast('Name is required.'); return; }
+  let error;
+  if (id) {
+    ({ error } = await sb.from('team_members').update(data).eq('id', id));
+  } else {
+    ({ error } = await sb.from('team_members').insert({ ...data, is_active: true, sort_order: teamMembers.length + 1 }));
+  }
+  if (error) { showToast('Error: ' + error.message); return; }
+  document.getElementById('team-edit-modal').classList.remove('open');
+  await loadAll(); renderAll();
+  showToast(id ? 'Member updated.' : 'Member added.');
+}
+async function deleteTeamMember(id) {
+  const m = teamMembers.find(x => x.id === id);
+  if (!m || !confirm(`Remove ${m.name} from the team?`)) return;
+  const { error } = await sb.from('team_members').update({ is_active: false }).eq('id', id);
+  if (error) { showToast('Error: ' + error.message); return; }
+  await loadAll(); renderAll();
+  showToast('Member removed.');
+}
+
+// --- IDEAS ---
+function renderIdeas() {
+  const el = document.getElementById('ideas-list'); if (!el) return;
+  if (!ideas.length) { el.innerHTML = '<div style="padding:52px 32px;text-align:center;color:var(--ink-light);border:1px solid var(--stone);font-size:13px">No ideas submitted yet \u2014 be the first to propose a new research direction.</div>'; return; }
+  el.innerHTML = ideas.map(idea => `<div class="idea-item">
     <div class="idea-header">
       <div class="idea-title">${idea.title}</div>
-      <div class="idea-badges"><span class="badge badge-area">${idea.area}</span>${fbadge(idea.feasibility)}</div>
+      <div class="idea-badges"><span class="badge badge-area">${idea.area||''}</span>${fbadge(idea.feasibility)}</div>
     </div>
-    <div class="idea-desc">${idea.desc}</div>
+    <div class="idea-desc">${idea.description||''}</div>
     ${idea.note?`<div class="idea-feas-note">${idea.note}</div>`:''}
     ${idea.papers&&idea.papers.length?`<div style="margin-bottom:12px"><div class="idea-papers-label">Suggested Literature</div>${idea.papers.map(p=>`<div class="paper-ref">${p}</div>`).join('')}</div>`:''}
     <div class="idea-footer">
-      <div class="idea-meta">By <strong>${idea.submitter}</strong> · ${idea.db} · ${idea.tl}</div>
+      <div class="idea-meta">By <strong>${idea.submitter||'Anonymous'}</strong> \u00b7 ${idea.db||''} \u00b7 ${idea.timeline||''}</div>
       <div class="idea-actions">
-        <button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="assignIdea(${idea.id})">+ Assign Me</button>
-        <button class="btn btn-dark" style="font-size:10px;padding:5px 12px" onclick="promoteIdea(${idea.id})">→ Create Project</button>
+        <button class="btn btn-dark" style="font-size:10px;padding:5px 12px" onclick="promoteIdea('${idea.id}')">&#8594; Create Project</button>
+        ${isAdmin?`<button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="deleteIdea('${idea.id}')">Delete</button>`:''}
       </div>
     </div>
   </div>`).join('');
 }
+async function submitIdea() {
+  const title = document.getElementById('idea-title').value.trim();
+  const desc = document.getElementById('idea-desc').value.trim();
+  if (!title || !desc) { showToast('Please fill in title and description.'); return; }
+  const area = document.getElementById('idea-area').value;
+  const db = document.getElementById('idea-db').value;
+  const fi = FDB[db] || { score:'moderate', note:'' };
+  const { error } = await sb.from('ideas').insert({
+    title, description: desc, area, db,
+    timeline: document.getElementById('idea-timeline').value,
+    submitter: document.getElementById('idea-submitter').value,
+    feasibility: fi.score, note: fi.note,
+    papers: PSG[area] || PSG['Other'],
+  });
+  if (error) { showToast('Error saving idea: ' + error.message); return; }
+  document.getElementById('idea-title').value = '';
+  document.getElementById('idea-desc').value = '';
+  await loadAll(); renderAll();
+  showToast('Idea submitted \u2014 feasibility assessed & literature suggested.');
+}
+async function promoteIdea(id) {
+  const idea = ideas.find(x => x.id === id);
+  if (!idea) return;
+  const { error } = await sb.from('projects').insert({
+    name: idea.title, icon: '&#128269;',
+    area_tag: idea.area || 'Other', status: 'preparation',
+    area: 'other', description: idea.description,
+    database_tags: idea.db ? [idea.db] : [],
+    methods: 'To be defined',
+    notes: `Promoted from Ideas Board \u2014 ${idea.area}`,
+  });
+  if (error) { showToast('Error: ' + error.message); return; }
+  await sb.from('ideas').delete().eq('id', id);
+  await loadAll();
+  document.getElementById('project-filters').dataset.built = '';
+  showToast('Idea promoted to active project.');
+  showTab('projects');
+}
+async function deleteIdea(id) {
+  if (!confirm('Delete this idea?')) return;
+  await sb.from('ideas').delete().eq('id', id);
+  await loadAll(); renderAll();
+  showToast('Idea deleted.');
+}
 
-// ——— PUBLICATIONS ———
-function renderPublications(){
-  function ph(p){return `<div class="pub-item">
+// --- PUBLICATIONS ---
+function renderPublications() {
+  function ph(p) { return `<div class="pub-item">
     <div class="pub-year-col"><div class="pub-year">${p.year}</div>${pubBadge(p.status)}</div>
     <div class="pub-content">
       <div class="pub-title">${p.title}</div>
       <div class="pub-authors">${p.authors}</div>
       <div class="pub-journal">${p.journal}</div>
-      ${p.finding?`<div class="pub-finding">📊 ${p.finding}</div>`:''}
+      ${p.finding?`<div class="pub-finding">&#128202; ${p.finding}</div>`:''}
       <div class="pub-tags">${p.tags.map(t=>`<span class="pub-tag">${t}</span>`).join('')}</div>
     </div>
-  </div>`;}
-  const ae=document.getElementById('pub-list-all'); if(!ae) return;
-  ae.innerHTML=[...publications].sort((a,b)=>b.year-a.year).map(ph).join('');
-  ['pse','loe','pharm','eeg','sleep','aging','ai','comorbid'].forEach(cat=>{
-    const el=document.getElementById('pub-list-'+cat);
-    if(el){const f=publications.filter(p=>p.categories.includes(cat));el.innerHTML=f.length?f.map(ph).join(''):'<div style="padding:24px;color:var(--ink-light);text-align:center;font-size:13px">No publications in this category yet.</div>';}
+  </div>`; }
+  const ae = document.getElementById('pub-list-all'); if (!ae) return;
+  ae.innerHTML = [...publications].sort((a,b)=>b.year-a.year).map(ph).join('');
+  ['pse','loe','pharm','eeg','sleep','aging','ai','comorbid'].forEach(cat => {
+    const el = document.getElementById('pub-list-'+cat);
+    if (el) { const f = publications.filter(p=>p.categories.includes(cat)); el.innerHTML = f.length ? f.map(ph).join('') : '<div style="padding:24px;color:var(--ink-light);text-align:center;font-size:13px">No publications in this category yet.</div>'; }
   });
-  const sp=document.getElementById('stat-pubs'); if(sp) sp.textContent=publications.length;
+  const sp = document.getElementById('stat-pubs'); if (sp) sp.textContent = publications.length;
 }
 
-// ——— CONFERENCES ———
-function renderConferences(){
-  const el=document.getElementById('conf-grid'); if(!el) return;
-  el.innerHTML=conferences.map(c=>`<div class="conf-card">
-    <div class="conf-type-tag">${c.type} · ${c.date}</div>
+// --- CONFERENCES ---
+function renderConferences() {
+  const el = document.getElementById('conf-grid'); if (!el) return;
+  el.innerHTML = conferences.map(c=>`<div class="conf-card">
+    <div class="conf-type-tag">${c.type} \u00b7 ${c.date}</div>
     <div class="conf-name">${c.name}</div>
-    <div class="conf-detail">📍 ${c.location}</div>
+    <div class="conf-detail">&#128205; ${c.location}</div>
     <div class="conf-deadline">Abstract deadline: <strong>${c.deadline}</strong></div>
-    <div class="conf-attendees">
-      ${c.attendees.map(a=>`<div class="team-pip" style="background:var(--sage)" data-name="${a}">${a}</div>`).join('')}
-      <span style="font-size:11.5px;color:var(--ink-light)">attending</span>
-    </div>
+    <div class="conf-attendees">${c.attendees.map(a=>`<div class="team-pip" style="background:var(--sage)" data-name="${a}">${a}</div>`).join('')}<span style="font-size:11.5px;color:var(--ink-light)">attending</span></div>
   </div>`).join('');
 }
 
-// ——— GRANTS ———
-function renderGrants(){
-  const el=document.getElementById('grants-grid'); if(!el) return;
-  el.innerHTML=grants.map(g=>`<div class="grant-card">
+// --- GRANTS ---
+function renderGrants() {
+  const el = document.getElementById('grants-grid'); if (!el) return;
+  el.innerHTML = grants.map(g=>`<div class="grant-card">
     <div class="grant-funder">${g.funder}</div>
     <div class="grant-title">${g.title}</div>
     <div class="grant-row"><span class="grant-key">PI</span><span class="grant-val">${g.pi}</span></div>
@@ -1310,13 +1579,10 @@ function renderGrants(){
     <div class="grant-row"><span class="grant-key">Period</span><span class="grant-val">${g.period}</span></div>
     <div class="grant-row"><span class="grant-key">Deadline</span><span class="grant-val">${g.deadline}</span></div>
     <div class="grant-desc">${g.description}</div>
-    <div class="grant-footer">
-      <span class="status-tag ${g.status}">${g.status.charAt(0).toUpperCase()+g.status.slice(1)}</span>
-      ${g.linked?`<span class="linked-tag">↗ ${g.linked}</span>`:''}
-    </div>
+    <div class="grant-footer"><span class="status-tag ${g.status}">${g.status.charAt(0).toUpperCase()+g.status.slice(1)}</span>${g.linked?`<span class="linked-tag">&#8599; ${g.linked}</span>`:''}</div>
   </div>`).join('');
-  const oe=document.getElementById('funding-opps-grid');
-  if(oe) oe.innerHTML=fundingOpps.map(o=>`<div class="opp-card">
+  const oe = document.getElementById('funding-opps-grid');
+  if (oe) oe.innerHTML = fundingOpps.map(o=>`<div class="opp-card">
     <div class="opp-name">${o.name}</div>
     <div class="opp-amount">${o.amount}</div>
     <div class="opp-deadline">Deadline: ${o.deadline}</div>
@@ -1324,115 +1590,111 @@ function renderGrants(){
   </div>`).join('');
 }
 
-// ——— RESOURCES ———
-function renderResources(){
-  const el=document.getElementById('resources-grid'); if(!el) return;
-  el.innerHTML=resources.map(r=>`<div class="resource-card">
+// --- RESOURCES ---
+function renderResources() {
+  const el = document.getElementById('resources-grid'); if (!el) return;
+  el.innerHTML = resources.map(r=>`<div class="resource-card">
     <div class="resource-icon-wrap">${r.icon}</div>
     <div class="resource-name">${r.name}</div>
     <div class="resource-desc">${r.desc}</div>
   </div>`).join('');
 }
 
-function renderAll(){renderProjects();renderTeam();renderIdeas();renderPublications();renderConferences();renderGrants();renderResources();}
+// --- USERS TAB ---
+async function renderUsers() {
+  if (!isAdmin) return;
+  const el = document.getElementById('users-list'); if (!el) return;
+  const { data: profiles } = await sb.from('profiles').select('*').order('created_at');
+  if (!profiles || !profiles.length) { el.innerHTML = '<div style="color:var(--ink-light);font-size:13px">No users yet.</div>'; return; }
+  el.innerHTML = `<div style="border:1px solid var(--stone)">` +
+    profiles.map(p => `<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--stone);background:var(--warm-white)">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:var(--ink)">${p.name||'\u2014'}</div>
+        <div style="font-size:11px;color:var(--ink-light);margin-top:2px">${p.id}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border:1px solid;border-radius:2px;${p.role==='admin'?'background:var(--sage-pale);color:var(--sage);border-color:rgba(74,103,65,0.2)':'background:var(--ivory);color:var(--ink-light);border-color:var(--stone)'}">${p.role}</span>
+        ${p.id !== currentUser?.id ? `<button class="admin-btn" onclick="toggleRole('${p.id}','${p.role}')">${p.role==='admin'?'&#8594; Member':'&#8594; Admin'}</button>` : '<span style="font-size:11px;color:var(--stone-dark)">You</span>'}
+      </div>
+    </div>`).join('') + '</div>';
+}
+async function toggleRole(uid, currentRole) {
+  const newRole = currentRole === 'admin' ? 'member' : 'admin';
+  const { error } = await sb.from('profiles').update({ role: newRole }).eq('id', uid);
+  if (error) { showToast('Error: ' + error.message); return; }
+  showToast('Role updated to ' + newRole + '.');
+  renderUsers();
+}
+async function inviteUser() {
+  const email = document.getElementById('invite-email').value.trim();
+  const name = document.getElementById('invite-name').value.trim();
+  if (!email) { showToast('Email is required.'); return; }
+  const tempPassword = Math.random().toString(36).slice(-10) + 'A1!';
+  const { error } = await sb.auth.signUp({ email, password: tempPassword, options: { data: { name: name || email } } });
+  if (error) { showToast('Error: ' + error.message); return; }
+  document.getElementById('invite-email').value = '';
+  document.getElementById('invite-name').value = '';
+  showToast(`Account created for ${email}. Share this temp password: ${tempPassword}`);
+}
 
-// ——— MODALS ———
-function openProject(id){
-  const p=projects.find(x=>x.id===id); if(!p) return;
-  const t=getTeam(p); const si=siInfo(p.status);
-  document.getElementById('modal-content').innerHTML=`
+// --- MODALS ---
+function openProject(id) {
+  const p = projects.find(x => x.id === id); if (!p) return;
+  const pips = getProjectTeamPips(p);
+  const si = siInfo(p.status);
+  const dbTags = Array.isArray(p.database_tags) ? p.database_tags.join(', ') : (p.database_tags || '');
+  document.getElementById('modal-content').innerHTML = `
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-      <span style="font-size:28px">${p.icon}</span>
+      <span style="font-size:28px">${p.icon||'&#128300;'}</span>
       <div style="flex:1">
         <div class="modal-title" style="margin-bottom:5px">${p.name}</div>
         <span class="status-tag ${p.status}" style="font-size:9px;padding:2px 9px">${si.label}</span>
-        <span style="margin-left:6px;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light)">${p.tag}</span>
+        ${dbTags?`<span style="margin-left:6px;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light)">${dbTags}</span>`:''}
       </div>
     </div>
-    <div class="detail-row"><span class="detail-key">Team</span><span class="detail-val">${t.names.join(', ')}</span></div>
-    <div class="detail-row"><span class="detail-key">Database</span><span class="detail-val">${p.database}</span></div>
-    <div class="detail-row"><span class="detail-key">Methods</span><span class="detail-val">${p.methods}</span></div>
-    ${p.finding?`<div style="background:var(--sage-pale);border-left:2px solid var(--sage);padding:11px 14px;margin:14px 0;font-size:12.5px;color:var(--sage);line-height:1.65">📊 <strong>Key Finding:</strong> ${p.finding}</div>`:''}
-    <div class="detail-row"><span class="detail-key">Notes</span><span class="detail-val" style="color:var(--ink-light)">${p.notes}</span></div>
-    <button class="btn btn-dark" style="width:100%;margin-top:18px" onclick="document.getElementById('project-modal').classList.remove('open');openJoin(${p.id})">+ Join This Project</button>`;
+    <div class="detail-row"><span class="detail-key">Team</span><span class="detail-val">${pips.map(m=>m.name).join(', ')||'\u2014'}</span></div>
+    <div class="detail-row"><span class="detail-key">Database</span><span class="detail-val">${dbTags||'\u2014'}</span></div>
+    ${p.methods?`<div class="detail-row"><span class="detail-key">Methods</span><span class="detail-val">${p.methods}</span></div>`:''}
+    ${p.finding?`<div style="background:var(--sage-pale);border-left:2px solid var(--sage);padding:11px 14px;margin:14px 0;font-size:12.5px;color:var(--sage);line-height:1.65">&#128202; <strong>Key Finding:</strong> ${p.finding}</div>`:''}
+    ${p.notes?`<div class="detail-row"><span class="detail-key">Notes</span><span class="detail-val" style="color:var(--ink-light)">${p.notes}</span></div>`:''}
+    <button class="btn btn-dark" style="width:100%;margin-top:18px" onclick="document.getElementById('project-modal').classList.remove('open');openJoin('${p.id}')">+ Join This Project</button>`;
   document.getElementById('project-modal').classList.add('open');
 }
-function openJoin(id){
-  currentJoinId=id;
-  const p=projects.find(x=>x.id===id);
-  document.getElementById('join-project-name').textContent=p.name;
+function openJoin(id) {
+  currentJoinId = id;
+  const p = projects.find(x => x.id === id);
+  const allNames = teamMembers.map(m => m.name);
+  document.getElementById('join-name').innerHTML = allNames.map(n=>`<option>${n}</option>`).join('');
+  document.getElementById('join-project-name').textContent = p?.name || '';
   document.getElementById('join-modal').classList.add('open');
 }
-function confirmJoin(){
-  const p=projects.find(x=>x.id===currentJoinId);
-  const name=document.getElementById('join-name').value;
-  const role=document.getElementById('join-role').value;
-  const ini=name.replace('Dr. ','').split(' ').map(w=>w[0]).join('').slice(0,2);
-  const t=getTeam(p);
-  if(!t.names.includes(name)){ if(!p.extra){p.extra={names:[],initials:[],colors:[]};} p.extra.names.push(name); p.extra.initials.push(ini); p.extra.colors.push(TC[Math.floor(Math.random()*TC.length)]); }
+async function confirmJoin() {
+  const p = projects.find(x => x.id === currentJoinId);
+  const name = document.getElementById('join-name').value;
+  const role = document.getElementById('join-role').value;
+  const note = document.getElementById('join-note').value.trim();
+  const existing = (projectMembers[currentJoinId] || []).find(m => m.member_name === name);
+  if (existing) { showToast(`${name} is already on this project.`); return; }
+  const { error } = await sb.from('project_members').insert({ project_id: currentJoinId, member_name: name, member_role: role, note: note || null });
+  if (error) { showToast('Error: ' + error.message); return; }
   document.getElementById('join-modal').classList.remove('open');
-  showToast(`${name} joined "${p.name.slice(0,36)}…" as ${role}`);
-  renderAll();
+  await loadAll(); renderAll();
+  showToast(`${name} joined "${p.name.slice(0,36)}\u2026" as ${role}`);
 }
-function closeModal(e,id){if(e.target.classList.contains('modal-overlay'))document.getElementById(id).classList.remove('open');}
+function closeModal(e, id) { if (e.target.classList.contains('modal-overlay')) document.getElementById(id).classList.remove('open'); }
 
-// ——— IDEAS ———
-function submitIdea(){
-  const title=document.getElementById('idea-title').value.trim();
-  const desc=document.getElementById('idea-desc').value.trim();
-  if(!title||!desc){showToast('Please fill in title and description.');return;}
-  const area=document.getElementById('idea-area').value;
-  const db=document.getElementById('idea-db').value;
-  const fi=FDB[db]||{score:'moderate',note:''};
-  ideas.unshift({id:Date.now(),title,desc,area,
-    submitter:document.getElementById('idea-submitter').value,
-    db,tl:document.getElementById('idea-timeline').value,
-    feasibility:fi.score,note:fi.note,
-    papers:PSG[area]||PSG['Other'],assignees:[]});
-  document.getElementById('idea-title').value='';
-  document.getElementById('idea-desc').value='';
-  showToast('Idea submitted — feasibility assessed & literature suggested.');
-  renderAll();
-}
-function assignIdea(id){
-  const idea=ideas.find(x=>x.id===id);
-  const all=[...teamCore,...teamVisiting].map(m=>m.name);
-  const name=prompt('Your name:\n'+all.join('\n'));
-  if(name&&!idea.assignees.includes(name.trim())){idea.assignees.push(name.trim());showToast(`${name.trim()} assigned.`);renderAll();}
-}
-function promoteIdea(id){
-  const idea=ideas.find(x=>x.id===id);
-  projects.push({id:Date.now(),name:idea.title,icon:'🔍',tag:idea.db.split(' ')[0],status:'preparation',
-    area:'other',areaLabel:'Other',desc:idea.desc,finding:null,extra:null,
-    database:idea.db,methods:'To be defined',timeline:idea.tl,notes:`Promoted from Ideas Board — ${idea.area}`});
-  ideas=ideas.filter(x=>x.id!==id);
-  showToast('Idea promoted to active project.');
-  showTab('projects');
+// --- TOAST ---
+function showToast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ——— TOAST ———
-function showToast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
-}
-
-renderAll();
-
-// ——— PASSWORD GATE ———
-function checkPassword(){
-  const val = document.getElementById('gate-input').value;
-  const input = document.getElementById('gate-input');
-  if(val === 'galovic2026'){
-    const gate = document.getElementById('gate');
-    gate.style.transition='opacity 0.4s';
-    gate.style.opacity='0';
-    setTimeout(()=>gate.style.display='none',400);
-  } else {
-    input.classList.add('error');
-    document.getElementById('gate-error').style.display='block';
-    input.value='';
-    setTimeout(()=>input.classList.remove('error'),1200);
-  }
+// --- RENDER ALL ---
+function renderAll() {
+  renderProjects(); renderTeam(); renderIdeas(); renderPublications();
+  renderConferences(); renderGrants(); renderResources();
+  const activeTab = document.querySelector('.tab.active');
+  if (activeTab && activeTab.id === 'tab-users') renderUsers();
 }
 </script>
 </body>
