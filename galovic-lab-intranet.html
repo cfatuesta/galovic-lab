@@ -1085,6 +1085,8 @@ async function doLogin() {
   if (error) {
     showGateError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message);
     btn.disabled = false; btn.textContent = 'Enter \u2192';
+  } else {
+    btn.textContent = 'Loading data\u2026';
   }
 }
 
