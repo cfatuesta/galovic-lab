@@ -421,6 +421,7 @@ footer {
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const TC = ['#4a6741','#6b5c8a','#5c7a8a','#8a5c4a','#4a7a6e','#7a6e4a','#5c4a7a','#4a5c7a','#7a4a5c'];
 
@@ -459,17 +460,31 @@ function pubBadge(s){return{preparation:'<span class="pub-status-tag s-prep">In 
 
 function teamCard(m){
   return `<div class="team-card">
-    <div class="team-monogram" style="background:${m.bg}">${m.initials}</div>
+    <div class="team-monogram" style="background:${m.bg_color||m.bg||'#4a6741'}">${m.initials}</div>
     <div class="team-name">${m.name}</div>
     <div class="team-role">${m.role}</div>
-    <div class="team-affil">${m.affil}</div>
-    <div class="team-focus">${m.focus}</div>
-    ${m.visiting?'<div class="visiting-tag">Visiting / External</div>':''}
+    <div class="team-affil">${m.affiliation||m.affil||''}</div>
+    <div class="team-focus">${m.focus||''}</div>
+    ${(m.is_visiting||m.visiting)?'<div class="visiting-tag">Visiting / External</div>':''}
   </div>`;
 }
 
-document.getElementById('public-team-core').innerHTML = teamCore.map(teamCard).join('');
-document.getElementById('public-team-visiting').innerHTML = teamVisiting.map(teamCard).join('');
+async function loadTeam() {
+  try {
+    const { createClient } = supabase;
+    const sb = createClient('https://jxrvxyjwjwiztviiqnzi.supabase.co','sb_publishable_5r0pKGImCK4Wy3zFrKwkrg_DF3wGeu1');
+    const { data, error } = await sb.from('team_members').select('*').eq('is_active',true).order('sort_order');
+    if (error || !data || !data.length) throw new Error('fallback');
+    const core = data.filter(m => !m.is_visiting);
+    const visiting = data.filter(m => m.is_visiting);
+    document.getElementById('public-team-core').innerHTML = core.map(teamCard).join('');
+    document.getElementById('public-team-visiting').innerHTML = visiting.map(teamCard).join('');
+  } catch(e) {
+    document.getElementById('public-team-core').innerHTML = teamCore.map(teamCard).join('');
+    document.getElementById('public-team-visiting').innerHTML = teamVisiting.map(teamCard).join('');
+  }
+}
+loadTeam();
 
 document.getElementById('public-pub-list').innerHTML = publications.map(p=>`<div class="pub-item">
   <div class="pub-year-col"><div class="pub-year">${p.year}</div>${pubBadge(p.status)}</div>
