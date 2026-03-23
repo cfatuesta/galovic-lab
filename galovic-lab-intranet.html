@@ -1626,7 +1626,7 @@ async function inviteUser() {
   const name = document.getElementById('invite-name').value.trim();
   if (!email) { showToast('Email is required.'); return; }
   const tempPassword = Math.random().toString(36).slice(-10) + 'A1!';
-  const { error } = await sb.auth.signUp({ email, password: tempPassword, options: { data: { name: name || email } } });
+  const { error } = await sb.auth.signUp({ email, password: tempPassword, options: { data: { name: name || email }, emailRedirectTo: 'https://cfatuesta.github.io/galovic-lab/galovic-lab-intranet.html' } });
   if (error) { showToast('Error: ' + error.message); return; }
   document.getElementById('invite-email').value = '';
   document.getElementById('invite-name').value = '';
