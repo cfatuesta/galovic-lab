@@ -21,8 +21,18 @@ CREATE TABLE IF NOT EXISTS projects (
   name text NOT NULL,
   icon text DEFAULT '🔬',
   area_tag text,          -- display label, e.g. "Post-Stroke Epilepsy"
-  status text DEFAULT 'preparation'
-    CHECK (status IN ('preparation', 'active', 'submitted', 'published', 'preprint')),
+  status text DEFAULT 'brainstorming'
+    CHECK (status IN (
+      'brainstorming',
+      'data_acquisition',
+      'data_analysis',
+      'writing',
+      'coauthor_review',
+      'submitted',
+      'first_review',
+      'accepted',
+      'rejected'
+    )),
   area text,              -- area code for filtering, e.g. "pse"
   description text,
   finding text,
@@ -214,7 +224,7 @@ BEGIN
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Sleep Duration & All-Cause Mortality in Adults with Epilepsy',
-  '😴', 'Sleep', 'preparation', 'sleep',
+  '😴', 'Sleep', 'brainstorming', 'sleep',
   'Cohort study of 2,874 adults with epilepsy followed for 15 years in UK Biobank, examining the association between sleep duration and all-cause mortality.',
   'Sleeping ≥9h associated with significantly higher all-cause mortality vs ≤7h (HR 1.52; 95% CI 1.15–2.00; p=.003). Routine sleep assessment may identify high-risk PWE.',
   ARRAY['UK Biobank'],
@@ -225,7 +235,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Continuous vs. Short EEG after Ischemic Stroke for Predicting Post-Stroke Epilepsy',
-  '🧠', 'Post-Stroke Epilepsy', 'preparation', 'pse',
+  '🧠', 'Post-Stroke Epilepsy', 'brainstorming', 'pse',
   'Retrospective SeLECT Consortium study (n=283) comparing cEEG (≥12h) vs 60-min sEEG for detecting epileptiform abnormalities and predicting PSE over 41 months.',
   'cEEG tripled IED detection (OR 3.75). LPDs (sHR 4.50) and electrographic seizures (sHR 3.63) were the strongest PSE predictors. ΔC-index +0.055; NRI 0.25.',
   ARRAY['SELECT Multicenter'],
@@ -236,7 +246,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Hearing Aid Use & Risk of Dementia in LOE, Stroke & Diabetes with Hearing Loss',
-  '👂', 'Late-Onset Epilepsy', 'preparation', 'loe',
+  '👂', 'Late-Onset Epilepsy', 'brainstorming', 'loe',
   'Target trial emulation using TriNetX (>250M patients) examining whether hearing aid use reduces dementia incidence across three high-risk neurological populations.',
   'HA use reduced Alzheimer''s risk: epilepsy HR 0.52, stroke HR 0.59, diabetes HR 0.69. All-cause dementia (epilepsy) HR 0.50.',
   ARRAY['TriNetX'],
@@ -247,7 +257,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'New Epilepsy: JAK Inhibitors vs TNFα Inhibitors in Rheumatoid Arthritis',
-  '💊', 'Pharmacotherapy', 'preprint', 'pharm',
+  '💊', 'Pharmacotherapy', 'submitted', 'pharm',
   'Pharmacoepidemiological TriNetX study comparing incident epilepsy risk in RA patients on tofacitinib or JAK inhibitors vs TNFα inhibitors.',
   'Tofacitinib vs TNFα: HR 0.42 (0.21–0.84), p=0.011. All JAK inhibitors vs TNFα: HR 0.64 (0.42–0.98), p=0.037.',
   ARRAY['TriNetX'],
@@ -258,7 +268,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Incidence & Attributable Disease Burden of Adult-Onset Acquired Epilepsy',
-  '📊', 'Epidemiology', 'preparation', 'epidemiology',
+  '📊', 'Epidemiology', 'brainstorming', 'epidemiology',
   'Real-world analysis of 2.4M adults across 20 brain insult etiologies, quantifying acquired epilepsy incidence and its independent contribution to long-term morbidity and mortality.',
   '3.8% incidence overall (1.8% MS → 10.5% malignant CNS tumors). Acquired epilepsy independently confers excess mortality, hospitalization, frailty, injury risk, and cognitive decline.',
   ARRAY['TriNetX'],
@@ -269,7 +279,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Epilepsy is Associated with Accelerated Biological Aging (PhenoAge, UK Biobank)',
-  '⏳', 'Brain Aging', 'preparation', 'aging',
+  '⏳', 'Brain Aging', 'brainstorming', 'aging',
   'Cross-sectional and prospective analysis of 415,915 UK Biobank participants comparing PhenoAgeAccel (biological − chronological age) in prevalent epilepsy, incident epilepsy, and controls.',
   'Incident epilepsy: +1.70y age acceleration (p<0.001), persisting after full adjustment (+0.85y). Higher baseline PhenoAgeAccel predicts earlier epilepsy onset. Carbamazepine: −0.99y; phenytoin: +1.05y.',
   ARRAY['UK Biobank'],
@@ -280,7 +290,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Brain Age Estimation from Structural MRI — ENIGMA Dataset (BrainAgeR Pipeline)',
-  '🧩', 'Brain Aging', 'active', 'aging',
+  '🧩', 'Brain Aging', 'data_analysis', 'aging',
   'Automated brain age estimation using the BrainAgeR Pipeline (v2.1) on T1-weighted MRI from the ENIGMA epilepsy dataset. Dockerised workflow: SPM12 segmentation, R-based modeling, QC reports.',
   NULL,
   ARRAY['ENIGMA'],
@@ -291,7 +301,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Vortioxetine vs Citalopram & Outcomes in Patients with Brain Neoplasms',
-  '🔬', 'Pharmacotherapy', 'preparation', 'pharm',
+  '🔬', 'Pharmacotherapy', 'brainstorming', 'pharm',
   'TriNetX pharmacoepidemiological study comparing outcomes of vortioxetine versus citalopram in patients with brain neoplasms, examining psychiatric, cognitive, and oncological endpoints.',
   NULL,
   ARRAY['TriNetX'],
@@ -302,7 +312,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Biomarkers in Epilepsy — IMPOSE Pilot (EVs, NfL, GFAP, NULISA)',
-  '🧪', 'Biomarkers', 'active', 'biomarker',
+  '🧪', 'Biomarkers', 'data_analysis', 'biomarker',
   'Pilot biomarker study using IMPOSE cohort samples with longitudinal blood collection (shortly after seizure and 6-month follow-up). Explores EVs, pTau217, NfL, GFAP, and NULISA CNS panels.',
   '8 IMPOSE patients with suitable longitudinal samples identified. Within-subject post-event vs 6-month follow-up design. NULISA: ~150 CHF/sample (Gothenburg). NfL, GFAP available on Lumipulse.',
   ARRAY['IMPOSE Study'],
@@ -313,7 +323,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'LLM-Assisted EEG Report Analysis (MedGemma / Local Models)',
-  '🤖', 'Clinical AI', 'active', 'ai',
+  '🤖', 'Clinical AI', 'data_analysis', 'ai',
   'Benchmarking local large language models (incl. MedGemma) for automated extraction and classification of structured information from clinical EEG reports.',
   NULL,
   ARRAY['Clinical AI'],
@@ -324,7 +334,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'LLM-Assisted Clinical Data Extraction from Medical Records',
-  '📑', 'Clinical AI', 'active', 'ai',
+  '📑', 'Clinical AI', 'data_analysis', 'ai',
   'Using large language models to extract structured clinical variables from unstructured medical records (discharge letters, clinical notes).',
   NULL,
   ARRAY['Clinical AI'],
@@ -335,7 +345,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Sodium Channel Blockers & Reduced Dementia Risk in Late-Onset Unexplained Epilepsy',
-  '🧬', 'Late-Onset Epilepsy', 'preparation', 'loe',
+  '🧬', 'Late-Onset Epilepsy', 'brainstorming', 'loe',
   'Target trial emulation using global federated real-world data (>75M adults aged ≥55) comparing dementia risk across antiseizure monotherapies in late-onset unexplained epilepsy. Tests whether sodium channel blockers provide disease-modifying neuroprotection via suppression of network hyperexcitability that drives amyloid-β release and tau propagation.',
   'Sodium channel blockers associated with 27% lower all-cause dementia hazard (HR 0.73, 95% CI 0.61–0.88) and 34% lower Alzheimer''s disease hazard (HR 0.66, 0.49–0.88) vs levetiracetam/brivaracetam. Replicated in Down syndrome cohort and National Alzheimer''s Coordinating Center (NACC) dataset.',
   ARRAY['TriNetX', 'NACC'],
@@ -346,7 +356,7 @@ VALUES (
 INSERT INTO projects (name, icon, area_tag, status, area, description, finding, database_tags, methods, notes)
 VALUES (
   'Suicide Attempt Risk: Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy',
-  '⚕️', 'Pharmacotherapy', 'preparation', 'pharm',
+  '⚕️', 'Pharmacotherapy', 'brainstorming', 'pharm',
   'Pharmacoepidemiological TriNetX study comparing suicide attempt rates in patients with epilepsy initiating levetiracetam versus lacosamide or lamotrigine, addressing the known psychiatric adverse effect signal of levetiracetam.',
   NULL,
   ARRAY['TriNetX'],

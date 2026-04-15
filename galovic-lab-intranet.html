@@ -270,10 +270,55 @@ nav {
   font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light);
 }
 .status-pip { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.status-pip.preparation { background: #6b8fd4; }
-.status-pip.preprint { background: var(--gold); }
-.status-pip.active { background: var(--sage); }
-.status-pip.submitted { background: var(--rust); }
+.status-pip.brainstorming    { background: #9aa0a6; }
+.status-pip.data_acquisition { background: #6b8fd4; }
+.status-pip.data_analysis    { background: #4a8a9e; }
+.status-pip.writing          { background: #7a6bb8; }
+.status-pip.coauthor_review  { background: #b86bb0; }
+.status-pip.submitted        { background: var(--rust); }
+.status-pip.first_review     { background: var(--gold); }
+.status-pip.accepted         { background: var(--sage); }
+.status-pip.rejected         { background: #c0504d; }
+
+/* --- TIMELINE --- */
+.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--stone); margin-top: 8px; }
+.timeline-stage { position: relative; padding-bottom: 36px; }
+.timeline-stage::before {
+  content: ''; position: absolute; left: -35px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--warm-white); border: 2px solid var(--stone);
+}
+.timeline-stage.has-items::before { background: var(--ink); border-color: var(--ink); }
+.timeline-stage-header {
+  display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px;
+}
+.timeline-stage-label {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink);
+}
+.timeline-stage-count {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light);
+}
+.timeline-empty { font-size: 12px; color: var(--ink-light); font-style: italic; }
+.timeline .projects-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+.status-select {
+  font-family: 'Jost', sans-serif; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink); background: var(--warm-white); border: 1px solid var(--stone);
+  border-radius: 4px; padding: 4px 8px; cursor: pointer;
+}
+.status-select:focus { outline: 1px solid var(--ink); }
+
+.participants-list { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; margin: 12px 0 18px; }
+.participants-row {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+  background: var(--warm-white); border: 1px solid var(--stone); border-radius: 6px;
+}
+.participants-row .name { flex: 1; font-size: 13px; }
+.participants-row .role { font-size: 10px; color: var(--ink-light); letter-spacing: 0.08em; text-transform: uppercase; }
+.participants-row .remove {
+  background: transparent; border: 1px solid var(--stone); color: var(--ink-light);
+  width: 22px; height: 22px; border-radius: 3px; cursor: pointer; font-size: 11px;
+}
+.participants-row .remove:hover { color: var(--rust); border-color: var(--rust); }
 
 /* --- FILTER BAR --- */
 .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
@@ -558,11 +603,8 @@ body.admin-mode .admin-controls { display:flex; }
     <li><button onclick="showTab('home')" id="nav-home" class="active">Home</button></li>
     <li><button onclick="showTab('projects')" id="nav-projects">Projects</button></li>
     <li><button onclick="showTab('ideas')" id="nav-ideas">Ideas</button></li>
-    <li><button onclick="showTab('team')" id="nav-team">Team</button></li>
-    <li><button onclick="showTab('publications')" id="nav-publications">Publications</button></li>
     <li><button onclick="showTab('conferences')" id="nav-conferences">Conferences</button></li>
     <li><button onclick="showTab('grants')" id="nav-grants">Grants</button></li>
-    <li><button onclick="showTab('resources')" id="nav-resources">Resources</button></li>
     <li id="nav-li-users" style="display:none"><button onclick="showTab('users')" id="nav-users">Users</button></li>
     <li><a href="galovic-lab-public.html" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone-dark);padding:6px 12px;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--stone-dark)'">&larr; Public</a></li>
   </ul>
@@ -630,7 +672,6 @@ body.admin-mode .admin-controls { display:flex; }
     <div class="actions-grid">
       <div class="action-card" onclick="showTab('ideas')"><div class="action-icon">&#128161;</div><div class="action-title">Submit an Idea</div><div class="action-desc">Propose a new research direction. Feasibility is assessed automatically.</div></div>
       <div class="action-card" onclick="showTab('projects')"><div class="action-icon">&#128203;</div><div class="action-title">Join a Project</div><div class="action-desc">Browse active studies and add yourself as a collaborator.</div></div>
-      <div class="action-card" onclick="showTab('publications')"><div class="action-icon">&#128196;</div><div class="action-title">Publications</div><div class="action-desc">Track manuscripts in preparation, preprints, and published papers.</div></div>
       <div class="action-card" onclick="showTab('grants')"><div class="action-icon">&#127942;</div><div class="action-title">Grants &amp; Funding</div><div class="action-desc">Active grants, pending applications, and upcoming funding opportunities.</div></div>
       <div class="action-card" onclick="showTab('conferences')"><div class="action-icon">&#127908;</div><div class="action-title">Conferences</div><div class="action-desc">Upcoming scientific meetings and abstract deadlines.</div></div>
     </div>
@@ -705,93 +746,6 @@ body.admin-mode .admin-controls { display:flex; }
   </div>
 </div>
 
-<!-- TEAM -->
-<div id="tab-team" class="tab">
-  <div class="section" style="padding-top:96px">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">People</div>
-        <div class="section-title">Our <em>Team</em></div>
-      </div>
-      <div class="admin-controls">
-        <button class="btn btn-dark" onclick="openTeamModal(null)">+ Add Member</button>
-      </div>
-    </div>
-    <div class="team-section-label">Core Team</div>
-    <div class="team-grid" id="team-grid-core"></div>
-    <div class="team-section-label">Visiting Researchers &amp; Collaborators</div>
-    <div class="team-grid" id="team-grid-visiting"></div>
-  </div>
-</div>
-
-<!-- PUBLICATIONS -->
-<div id="tab-publications" class="tab">
-  <div class="section" style="padding-top:96px">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">Scientific Output</div>
-        <div class="section-title"><em>Publications</em></div>
-      </div>
-      <button class="btn btn-dark" onclick="showToast('Publication form coming soon.')">+ Add Publication</button>
-    </div>
-    <div class="sub-tabs">
-      <button class="sub-tab-btn active" onclick="showSubTab('pubs','all',this)">All</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','pse',this)">Post-Stroke Epilepsy</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','loe',this)">Late-Onset Epilepsy</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','pharm',this)">Pharmacotherapy</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','eeg',this)">EEG &amp; Biomarkers</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','sleep',this)">Sleep</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','aging',this)">Brain Aging</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','ai',this)">Clinical AI</button>
-      <button class="sub-tab-btn" onclick="showSubTab('pubs','comorbid',this)">Comorbidities</button>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
-      <a href="https://scholar.google.com/citations?user=RBIHxa8AAAAJ&amp;hl=en" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
-        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
-        onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">&#127891;</span>
-        <div style="flex:1">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Marian Galovic</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar</div>
-        </div>
-        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
-      </a>
-      <a href="https://scholar.google.com/citations?user=KWjDcx0AAAAJ&amp;hl=en" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
-        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
-        onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">&#127891;</span>
-        <div style="flex:1">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Kai Michael Schubert</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">Google Scholar</div>
-        </div>
-        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
-      </a>
-      <a href="https://www.researchgate.net/profile/Kai-Schubert" target="_blank" rel="noopener"
-        style="display:flex;align-items:center;gap:12px;background:var(--warm-white);border:1px solid var(--stone);border-radius:10px;padding:12px 18px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(28,26,23,0.05)"
-        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(28,26,23,0.10)'"
-        onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(28,26,23,0.05)'">
-        <span style="font-size:20px">&#128300;</span>
-        <div style="flex:1">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--ink)">Dr. Kai Michael Schubert</div>
-          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-top:2px">ResearchGate</div>
-        </div>
-        <span style="font-size:14px;color:var(--stone-dark)">&#8599;</span>
-      </a>
-    </div>
-    <div id="pubs-all" class="sub-tab-content active"><div class="pub-list" id="pub-list-all"></div></div>
-    <div id="pubs-pse" class="sub-tab-content"><div class="pub-list" id="pub-list-pse"></div></div>
-    <div id="pubs-loe" class="sub-tab-content"><div class="pub-list" id="pub-list-loe"></div></div>
-    <div id="pubs-pharm" class="sub-tab-content"><div class="pub-list" id="pub-list-pharm"></div></div>
-    <div id="pubs-eeg" class="sub-tab-content"><div class="pub-list" id="pub-list-eeg"></div></div>
-    <div id="pubs-sleep" class="sub-tab-content"><div class="pub-list" id="pub-list-sleep"></div></div>
-    <div id="pubs-aging" class="sub-tab-content"><div class="pub-list" id="pub-list-aging"></div></div>
-    <div id="pubs-ai" class="sub-tab-content"><div class="pub-list" id="pub-list-ai"></div></div>
-    <div id="pubs-comorbid" class="sub-tab-content"><div class="pub-list" id="pub-list-comorbid"></div></div>
-  </div>
-</div>
-
 <!-- CONFERENCES -->
 <div id="tab-conferences" class="tab">
   <div class="section" style="padding-top:96px">
@@ -822,19 +776,6 @@ body.admin-mode .admin-controls { display:flex; }
       <div class="section-title" style="font-size:22px;margin-bottom:24px">Funding <em>Calls</em></div>
       <div class="opps-grid" id="funding-opps-grid"></div>
     </div>
-  </div>
-</div>
-
-<!-- RESOURCES -->
-<div id="tab-resources" class="tab">
-  <div class="section" style="padding-top:96px">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">Lab Infrastructure</div>
-        <div class="section-title">Tools &amp; <em>Resources</em></div>
-      </div>
-    </div>
-    <div class="resources-grid" id="resources-grid"></div>
   </div>
 </div>
 
@@ -894,6 +835,34 @@ body.admin-mode .admin-controls { display:flex; }
   </div>
 </div>
 
+<!-- Participants Manager Modal -->
+<div class="modal-overlay" id="participants-modal" onclick="closeModal(event,'participants-modal')">
+  <div class="modal" style="max-width:560px">
+    <button class="modal-close" onclick="document.getElementById('participants-modal').classList.remove('open')">&#10005;</button>
+    <div class="modal-title">Manage Participants</div>
+    <p id="participants-project-name" style="font-size:12.5px;color:var(--ink-light);margin-bottom:16px;font-style:italic"></p>
+    <div class="participants-list" id="participants-list"></div>
+    <div style="border-top:1px solid var(--stone);padding-top:16px">
+      <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:10px">Add a participant</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Member</label>
+          <select class="form-control" id="part-name"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <select class="form-control" id="part-role">
+            <option>Lead Investigator</option><option>Co-Investigator</option>
+            <option>Co-Senior Investigator</option>
+            <option>Data Analyst</option><option>Manuscript Writer</option><option>Statistical Advisor</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-dark" onclick="addParticipant()" style="width:100%">+ Add</button>
+    </div>
+  </div>
+</div>
+
 <!-- Project Edit Modal -->
 <div class="modal-overlay" id="project-edit-modal" onclick="closeModal(event,'project-edit-modal')">
   <div class="modal" style="max-width:680px">
@@ -908,11 +877,15 @@ body.admin-mode .admin-controls { display:flex; }
       <div class="form-group">
         <label class="form-label">Status</label>
         <select class="form-control" id="pf-status">
-          <option value="preparation">In Preparation</option>
-          <option value="active">Active</option>
-          <option value="preprint">Preprint</option>
+          <option value="brainstorming">Brainstorming</option>
+          <option value="data_acquisition">Data Acquisition / Retrieval</option>
+          <option value="data_analysis">Data Analysis</option>
+          <option value="writing">Writing / Reviewing Draft</option>
+          <option value="coauthor_review">Co-authors Check</option>
           <option value="submitted">Submitted</option>
-          <option value="published">Published</option>
+          <option value="first_review">First Review</option>
+          <option value="accepted">Accepted</option>
+          <option value="rejected">Rejected</option>
         </select>
       </div>
     </div>
@@ -1091,19 +1064,25 @@ async function doLogin() {
 }
 
 async function afterLogin(user) {
-  currentUser = user;
-  let { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
-  if (!profile) {
-    await sb.from('profiles').insert({ id: user.id, name: user.user_metadata?.name || user.email, role: 'member' });
-    const res = await sb.from('profiles').select('*').eq('id', user.id).single();
-    profile = res.data;
+  try {
+    currentUser = user;
+    let { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+    if (!profile) {
+      await sb.from('profiles').insert({ id: user.id, name: user.user_metadata?.name || user.email, role: 'member' });
+      const res = await sb.from('profiles').select('*').eq('id', user.id).single();
+      profile = res.data;
+    }
+    currentProfile = profile;
+    isAdmin = profile?.role === 'admin';
+    try { await loadAll(); } catch (e) { console.error('loadAll failed:', e); showToast('Data load failed: ' + (e.message||e)); }
+    hideGate();
+    updateUIForRole();
+    try { renderAll(); } catch (e) { console.error('renderAll failed:', e); showToast('Render error: ' + (e.message||e)); }
+  } catch (e) {
+    console.error('afterLogin failed:', e);
+    hideGate();
+    showToast('Login error: ' + (e.message||e));
   }
-  currentProfile = profile;
-  isAdmin = profile?.role === 'admin';
-  await loadAll();
-  hideGate();
-  updateUIForRole();
-  renderAll();
 }
 
 async function doLogout() {
@@ -1245,7 +1224,17 @@ function showSubTab(g, tab, btn) {
 
 // --- HELPERS ---
 function siInfo(s) {
-  return {active:{pip:'active',label:'Active'},preparation:{pip:'preparation',label:'In Preparation'},preprint:{pip:'preprint',label:'Preprint'},submitted:{pip:'submitted',label:'Under Review'},published:{pip:'active',label:'Published'}}[s]||{pip:'preparation',label:'Planning'};
+  return {
+    brainstorming:    {pip:'brainstorming',    label:'Brainstorming'},
+    data_acquisition: {pip:'data_acquisition', label:'Data Acquisition'},
+    data_analysis:    {pip:'data_analysis',    label:'Data Analysis'},
+    writing:          {pip:'writing',          label:'Writing / Draft'},
+    coauthor_review:  {pip:'coauthor_review',  label:'Co-authors Check'},
+    submitted:        {pip:'submitted',        label:'Submitted'},
+    first_review:     {pip:'first_review',     label:'First Review'},
+    accepted:         {pip:'accepted',         label:'Accepted'},
+    rejected:         {pip:'rejected',         label:'Rejected'}
+  }[s] || {pip:'brainstorming', label:'Brainstorming'};
 }
 function pubBadge(s) {
   return {preparation:'<span class="pub-status-tag s-prep">In Prep</span>',preprint:'<span class="pub-status-tag s-preprint">Preprint</span>',submitted:'<span class="pub-status-tag s-submitted">Under Review</span>'}[s]||'<span class="pub-status-tag s-published">Published</span>';
@@ -1267,11 +1256,34 @@ function getProjectTeamPips(p) {
   });
 }
 
+const STATUS_OPTIONS = [
+  ['brainstorming','Brainstorming'],
+  ['data_acquisition','Data Acquisition / Retrieval'],
+  ['data_analysis','Data Analysis'],
+  ['writing','Writing / Reviewing Draft'],
+  ['coauthor_review','Co-authors Check'],
+  ['submitted','Submitted'],
+  ['first_review','First Review'],
+  ['accepted','Accepted'],
+  ['rejected','Rejected']
+];
+
+function statusControl(p) {
+  const si = siInfo(p.status);
+  if (isAdmin) {
+    const opts = STATUS_OPTIONS.map(([v,l])=>`<option value="${v}"${v===p.status?' selected':''}>${l}</option>`).join('');
+    return `<div style="display:flex;align-items:center;gap:6px" onclick="event.stopPropagation()">
+      <span class="status-pip ${si.pip}"></span>
+      <select class="status-select" onchange="updateProjectStatus('${p.id}', this.value)">${opts}</select>
+    </div>`;
+  }
+  return `<div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>`;
+}
+
 function projectCard(p) {
   const pips = getProjectTeamPips(p);
-  const si = siInfo(p.status);
   const dbTag = Array.isArray(p.database_tags) ? p.database_tags[0] : (p.database_tags || '');
-  return `<div class="project-card" data-area="${p.area||''}" onclick="openProject('${p.id}')">
+  return `<div class="project-card" data-area="${p.area||''}" data-status="${p.status||''}" onclick="openProject('${p.id}')">
     <div class="project-card-top">
       <div class="project-icon-wrap">${p.icon||'&#128300;'}</div>
       <div style="display:flex;align-items:center;gap:8px">
@@ -1291,8 +1303,11 @@ function projectCard(p) {
       ${pips.length>6?`<span style="font-size:11px;color:var(--ink-light)">+${pips.length-6}</span>`:''}
     </div>
     <div class="project-footer">
-      <div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>
-      <button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="event.stopPropagation();openJoin('${p.id}')">+ Join</button>
+      ${statusControl(p)}
+      <div style="display:flex;gap:6px">
+        ${isAdmin?`<button class="btn btn-outline" style="font-size:10px;padding:5px 10px" onclick="event.stopPropagation();openParticipants('${p.id}')">Team</button>`:''}
+        <button class="btn btn-outline" style="font-size:10px;padding:5px 12px" onclick="event.stopPropagation();openJoin('${p.id}')">+ Join</button>
+      </div>
     </div>
   </div>`;
 }
@@ -1302,7 +1317,26 @@ function renderProjects() {
   if (hp) hp.innerHTML = projects.slice(0,4).map(projectCard).join('');
   const ap = document.getElementById('all-projects');
   if (!ap) return;
-  ap.innerHTML = projects.map(projectCard).join('');
+  // Group by status and render as vertical timeline
+  const byStatus = {};
+  STATUS_OPTIONS.forEach(([k]) => { byStatus[k] = []; });
+  projects.forEach(p => {
+    const k = byStatus[p.status] ? p.status : 'brainstorming';
+    byStatus[k].push(p);
+  });
+  ap.innerHTML = `<div class="timeline">${STATUS_OPTIONS.map(([k,label]) => {
+    const items = byStatus[k];
+    return `<div class="timeline-stage${items.length?' has-items':''}" data-stage="${k}">
+      <div class="timeline-stage-header">
+        <span class="status-pip ${k}"></span>
+        <div class="timeline-stage-label">${label}</div>
+        <div class="timeline-stage-count">${items.length} project${items.length===1?'':'s'}</div>
+      </div>
+      ${items.length
+        ? `<div class="projects-grid">${items.map(projectCard).join('')}</div>`
+        : `<div class="timeline-empty">No projects in this stage.</div>`}
+    </div>`;
+  }).join('')}</div>`;
   const fb = document.getElementById('project-filters');
   if (fb && !fb.dataset.built) {
     fb.dataset.built = '1';
@@ -1317,6 +1351,11 @@ function filterProjects(area, btn) {
   document.querySelectorAll('#all-projects .project-card').forEach(c=>{
     c.classList.toggle('hidden', area!=='all' && c.dataset.area!==area);
   });
+  // hide empty stages after filtering
+  document.querySelectorAll('#all-projects .timeline-stage').forEach(stage => {
+    const visible = stage.querySelectorAll('.project-card:not(.hidden)').length;
+    stage.style.display = (area==='all' || visible>0) ? '' : 'none';
+  });
 }
 
 // --- PROJECT CRUD ---
@@ -1328,7 +1367,7 @@ function openProjectModal(id) {
     document.getElementById('project-edit-title').textContent = 'Edit Project';
     document.getElementById('project-edit-id').value = p.id;
     document.getElementById('pf-icon').value = p.icon || '';
-    document.getElementById('pf-status').value = p.status || 'preparation';
+    document.getElementById('pf-status').value = p.status || 'brainstorming';
     document.getElementById('pf-name').value = p.name || '';
     document.getElementById('pf-area-tag').value = p.area_tag || '';
     document.getElementById('pf-area').value = p.area || 'other';
@@ -1341,7 +1380,7 @@ function openProjectModal(id) {
     document.getElementById('project-edit-title').textContent = 'New Project';
     document.getElementById('project-edit-id').value = '';
     ['pf-icon','pf-name','pf-area-tag','pf-desc','pf-finding','pf-dbtags','pf-methods','pf-notes'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('pf-status').value = 'preparation';
+    document.getElementById('pf-status').value = 'brainstorming';
     document.getElementById('pf-area').value = 'other';
   }
   modal.classList.add('open');
@@ -1511,7 +1550,7 @@ async function promoteIdea(id) {
   if (!idea) return;
   const { error } = await sb.from('projects').insert({
     name: idea.title, icon: '&#128269;',
-    area_tag: idea.area || 'Other', status: 'preparation',
+    area_tag: idea.area || 'Other', status: 'brainstorming',
     area: 'other', description: idea.description,
     database_tags: idea.db ? [idea.db] : [],
     methods: 'To be defined',
@@ -1676,6 +1715,68 @@ async function confirmJoin() {
   document.getElementById('join-modal').classList.remove('open');
   await loadAll(); renderAll();
   showToast(`${name} joined "${p.name.slice(0,36)}\u2026" as ${role}`);
+}
+
+// --- INLINE STATUS UPDATE ---
+async function updateProjectStatus(id, status) {
+  if (!isAdmin) return;
+  const { error } = await sb.from('projects').update({ status }).eq('id', id);
+  if (error) { showToast('Error: ' + error.message); return; }
+  const p = projects.find(x => x.id === id);
+  if (p) p.status = status;
+  renderProjects();
+  const label = (STATUS_OPTIONS.find(o=>o[0]===status)||[,status])[1];
+  showToast(`Status updated to "${label}"`);
+}
+
+// --- PARTICIPANTS MANAGER ---
+let currentParticipantsProjectId = null;
+function openParticipants(id) {
+  if (!isAdmin) return;
+  currentParticipantsProjectId = id;
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('participants-project-name').textContent = p.name;
+  renderParticipantsList();
+  const taken = new Set((projectMembers[id]||[]).map(m=>m.member_name));
+  const avail = teamMembers.filter(m => !taken.has(m.name));
+  document.getElementById('part-name').innerHTML =
+    avail.length ? avail.map(m=>`<option>${m.name}</option>`).join('') : '<option disabled>All team members already added</option>';
+  document.getElementById('participants-modal').classList.add('open');
+}
+function renderParticipantsList() {
+  const list = projectMembers[currentParticipantsProjectId] || [];
+  const el = document.getElementById('participants-list');
+  if (!list.length) { el.innerHTML = '<div class="timeline-empty">No participants yet.</div>'; return; }
+  el.innerHTML = list.map(m => `
+    <div class="participants-row">
+      <div class="name">${m.member_name}</div>
+      <div class="role">${m.member_role||''}</div>
+      <button class="remove" title="Remove" onclick="removeParticipant('${m.id}')">&#10005;</button>
+    </div>`).join('');
+}
+async function addParticipant() {
+  if (!isAdmin || !currentParticipantsProjectId) return;
+  const name = document.getElementById('part-name').value;
+  const role = document.getElementById('part-role').value;
+  if (!name) return;
+  const existing = (projectMembers[currentParticipantsProjectId] || []).find(m => m.member_name === name);
+  if (existing) { showToast(`${name} is already on this project.`); return; }
+  const { error } = await sb.from('project_members').insert({ project_id: currentParticipantsProjectId, member_name: name, member_role: role });
+  if (error) { showToast('Error: ' + error.message); return; }
+  await loadAll();
+  renderProjects();
+  openParticipants(currentParticipantsProjectId);
+  showToast(`${name} added as ${role}`);
+}
+async function removeParticipant(pmId) {
+  if (!isAdmin) return;
+  const { error } = await sb.from('project_members').delete().eq('id', pmId);
+  if (error) { showToast('Error: ' + error.message); return; }
+  await loadAll();
+  renderProjects();
+  openParticipants(currentParticipantsProjectId);
+  showToast('Participant removed');
 }
 function closeModal(e, id) { if (e.target.classList.contains('modal-overlay')) document.getElementById(id).classList.remove('open'); }
 
