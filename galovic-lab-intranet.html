@@ -886,7 +886,9 @@ body.admin-mode .admin-controls { display:flex; }
         <div class="section-eyebrow">Funding</div>
         <div class="section-title">Grants &amp; <em>Funding</em></div>
       </div>
-      <button class="btn btn-dark" onclick="showToast('Grant entry form coming soon.')">+ Add Grant</button>
+      <div class="admin-controls">
+        <button class="btn btn-dark" onclick="openGrantModal(null)">+ Add Grant</button>
+      </div>
     </div>
     <div class="grants-grid" id="grants-grid"></div>
     <div style="margin-top:48px">
@@ -1057,6 +1059,71 @@ body.admin-mode .admin-controls { display:flex; }
     <div style="display:flex;gap:8px;margin-top:8px">
       <button class="btn btn-dark" onclick="saveProject()" style="flex:1">Save Project</button>
       <button class="btn btn-outline" onclick="document.getElementById('project-edit-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Grant Edit Modal -->
+<div class="modal-overlay" id="grant-edit-modal" onclick="closeModal(event,'grant-edit-modal')">
+  <div class="modal" style="max-width:680px">
+    <button class="modal-close" onclick="document.getElementById('grant-edit-modal').classList.remove('open')">&#10005;</button>
+    <div class="modal-title" id="grant-edit-title">New Grant</div>
+    <input type="hidden" id="grant-edit-id">
+    <div class="form-group">
+      <label class="form-label">Funder *</label>
+      <input type="text" class="form-control" id="gf-funder" placeholder="e.g. Swiss National Science Foundation (SNSF)">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Grant Title *</label>
+      <input type="text" class="form-control" id="gf-title" placeholder="Project title">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Principal Investigator</label>
+        <input type="text" class="form-control" id="gf-pi" placeholder="Dr. Marian Galovic">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-control" id="gf-status">
+          <option value="planning">Planning</option>
+          <option value="pending">Pending</option>
+          <option value="active">Active</option>
+          <option value="closed">Closed</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Amount</label>
+        <input type="text" class="form-control" id="gf-amount" placeholder="CHF 450,000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Period</label>
+        <input type="text" class="form-control" id="gf-period" placeholder="2026&ndash;2029">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Deadline</label>
+        <input type="text" class="form-control" id="gf-deadline" placeholder="1 Oct 2026">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Linked Project / Tag</label>
+        <input type="text" class="form-control" id="gf-linked" placeholder="e.g. FINESSE / IMPOSE">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Funder URL</label>
+      <input type="url" class="form-control" id="gf-url" placeholder="https://...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" id="gf-description" rows="3" placeholder="What this grant funds / rationale"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn btn-dark" onclick="saveGrant()" style="flex:1">Save Grant</button>
+      <button class="btn btn-outline" onclick="document.getElementById('grant-edit-modal').classList.remove('open')">Cancel</button>
     </div>
   </div>
 </div>
@@ -1281,11 +1348,12 @@ function updateUIForRole() {
 
 // --- DATA LOADING ---
 async function loadAll() {
-  const [projRes, teamRes, pmRes, ideasRes] = await Promise.all([
+  const [projRes, teamRes, pmRes, ideasRes, grantsRes] = await Promise.all([
     sb.from('projects').select('*').order('created_at'),
     sb.from('team_members').select('*').eq('is_active', true).order('sort_order'),
     sb.from('project_members').select('*'),
     sb.from('ideas').select('*').order('created_at', { ascending: false }),
+    sb.from('grants').select('*').order('sort_order'),
   ]);
   projects = projRes.data || [];
   teamMembers = teamRes.data || [];
@@ -1295,6 +1363,7 @@ async function loadAll() {
     projectMembers[m.project_id].push(m);
   });
   ideas = ideasRes.data || [];
+  grants = grantsRes.data || [];
 }
 
 // --- STATIC DATA ---
@@ -1311,22 +1380,21 @@ const publications = [
   { year:2026, status:'preparation', title:'Suicide Attempt Risk with Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy', authors:'Stattmann M, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.', journal:'Manuscript in preparation', finding:null, tags:['trinetx','levetiracetam','psychiatric-adverse-effects','pharmacovigilance'], categories:['pharm','comorbid']},
 ];
 const conferences = [
-  {name:'American Epilepsy Society Annual Meeting', date:'Dec 2026', dateIso:'2026-12-04', location:'Houston, TX', deadline:'Jul 15, 2026', type:'National', attendees:['MG','CF','KS']},
-  {name:'ILAE World Congress of Epileptology', date:'Aug 2027', dateIso:'2027-08-28', location:'Lisbon, Portugal', deadline:'Feb 15, 2027', type:'International', attendees:['MG','CF']},
-  {name:'European Congress of Epileptology', date:'Jul 2026', dateIso:'2026-07-04', location:'Birmingham, UK', deadline:'Jan 31, 2026', type:'International', attendees:['KS','XT']},
-  {name:'Swiss Neurological Society', date:'Apr 2026', dateIso:'2026-04-30', location:'Bern, Switzerland', deadline:'Feb 2026', type:'National', attendees:['MD','KSc']},
+  {name:'16th European Epilepsy Congress (EEC 2026)', date:'5\u20139 Sep 2026', dateIso:'2026-09-05', location:'Athens, Greece', deadline:'See ilae.org/eec2026', type:'International', attendees:['MG','CF','KS'], url:'https://www.ilae.org/eec2026'},
+  {name:'AES Annual Meeting', date:'4\u20138 Dec 2026', dateIso:'2026-12-04', location:'Denver, CO, USA', deadline:'9 Jun 2026', type:'International', attendees:['MG','CF','KS'], url:'https://aesnet.org/AES-annual-meeting'},
+  {name:'Swiss NeuroWeek (SNS Annual Meeting)', date:'18\u201320 Nov 2026', dateIso:'2026-11-18', location:'Bernexpo, Bern, Switzerland', deadline:'Check swissneuro.ch', type:'National', attendees:['MG','CF','KS'], url:'https://www.swissneuro.ch/en/calendar/sns-events/sns-annual-meeting'},
+  {name:'37th International Epilepsy Congress (IEC 2027)', date:'28 Aug \u2013 1 Sep 2027', dateIso:'2027-08-28', location:'Amsterdam, Netherlands', deadline:'TBA (early 2027)', type:'International', attendees:['MG','CF'], url:'https://www.ilae.org/congresses'},
 ];
-const grants = [
-  { funder:'Koetser Foundation for Brain Research', title:'JAK Inhibitors as Novel Modulators of Epileptogenesis', pi:'Dr. Katharina Schuler', amount:'CHF ~80,000', period:'2026\u20132027', status:'pending', description:'Supported by TriNetX real-world data: 58% reduction in new epilepsy with tofacitinib vs TNF\u03b1 inhibitors in RA.', deadline:'Feb 15, 2026', linked:'JAK vs TNF\u03b1'},
-  { funder:'Swiss National Science Foundation (SNSF)', title:'Post-Stroke Epilepsy Prediction \u2014 Multimodal EEG Biomarker Validation', pi:'Dr. Marian Galovic', amount:'CHF 450,000', period:'2024\u20132027', status:'active', description:"Funds SELECT-EEG multicenter validation study and the lab's PSE/EEG research program.", deadline:'N/A (active)', linked:'cEEG vs sEEG / SELECT'},
-  { funder:'SNSF / Alternative Funder (TBD)', title:'Biomarkers of Seizure Activity \u2014 FINESSE 2.0', pi:'Dr. Marian Galovic', amount:'CHF 200\u2013300k+', period:'2026\u20132028', status:'planning', description:'Full IMPOSE/FINESSE biomarker pipeline (EVs, NULISA CNS, NfL, GFAP). Galovic ineligible for SNSF before Oct 2026.', deadline:'Oct 2026 (SNSF); alternatives being explored', linked:'Biomarkers / IMPOSE'},
-];
+// Grants are now loaded from Supabase in loadAll()
 const fundingOpps = [
-  {name:'SNSF Project Grant', deadline:'Oct 2026', amount:'Up to CHF 1M', note:'Next available for Galovic lab. Explore co-applicant (e.g. Weiss).'},
-  {name:'ERC Starting Grant', deadline:'Sep 2025', amount:'\u20ac1.5M', note:'2\u20137 yrs post-PhD. Open science focus. Potential PI: Weiss.'},
-  {name:'Hartmann M\u00fcller Foundation', deadline:'Rolling', amount:'CHF 20\u201380k', note:'Zurich-based. Suitable for FINESSE pilot bridge funding.'},
-  {name:'Vontobel Foundation', deadline:'Rolling', amount:'CHF 50k', note:'Zurich-based private medical research funder.'},
+  {name:'SNSF Project Grant', deadline:'1 Oct 2026', amount:'Max CHF 250k/yr', note:'Next window after 1 Apr 2026 deadline. New rules: max 2 simultaneous grants, 1 proposal/12mo.', url:'https://www.snf.ch/en/WAvYcY7awAUGolST/funding/projects/project-funding'},
+  {name:'ERC Starting Grant 2027', deadline:'Autumn 2026 (TBC)', amount:'Up to \u20ac1.5M / 5yr', note:'2\u20137 yrs post-PhD. ERC-2026 call is closed — next is ERC-2027 (opens mid-2026).', url:'https://erc.europa.eu/apply-grant/starting-grant'},
+  {name:'Hartmann M\u00fcller-Stiftung', deadline:'1 Feb / 1 Jun / 1 Oct', amount:'Up to CHF 30k', note:'UZH Medicine only. Rolling 3\u00d7/yr. Good for pilot/bridge funding.', url:'https://www.hms.uzh.ch/en.html'},
+  {name:'Swiss League Against Epilepsy', deadline:'Annual — check epi.ch', amount:'CHF 25,000', note:'Research Promotion Award. Directly aligned with lab focus.', url:'https://www.epi.ch/en/'},
+  {name:'Vontobel Foundation', deadline:'Rolling', amount:'Up to CHF 30k', note:'Zurich-based. Funds brain health. Online application only.', url:'https://www.vontobel-stiftung.ch/en-ch/projects/'},
+  {name:'Betty & David Koetser Foundation', deadline:'Annual — contact foundation', amount:'Contact foundation', note:'USZ Neurology priority. Natural fit — verify amounts directly.', url:'https://koetserfoundation.org/'},
 ];
+let grants = [];
 const resources = [
   {icon:'&#128452;&#65039;', name:'TriNetX', desc:'Federated EHR database (>250M patients). Propensity-matching, cohort assembly, survival analysis.'},
   {icon:'&#129516;', name:'UK Biobank', desc:'Population cohort: genetics, neuroimaging, wearables, long-term follow-up (n>500,000).'},
@@ -1827,7 +1895,7 @@ function renderConferences() {
     el.innerHTML = '<div style="padding:32px;color:var(--ink-light);font-style:italic;text-align:center;grid-column:1/-1">No upcoming conferences.</div>';
     return;
   }
-  el.innerHTML = upcoming.map(c=>`<div class="conf-card">
+  el.innerHTML = upcoming.map(c=>`<div class="conf-card"${c.url?` onclick="window.open('${c.url}','_blank')" style="cursor:pointer"`:''}>
     <div class="conf-type-tag">${c.type} \u00b7 ${c.date}</div>
     <div class="conf-name">${c.name}</div>
     <div class="conf-detail">&#128205; ${c.location}</div>
@@ -1839,23 +1907,99 @@ function renderConferences() {
 // --- GRANTS ---
 function renderGrants() {
   const el = document.getElementById('grants-grid'); if (!el) return;
-  el.innerHTML = grants.map(g=>`<div class="grant-card">
-    <div class="grant-funder">${g.funder}</div>
-    <div class="grant-title">${g.title}</div>
-    <div class="grant-row"><span class="grant-key">PI</span><span class="grant-val">${g.pi}</span></div>
-    <div class="grant-row"><span class="grant-key">Amount</span><span class="grant-val grant-amount">${g.amount}</span></div>
-    <div class="grant-row"><span class="grant-key">Period</span><span class="grant-val">${g.period}</span></div>
-    <div class="grant-row"><span class="grant-key">Deadline</span><span class="grant-val">${g.deadline}</span></div>
-    <div class="grant-desc">${g.description}</div>
-    <div class="grant-footer"><span class="status-tag ${g.status}">${g.status.charAt(0).toUpperCase()+g.status.slice(1)}</span>${g.linked?`<span class="linked-tag">&#8599; ${g.linked}</span>`:''}</div>
-  </div>`).join('');
+  if (!grants.length) {
+    el.innerHTML = '<div style="padding:32px;color:var(--ink-light);font-style:italic;text-align:center;grid-column:1/-1">No grants yet. Click \u201c+ Add Grant\u201d to create one.</div>';
+  } else {
+    el.innerHTML = grants.map(g=>`<div class="grant-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div class="grant-funder">${g.funder||''}</div>
+        <div class="admin-controls">
+          <button class="admin-btn" onclick="openGrantModal('${g.id}')">&#9998;</button>
+          <button class="admin-btn danger" onclick="deleteGrant('${g.id}')">&#10005;</button>
+        </div>
+      </div>
+      <div class="grant-title">${g.title||''}</div>
+      ${g.pi?`<div class="grant-row"><span class="grant-key">PI</span><span class="grant-val">${g.pi}</span></div>`:''}
+      ${g.amount?`<div class="grant-row"><span class="grant-key">Amount</span><span class="grant-val grant-amount">${g.amount}</span></div>`:''}
+      ${g.period?`<div class="grant-row"><span class="grant-key">Period</span><span class="grant-val">${g.period}</span></div>`:''}
+      ${g.deadline?`<div class="grant-row"><span class="grant-key">Deadline</span><span class="grant-val">${g.deadline}</span></div>`:''}
+      ${g.description?`<div class="grant-desc">${g.description}</div>`:''}
+      <div class="grant-footer">
+        <span class="status-tag ${g.status||'planning'}">${(g.status||'planning').charAt(0).toUpperCase()+(g.status||'planning').slice(1)}</span>
+        <div style="display:flex;gap:8px;align-items:center">
+          ${g.linked?`<span class="linked-tag">&#8599; ${g.linked}</span>`:''}
+          ${g.url?`<a href="${g.url}" target="_blank" rel="noopener" class="linked-tag" style="text-decoration:none;color:var(--sage)" onclick="event.stopPropagation()">Visit &rarr;</a>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+  }
   const oe = document.getElementById('funding-opps-grid');
-  if (oe) oe.innerHTML = fundingOpps.map(o=>`<div class="opp-card">
+  if (oe) oe.innerHTML = fundingOpps.map(o=>`<div class="opp-card"${o.url?` onclick="window.open('${o.url}','_blank')" style="cursor:pointer"`:''}>
     <div class="opp-name">${o.name}</div>
     <div class="opp-amount">${o.amount}</div>
     <div class="opp-deadline">Deadline: ${o.deadline}</div>
     <div class="opp-note">${o.note}</div>
   </div>`).join('');
+}
+
+// --- GRANT CRUD ---
+function openGrantModal(id) {
+  if (!isAdmin) return;
+  const modal = document.getElementById('grant-edit-modal');
+  if (id) {
+    const g = grants.find(x => x.id === id); if (!g) return;
+    document.getElementById('grant-edit-title').textContent = 'Edit Grant';
+    document.getElementById('grant-edit-id').value = g.id;
+    document.getElementById('gf-funder').value = g.funder || '';
+    document.getElementById('gf-title').value = g.title || '';
+    document.getElementById('gf-pi').value = g.pi || '';
+    document.getElementById('gf-amount').value = g.amount || '';
+    document.getElementById('gf-period').value = g.period || '';
+    document.getElementById('gf-status').value = g.status || 'planning';
+    document.getElementById('gf-deadline').value = g.deadline || '';
+    document.getElementById('gf-linked').value = g.linked || '';
+    document.getElementById('gf-url').value = g.url || '';
+    document.getElementById('gf-description').value = g.description || '';
+  } else {
+    document.getElementById('grant-edit-title').textContent = 'New Grant';
+    document.getElementById('grant-edit-id').value = '';
+    ['gf-funder','gf-title','gf-pi','gf-amount','gf-period','gf-deadline','gf-linked','gf-url','gf-description'].forEach(k => document.getElementById(k).value = '');
+    document.getElementById('gf-status').value = 'planning';
+  }
+  modal.classList.add('open');
+}
+async function saveGrant() {
+  if (!isAdmin) return;
+  const id = document.getElementById('grant-edit-id').value;
+  const data = {
+    funder: document.getElementById('gf-funder').value.trim(),
+    title: document.getElementById('gf-title').value.trim(),
+    pi: document.getElementById('gf-pi').value.trim(),
+    amount: document.getElementById('gf-amount').value.trim(),
+    period: document.getElementById('gf-period').value.trim(),
+    status: document.getElementById('gf-status').value,
+    deadline: document.getElementById('gf-deadline').value.trim(),
+    linked: document.getElementById('gf-linked').value.trim(),
+    url: document.getElementById('gf-url').value.trim() || null,
+    description: document.getElementById('gf-description').value.trim(),
+  };
+  if (!data.funder || !data.title) { showToast('Funder and title are required.'); return; }
+  let error;
+  if (id) ({ error } = await sb.from('grants').update(data).eq('id', id));
+  else    ({ error } = await sb.from('grants').insert(data));
+  if (error) { showToast('Error: ' + error.message); return; }
+  document.getElementById('grant-edit-modal').classList.remove('open');
+  await loadAll(); renderGrants();
+  showToast(id ? 'Grant updated.' : 'Grant added.');
+}
+async function deleteGrant(id) {
+  if (!isAdmin) return;
+  const g = grants.find(x => x.id === id);
+  if (!g || !confirm(`Delete grant "${g.title}"? This cannot be undone.`)) return;
+  const { error } = await sb.from('grants').delete().eq('id', id);
+  if (error) { showToast('Error: ' + error.message); return; }
+  await loadAll(); renderGrants();
+  showToast('Grant deleted.');
 }
 
 // --- RESOURCES ---
