@@ -230,6 +230,14 @@ nav {
   color: var(--ink-light); font-weight: 500;
   border: 1px solid var(--stone); padding: 3px 9px; border-radius: 2px;
 }
+.project-idea-tag {
+  font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600;
+  background: var(--gold-pale);
+  border: 1px solid rgba(154,125,74,0.25);
+  padding: 3px 9px; border-radius: 2px;
+}
+.status-pip.idea { background: var(--gold); }
 .project-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px; font-weight: 500; line-height: 1.3;
@@ -280,62 +288,134 @@ nav {
 .status-pip.accepted         { background: var(--sage); }
 .status-pip.rejected         { background: #c0504d; }
 
-/* --- TIMELINE --- */
-.timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--stone); margin-top: 8px; }
-.timeline-stage { position: relative; padding-bottom: 36px; }
-.timeline-stage::before {
-  content: ''; position: absolute; left: -35px; top: 6px;
-  width: 12px; height: 12px; border-radius: 50%; background: var(--warm-white); border: 2px solid var(--stone);
+/* --- KANBAN BOARD --- */
+#tab-projects .section { max-width: 100%; padding-left: 40px; padding-right: 40px; }
+
+.kanban-wrap {
+  margin-top: 8px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 20px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--stone-mid) transparent;
 }
-.timeline-stage.has-items::before { background: var(--ink); border-color: var(--ink); }
-.timeline-stage-header {
-  display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px;
+.kanban-wrap::-webkit-scrollbar { height: 10px; }
+.kanban-wrap::-webkit-scrollbar-track { background: transparent; }
+.kanban-wrap::-webkit-scrollbar-thumb { background: var(--stone-mid); border-radius: 4px; }
+
+.kanban {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  min-width: min-content;
+  padding: 4px 2px 4px 2px;
 }
-.timeline-stage-label {
-  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--ink);
+
+.kanban-col {
+  flex: 0 0 300px;
+  width: 300px;
+  background: var(--ivory);
+  border: 1px solid var(--stone);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 240px);
+  scroll-snap-align: start;
 }
-.timeline-stage-count {
-  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light);
+
+.kanban-col-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px 12px 16px;
+  border-bottom: 1px solid var(--stone);
+  position: sticky; top: 0;
+  background: var(--ivory);
+  border-radius: 12px 12px 0 0;
+  z-index: 2;
 }
-.timeline-empty { font-size: 12px; color: var(--ink-light); font-style: italic; }
-.timeline .projects-grid { grid-template-columns: 1fr; gap: 14px; }
-.timeline .project-card {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) 240px;
-  gap: 22px;
-  align-items: start;
+.kanban-col-header .status-pip { width: 9px; height: 9px; flex-shrink: 0; }
+.kanban-col-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 500; color: var(--ink);
+  flex: 1; line-height: 1.2;
 }
-.timeline .project-card .project-card-top {
-  flex-direction: column; align-items: center; gap: 8px;
-  grid-column: 1; grid-row: 1 / span 4;
+.kanban-col-count {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-light);
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 10px;
+  padding: 2px 8px;
+  min-width: 22px; text-align: center;
 }
-.timeline .project-card .project-icon-wrap { font-size: 28px; }
-.timeline .project-card .project-name { grid-column: 2; margin-top: 0; }
-.timeline .project-card .project-desc { grid-column: 2; }
-.timeline .project-card .project-finding { grid-column: 2; }
-.timeline .project-card .project-db-tag { grid-column: 2; justify-self: start; }
-.timeline .project-card .project-team {
-  grid-column: 3; grid-row: 1 / span 3;
-  align-self: start; justify-content: flex-start; flex-wrap: wrap;
-  padding-left: 18px; border-left: 1px solid var(--stone);
+
+.kanban-col-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1;
 }
-.timeline .project-card .project-footer {
-  grid-column: 2 / span 2; border-top: 1px solid var(--stone);
-  margin-top: 10px; padding-top: 12px;
+.kanban-col-body::-webkit-scrollbar { width: 6px; }
+.kanban-col-body::-webkit-scrollbar-thumb { background: var(--stone-mid); border-radius: 3px; }
+.kanban-empty {
+  font-size: 11.5px; color: var(--stone-dark); font-style: italic;
+  text-align: center; padding: 20px 8px;
 }
-@media (max-width: 820px) {
-  .timeline .project-card {
-    grid-template-columns: 1fr;
-  }
-  .timeline .project-card .project-card-top { flex-direction: row; grid-row: auto; }
-  .timeline .project-card .project-name,
-  .timeline .project-card .project-desc,
-  .timeline .project-card .project-finding,
-  .timeline .project-card .project-db-tag { grid-column: 1; }
-  .timeline .project-card .project-team {
-    grid-column: 1; grid-row: auto; border-left: none; padding-left: 0;
-  }
-  .timeline .project-card .project-footer { grid-column: 1; }
+
+/* compact kanban card */
+.kb-card {
+  background: var(--warm-white);
+  border: 1px solid var(--stone);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  box-shadow: 0 1px 2px rgba(28,26,23,0.04);
+  position: relative;
+}
+.kb-card.hidden { display: none !important; }
+.kb-card:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(28,26,23,0.08); border-color: var(--stone-dark); }
+
+.kb-card-top {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 8px;
+}
+.kb-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+.kb-tags { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; min-width: 0; }
+.kb-card .admin-controls { display: none; }
+body.admin-mode .kb-card .admin-controls { display: flex; gap: 3px; }
+
+.kb-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15.5px; font-weight: 500; line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 5px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.kb-desc {
+  font-size: 11.5px; color: var(--ink-light); line-height: 1.55;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin-bottom: 10px;
+}
+.kb-team { display: flex; gap: 3px; flex-wrap: wrap; margin-bottom: 10px; }
+.kb-team .team-pip { width: 22px; height: 22px; font-size: 9px; }
+
+.kb-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--stone);
+}
+.kb-footer .status-select {
+  font-size: 9.5px; padding: 3px 6px; max-width: 130px;
+}
+.kb-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.kb-actions .btn { font-size: 9px; padding: 4px 8px; letter-spacing: 0.06em; }
+
+@media (max-width: 640px) {
+  #tab-projects .section { padding-left: 16px; padding-right: 16px; }
+  .kanban-col { flex-basis: 84vw; width: 84vw; }
 }
 
 .status-select {
@@ -731,7 +811,7 @@ body.admin-mode .admin-controls { display:flex; }
       </div>
     </div>
     <div class="filter-bar" id="project-filters"></div>
-    <div class="projects-grid" id="all-projects"></div>
+    <div id="all-projects"></div>
   </div>
 </div>
 
@@ -1047,9 +1127,21 @@ let projects = [], teamMembers = [], projectMembers = {}, ideas = [];
 let currentJoinId = null;
 
 // --- INIT ---
+const IS_LOCAL = ['localhost','127.0.0.1','0.0.0.0'].includes(location.hostname);
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (session) await afterLogin(session.user);
+  if (session) { await afterLogin(session.user); return; }
+  if (IS_LOCAL) {
+    try {
+      const saved = JSON.parse(localStorage.getItem('devAuth') || 'null');
+      if (saved?.email && saved?.password) {
+        console.log('[dev] auto sign-in with stored credentials');
+        const { data, error } = await sb.auth.signInWithPassword(saved);
+        if (error) { console.warn('[dev] auto sign-in failed, clearing', error); localStorage.removeItem('devAuth'); }
+        else if (data?.user) await afterLogin(data.user);
+      }
+    } catch (e) { console.warn('[dev] auto sign-in error', e); }
+  }
 })();
 
 sb.auth.onAuthStateChange(async (event, session) => {
@@ -1086,18 +1178,43 @@ async function doSignup() {
   toggleGateMode(); btn.disabled = false;
 }
 async function doLogin() {
-  const email = document.getElementById('gate-email').value.trim();
-  const password = document.getElementById('gate-password').value;
-  if (!email || !password) { showGateError('Please enter email and password.'); return; }
-  const btn = document.getElementById('gate-btn');
-  btn.disabled = true; btn.textContent = 'Signing in\u2026';
-  document.getElementById('gate-error').style.display = 'none';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) {
-    showGateError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message);
+  console.log('[doLogin] clicked');
+  try {
+    const email = document.getElementById('gate-email').value.trim();
+    const password = document.getElementById('gate-password').value;
+    console.log('[doLogin] email:', email, 'password length:', password.length);
+    if (!email || !password) { showGateError('Please enter email and password.'); return; }
+    const btn = document.getElementById('gate-btn');
+    btn.disabled = true; btn.textContent = 'Signing in\u2026';
+    document.getElementById('gate-error').style.display = 'none';
+    console.log('[doLogin] calling sb.auth.signInWithPassword...');
+    const timeoutP = new Promise((_, rej) => setTimeout(() => rej(new Error('Request timed out after 15s. Check network / adblocker / Supabase status.')), 15000));
+    const { data, error } = await Promise.race([
+      sb.auth.signInWithPassword({ email, password }),
+      timeoutP
+    ]);
+    console.log('[doLogin] response:', { data, error });
+    if (error) {
+      showGateError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message);
+      btn.disabled = false; btn.textContent = 'Enter \u2192';
+    } else {
+      btn.textContent = 'Loading data\u2026';
+      if (IS_LOCAL) {
+        try { localStorage.setItem('devAuth', JSON.stringify({ email, password })); } catch(_) {}
+      }
+      // fallback: if onAuthStateChange doesn't fire within 3s, call afterLogin directly
+      setTimeout(() => {
+        if (document.getElementById('gate').style.display !== 'none' && data?.user) {
+          console.log('[doLogin] fallback: calling afterLogin directly');
+          afterLogin(data.user);
+        }
+      }, 3000);
+    }
+  } catch (e) {
+    console.error('[doLogin] caught error:', e);
+    showGateError('Error: ' + (e.message || e));
+    const btn = document.getElementById('gate-btn');
     btn.disabled = false; btn.textContent = 'Enter \u2192';
-  } else {
-    btn.textContent = 'Loading data\u2026';
   }
 }
 
@@ -1124,6 +1241,7 @@ async function afterLogin(user) {
 }
 
 async function doLogout() {
+  if (IS_LOCAL) { try { localStorage.removeItem('devAuth'); } catch(_) {} }
   await sb.auth.signOut();
   currentUser = null; currentProfile = null; isAdmin = false;
   projects = []; teamMembers = []; projectMembers = {}; ideas = [];
@@ -1193,10 +1311,10 @@ const publications = [
   { year:2026, status:'preparation', title:'Suicide Attempt Risk with Levetiracetam vs Lacosamide/Lamotrigine in Epilepsy', authors:'Stattmann M, Ferreira-Atuesta C, Schubert KM, Galovic M, et al.', journal:'Manuscript in preparation', finding:null, tags:['trinetx','levetiracetam','psychiatric-adverse-effects','pharmacovigilance'], categories:['pharm','comorbid']},
 ];
 const conferences = [
-  {name:'American Epilepsy Society Annual Meeting', date:'Dec 2025', location:'Houston, TX', deadline:'Jul 15, 2025', type:'National', attendees:['MG','CF','KS']},
-  {name:'ILAE World Congress of Epileptology', date:'Sep 2025', location:'Istanbul, Turkey', deadline:'Mar 1, 2025', type:'International', attendees:['MG','CF']},
-  {name:'European Congress of Epileptology', date:'Jun 2025', location:'Vienna, Austria', deadline:'Jan 31, 2025', type:'International', attendees:['KS','XT']},
-  {name:'Swiss Neurological Society', date:'Apr 2025', location:'Bern, Switzerland', deadline:'Feb 2025', type:'National', attendees:['MD','KSc']},
+  {name:'American Epilepsy Society Annual Meeting', date:'Dec 2026', dateIso:'2026-12-04', location:'Houston, TX', deadline:'Jul 15, 2026', type:'National', attendees:['MG','CF','KS']},
+  {name:'ILAE World Congress of Epileptology', date:'Aug 2027', dateIso:'2027-08-28', location:'Lisbon, Portugal', deadline:'Feb 15, 2027', type:'International', attendees:['MG','CF']},
+  {name:'European Congress of Epileptology', date:'Jul 2026', dateIso:'2026-07-04', location:'Birmingham, UK', deadline:'Jan 31, 2026', type:'International', attendees:['KS','XT']},
+  {name:'Swiss Neurological Society', date:'Apr 2026', dateIso:'2026-04-30', location:'Bern, Switzerland', deadline:'Feb 2026', type:'National', attendees:['MD','KSc']},
 ];
 const grants = [
   { funder:'Koetser Foundation for Brain Research', title:'JAK Inhibitors as Novel Modulators of Epileptogenesis', pi:'Dr. Katharina Schuler', amount:'CHF ~80,000', period:'2026\u20132027', status:'pending', description:'Supported by TriNetX real-world data: 58% reduction in new epilepsy with tofacitinib vs TNF\u03b1 inhibitors in RA.', deadline:'Feb 15, 2026', linked:'JAK vs TNF\u03b1'},
@@ -1318,6 +1436,60 @@ function statusControl(p) {
   return `<div class="status-pill"><span class="status-pip ${si.pip}"></span>${si.label}</div>`;
 }
 
+function kanbanIdeaCard(idea) {
+  const submitter = idea.submitter || 'Anonymous';
+  const db = idea.db || '';
+  return `<div class="kb-card kb-card-idea" data-area="${idea.area||''}" onclick="showTab('ideas')">
+    <div class="kb-card-top">
+      <div class="kb-icon">&#128161;</div>
+      <div class="kb-tags">
+        <span class="project-idea-tag">Idea</span>
+        ${db?`<span class="project-db-tag">${db}</span>`:''}
+      </div>
+      ${isAdmin?`<div class="admin-controls">
+        <button class="admin-btn" title="Promote to project" onclick="event.stopPropagation();promoteIdea('${idea.id}')">&rarr;</button>
+        <button class="admin-btn danger" onclick="event.stopPropagation();deleteIdea('${idea.id}')">&#10005;</button>
+      </div>`:''}
+    </div>
+    <div class="kb-name">${idea.title||'Untitled idea'}</div>
+    ${idea.description?`<div class="kb-desc">${idea.description}</div>`:''}
+    <div class="kb-footer" style="justify-content:flex-start;gap:8px">
+      <span style="font-size:10.5px;color:var(--ink-light)">By <strong style="color:var(--ink)">${submitter}</strong></span>
+    </div>
+  </div>`;
+}
+
+function kanbanProjectCard(p) {
+  const pips = getProjectTeamPips(p);
+  const dbTag = Array.isArray(p.database_tags) ? p.database_tags[0] : (p.database_tags || '');
+  return `<div class="kb-card" data-area="${p.area||''}" data-status="${p.status||''}" onclick="openProject('${p.id}')">
+    <div class="kb-card-top">
+      <div class="kb-icon">${p.icon||'&#128300;'}</div>
+      <div class="kb-tags">
+        ${p.area_tag?`<span class="project-area-tag">${p.area_tag}</span>`:''}
+        ${dbTag?`<span class="project-db-tag">${dbTag}</span>`:''}
+      </div>
+      <div class="admin-controls">
+        <button class="admin-btn" onclick="event.stopPropagation();openProjectModal('${p.id}')">&#9998;</button>
+        <button class="admin-btn danger" onclick="event.stopPropagation();deleteProject('${p.id}')">&#10005;</button>
+      </div>
+    </div>
+    <div class="kb-name">${p.name}</div>
+    ${p.description?`<div class="kb-desc">${p.description}</div>`:''}
+    ${pips.length?`<div class="kb-team">
+      ${pips.slice(0,6).map(pip=>`<div class="team-pip" style="background:${pip.color}" data-name="${pip.name}">${pip.initials}</div>`).join('')}
+      ${pips.length>6?`<span style="font-size:10px;color:var(--ink-light);align-self:center">+${pips.length-6}</span>`:''}
+    </div>`:''}
+    <div class="kb-footer">
+      ${statusControl(p)}
+      <div class="kb-actions">
+        ${isAdmin?`<button class="btn btn-outline" onclick="event.stopPropagation();openParticipants('${p.id}')">Team</button>`:''}
+        <button class="btn btn-outline" onclick="event.stopPropagation();openJoin('${p.id}')">+ Join</button>
+      </div>
+    </div>
+  </div>`;
+}
+
 function projectCard(p) {
   const pips = getProjectTeamPips(p);
   const dbTag = Array.isArray(p.database_tags) ? p.database_tags[0] : (p.database_tags || '');
@@ -1355,26 +1527,41 @@ function renderProjects() {
   if (hp) hp.innerHTML = projects.slice(0,4).map(projectCard).join('');
   const ap = document.getElementById('all-projects');
   if (!ap) return;
-  // Group by status and render as vertical timeline
+  // Group by status and render as kanban board
   const byStatus = {};
   STATUS_OPTIONS.forEach(([k]) => { byStatus[k] = []; });
   projects.forEach(p => {
     const k = byStatus[p.status] ? p.status : 'brainstorming';
     byStatus[k].push(p);
   });
-  ap.innerHTML = `<div class="timeline">${STATUS_OPTIONS.map(([k,label]) => {
+  const ideaCol = `<div class="kanban-col" data-stage="__idea">
+    <div class="kanban-col-header">
+      <span class="status-pip idea"></span>
+      <div class="kanban-col-label">Ideas</div>
+      <div class="kanban-col-count">${ideas.length}</div>
+    </div>
+    <div class="kanban-col-body">
+      ${ideas.length
+        ? ideas.map(kanbanIdeaCard).join('')
+        : `<div class="kanban-empty">No ideas yet</div>`}
+    </div>
+  </div>`;
+  const projectCols = STATUS_OPTIONS.map(([k,label]) => {
     const items = byStatus[k];
-    return `<div class="timeline-stage${items.length?' has-items':''}" data-stage="${k}">
-      <div class="timeline-stage-header">
+    return `<div class="kanban-col" data-stage="${k}">
+      <div class="kanban-col-header">
         <span class="status-pip ${k}"></span>
-        <div class="timeline-stage-label">${label}</div>
-        <div class="timeline-stage-count">${items.length} project${items.length===1?'':'s'}</div>
+        <div class="kanban-col-label">${label}</div>
+        <div class="kanban-col-count">${items.length}</div>
       </div>
-      ${items.length
-        ? `<div class="projects-grid">${items.map(projectCard).join('')}</div>`
-        : `<div class="timeline-empty">No projects in this stage.</div>`}
+      <div class="kanban-col-body">
+        ${items.length
+          ? items.map(kanbanProjectCard).join('')
+          : `<div class="kanban-empty">No projects</div>`}
+      </div>
     </div>`;
-  }).join('')}</div>`;
+  }).join('');
+  ap.innerHTML = `<div class="kanban-wrap"><div class="kanban">${ideaCol}${projectCols}</div></div>`;
   const fb = document.getElementById('project-filters');
   if (fb && !fb.dataset.built) {
     fb.dataset.built = '1';
@@ -1386,13 +1573,13 @@ function renderProjects() {
 function filterProjects(area, btn) {
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#all-projects .project-card').forEach(c=>{
+  document.querySelectorAll('#all-projects .kb-card, #all-projects .project-card').forEach(c=>{
     c.classList.toggle('hidden', area!=='all' && c.dataset.area!==area);
   });
-  // hide empty stages after filtering
-  document.querySelectorAll('#all-projects .timeline-stage').forEach(stage => {
-    const visible = stage.querySelectorAll('.project-card:not(.hidden)').length;
-    stage.style.display = (area==='all' || visible>0) ? '' : 'none';
+  document.querySelectorAll('#all-projects .kanban-col').forEach(col => {
+    const visible = col.querySelectorAll('.kb-card:not(.hidden)').length;
+    const count = col.querySelector('.kanban-col-count');
+    if (count) count.textContent = visible;
   });
 }
 
@@ -1632,7 +1819,15 @@ function renderPublications() {
 // --- CONFERENCES ---
 function renderConferences() {
   const el = document.getElementById('conf-grid'); if (!el) return;
-  el.innerHTML = conferences.map(c=>`<div class="conf-card">
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = conferences
+    .filter(c => c.dateIso && new Date(c.dateIso) >= today)
+    .sort((a,b) => new Date(a.dateIso) - new Date(b.dateIso));
+  if (!upcoming.length) {
+    el.innerHTML = '<div style="padding:32px;color:var(--ink-light);font-style:italic;text-align:center;grid-column:1/-1">No upcoming conferences.</div>';
+    return;
+  }
+  el.innerHTML = upcoming.map(c=>`<div class="conf-card">
     <div class="conf-type-tag">${c.type} \u00b7 ${c.date}</div>
     <div class="conf-name">${c.name}</div>
     <div class="conf-detail">&#128205; ${c.location}</div>
